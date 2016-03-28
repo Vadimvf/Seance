@@ -121,7 +121,6 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] Allow users to follow users and bookmark articles
 - [ ] AutoSave when creating/editing articles
 - [ ] Login through FB, Google
-- [ ] Login through FB, Google
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

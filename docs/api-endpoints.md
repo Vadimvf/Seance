@@ -59,3 +59,8 @@
 - `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by name
 
 ### Followers
+- `GET /api/followers`
+- `POST /api/followers`
+
+- `GET /api/followers/:id`
+- `DELETE /api/followers/:id`

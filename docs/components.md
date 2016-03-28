@@ -1,13 +1,14 @@
 ## Component Hierarchy
 
 * `App`
-  * `SearchIndex`
-  * `NotebooksIndex`
-    * `NotebookIndexItem`
-  * `NotebookForm`
-  * `NotesIndex`
-    * `NoteForm`
-    * `NoteIndexItem`
-  * `NoteDetail`
-    * `NoteTags`
-    * `NoteEditArea`
+  * `Navbar`
+    * `Search`
+    * `SignIn/Register`
+  * `ArticlesIndex`
+    * `ArticleIndexItem`
+    * `ArticleDetail`
+    * `ArticleTags`
+    * `ArticleComments`
+  * `ArticleForm`
+  * `PublicationsIndex`
+    * `PublicationIndexItem`

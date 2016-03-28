@@ -1,66 +1,50 @@
 # Flux Stores
 
-### NoteStore
+### AritcleStore
 
-Holds all persisted note data.
-
-##### Actions:
-- `receiveAllNotes`
-- `receiveSingleNote`
-- `removeNote`
-
-##### Listeners:
-- `NotesIndex` (passes to `NoteIndexItem` via props)
-- `NoteDetail`
-
-### NoteFormStore
-
-Holds un-persisted note data to send to the API.
+Holds all Articles.
 
 ##### Actions:
-- `receiveNoteFormParams`
+- `receiveAllAritcles`
+- `receiveSingleArticle`
+- `removeArticle`
 
 ##### Listeners:
-- `NoteForm`
+- `AritclesIndex`
+- `ArticleDetail`
 
-### NotebookStore
+### CommentStore
 
-Holds all persisted notebook data.
+Holds comment details
 
 ##### Actions:
-- `receiveAllNotebooks`
-- `receiveSingleNotebook`
-- `removeNotebook`
+
+- `receiveAllComments`
+- `receiveSingleComment`
+- `removeComment`
 
 ##### Listeners:
-- `NotebookIndex`
+- `CommentList`
+- `CommentDetail`
 
-### NotebookFormStore
+### Publications
 
-Holds un-persisted notebook data to send to the API.
+- Holds all Articles.
 
 ##### Actions:
-- `receiveNotebookFormParams`
+- `receiveAllPublications`
+- `receiveSinglePublication`
+- `removePublication`
 
 ##### Listeners:
-- `NotebookForm`
+- `PublicationsIndex`
+- `PublicationDetail`
 
 ### SearchStore
-
-Holds search parameters to send to the API.
+Holds suggestions for search.
 
 ##### Actions:
 - `receiveSearchParams`
 
 ##### Listeners:
-- `SearchIndex`
-
-### SearchSuggestionStore
-
-Holds typeahead suggestions for search.
-
-##### Actions:
-- `receiveSearchSuggestions`
-
-##### Listeners:
-- `SearchSuggestions`
+- `Search`
