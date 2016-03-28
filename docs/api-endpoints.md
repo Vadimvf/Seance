@@ -6,48 +6,56 @@
 
 - `GET /` - loads React web app
 
-### Users
+### Users (Authors)
 
-- `GET /users/new`
 - `POST /users`
 - `PATCH /users`
+- `DELETE /users`
 
 ### Session
 
-- `GET /session/new`
 - `POST /session`
 - `DELETE /session`
 
 ## JSON API
 
-### Notes
+### Articles
 
-- `GET /api/notes`
+- `GET /api/articles`
   - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `POST /api/articles`
 
-### Notebooks
+- `GET /api/articles/:id`
+- `PATCH /api/articles/:id`
+- `DELETE /api/articles/:id`
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+- `GET /api/articles/:id/comments`
+  - Index of all comments for an article
+
+### Publications
+
+- `GET /api/publications`
+  - Publications search
+- `POST /api/publications`
+
+- `GET /api/publications/:id`
+- `POST /api/publications/:id`
+- `PATCH /api/publications/:id`
+- `DELETE /api/publications/:id`
+
+### Comments
+
+- `GET /api/comments`
+- `POST /api/comments`
+- `GET /api/comments/:id`
+- `DELETE /api/comments/:id`
 
 ### Tags
 
-- A note's tags will be included in the note show template
+- An articles's tags will be included in the article show template
 - `GET /api/tags`
-  - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
+- `POST /api/notes/:note_id/tags`: add tag to article by name
   - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
-  name
+- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by name
+
+### Followers

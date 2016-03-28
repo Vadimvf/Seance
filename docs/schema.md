@@ -1,32 +1,36 @@
 # Schema Information
 
-## notes
+## articles
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
 body        | text      | not null
-author_id   | integer   | not null, foreign key (references users), indexed
-notebook_id | integer   | not null, foreign key (references notebooks), indexed
-archived    | boolean   | not null, default: false
+author_id   | integer   | not null, foreign key (references authors), indexed
+publication_id | integer   | not null, foreign key (references publications), indexed
 
-## notebooks
+##publishings
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references users), indexed
+author_id   | integer   | foreign key (references authors), indexed
+publication_id | integer | foreign key (references publications), indexed
+
+## publications
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
 title       | string    | not null
-description | string    | 
+description | string    |
+email       | string    |
 
-## reminders
+## comments
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users), indexed
-note_id     | string    | not null, foreign key (references notes), indexed
-date        | datetime  | not null
-type        | string    | not null
-prev_id     | integer   | foreign key (references reminders), indexed
+author_id     | integer   | not null, foreign key (references authors), indexed
+article_id     | string    | not null, foreign key (references articles), indexed
+body        | text    | not null
 
 ## tags
 column name | data type | details
@@ -38,14 +42,51 @@ name        | string    | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-name        | string    | not null
-note_id     | integer   | not null, foreign key (references notes), indexed, unique [tag_id]
 tag_id      | integer   | not null, foreign key (references tags), indexed
+article_id  | integer   | not null, foreign key (references articles), indexed, unique [tag_id]
 
-## users
+
+## authors
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 username        | string    | not null, indexed, unique
+email           | string    | not null, unique
+bio             | text      |
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
+
+##bookmarks
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+author_id       | integer   | not null, foreign key (references authors), indexed
+article_id        | integer   | not null, foreign key (references articles), indexed
+
+##pictures
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+description     | string    | not null, indexed, unique
+link            | string    | not null, unique
+imageable_id    | string    | integer, not null, foreign key
+imageable_type  | string    | integer, not null
+
+##follows (bonus)
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+author_id       | string    | not null, unique
+followable_id   | string    | not null, foreign key (references authors), indexed
+followable_type | string    | not null
+
+##highlights (bonus)
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+description     | string    | not null, indexed, unique
+email           | string    | not null, unique
+article_id      | integer   | not null, foreign key (references articles), indexed
+author_id       | integer   | not null, foreign key (references articles), indexed
+start_pos       | integer   | not null
+end_pos         | integer   | not null
