@@ -50,6 +50,7 @@ article_id  | integer   | not null, foreign key (references articles), indexed, 
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
+fullname        | string    | not null
 username        | string    | not null, indexed, unique
 email           | string    | not null, unique
 bio             | text      |
