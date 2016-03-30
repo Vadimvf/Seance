@@ -8,6 +8,8 @@ class Author < ActiveRecord::Base
   validates :password, length: { in: 6..20, allow_nil: true}
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
 
+  has_many :articles
+
   def find_by_credentials(identifier, password)
     if /@/.match(indentifier)
       user = user.find_by_email(identifier)

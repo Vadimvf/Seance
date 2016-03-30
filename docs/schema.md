@@ -5,9 +5,9 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
-body        | text      | not null
+body        | text      | not null, unique (no duplicate articles)
 author_id   | integer   | not null, foreign key (references authors), indexed
-publication_id | integer   | not null, foreign key (references publications), indexed
+publication_id | integer   | foreign key (references publications), indexed
 
 ##publishings
 column name | data type | details
