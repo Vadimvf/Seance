@@ -9,7 +9,7 @@ $grey-link: #B3B3B3;
 $text: #404040;
 
 
-// RESET
+// RESET ///////////////////////////////////////////////////////////
 body, h1, h2, header, div, img, ul, li, input, button, div, a {
 
   border: 0;
@@ -30,14 +30,19 @@ li {
   list-style: none;
 }
 
-//CLEARFIX
+.nav-logo, a, button, .nav-tools-search > img {
+  cursor: pointer;
+}
+
+
+//CLEARFIX /////////////////////////////////////////////////////////
 .group:after {
   content: "";
   display: block;
   clear: both;
 }
 
-//CSS
+//CSS //////////////////////////////////////////////////////////// 
 body {
   font-family: sans-serif;
   background-color: $grey-background;
