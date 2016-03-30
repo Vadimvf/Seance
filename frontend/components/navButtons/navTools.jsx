@@ -1,5 +1,5 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
+var Profile = require("./profile");
 
 var NavTools = React.createClass({
 
@@ -14,9 +14,7 @@ var NavTools = React.createClass({
           <button className="nav-tools--write">Write a Story</button>
         </li>
         <li>
-          <button className="nav-tools--profile">
-            <img className="avatar"></img>
-          </button>
+          <Profile />
         </li>
       </ul>
     );

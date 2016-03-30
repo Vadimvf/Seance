@@ -1,9 +1,16 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// COLORS
+$grey-background: #FAFAFA;
+$white-background: #FFFFFF;
+$grey-border: #EFEFEF;
+$grey-link: #B3B3B3;
+$text: #404040;
+
 
 // RESET
-body, h1, h2, header, div, img, ul, li, input, button, div {
+body, h1, h2, header, div, img, ul, li, input, button, div, a {
 
   border: 0;
   outline: 0;
@@ -24,7 +31,7 @@ li {
 }
 
 //CLEARFIX
-.group {
+.group:after {
   content: "";
   display: block;
   clear: both;
@@ -33,36 +40,95 @@ li {
 //CSS
 body {
   font-family: sans-serif;
+  background-color: $grey-background;
 }
 
 .nav {
+  padding: 0 20px;
+  position: relative;
+  background-color: $white-background;
+  border-bottom: 1px solid $grey-border;
 }
 
 .nav-logo {
-  display: inline-block;
+  display: block;
+  float: left;
+  vertical-align: top;
+  padding-top: 20px;
 }
 
 .nav-logo-icon {
-  width: 35px;
+  content: asset-url('seance.png');
+  width: 30px;
 }
 
 .nav-logo-text {
+  // image coming soon change with asset-url
+  content: "Seance";
   width: 80px;
 }
 
 .nav-links {
   display: inline-block;
-}
-
-.nav-links > li {
-  float: left;
-}
-
-.nav-tools {
-  display: inline-block;
-  text-align: right;
+  padding-left: 7%;
+  min-width: 460px;
+  color: $grey-link;
+  font-weight: 300;
+  letter-spacing: 0.1em;
 
   li {
     float: left;
+    :hover {
+      color: $text;
+    }
+    a{
+      display: block;
+      padding: 30px 20px;
+    }
   }
+}
+
+.nav-tools {
+  display: block;
+  float: right;
+  text-align: right;
+  li {
+    float: left;
+  }
+  input {
+    padding-left: 15px;
+  }
+}
+
+.nav-tools:last-child {
+  padding: 20px;
+}
+
+button, .nav-tools-search {
+  text-align: left;
+  border: 1px solid $grey-border;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 1010px){
+  .nav-tools-search > input {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 850px){
+  .nav-links {
+    position: absolute;
+    top: 75px;
+    left: 5%;
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+.nav-tools-search > img {
+  content: asset-url('search.svg');
+  width: 20px;
+  vertical-align: bottom;
 }
