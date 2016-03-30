@@ -29,7 +29,7 @@ Holds comment details
 
 ### Publications
 
-- Holds all Articles.
+- Holds all Publications.
 
 ##### Actions:
 - `receiveAllPublications`
