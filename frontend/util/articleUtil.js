@@ -1,3 +1,5 @@
+var ArticleActions = require('../actions/ArticleAction');
+
 var ArticleUtil = {
   fetchArticles: function () {
     $.ajax({
