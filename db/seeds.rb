@@ -1,35 +1,48 @@
 ##ALREADY SEEDED
-# Authors = 10.times do
-#   Author.create(
-#     username: Faker::Internet.user_name,
-#     password: "password",
-#     fullname: Faker::Book.author,
-#     email: Faker::Internet.safe_email,
-#     bio:  "#{Faker::Name.title} from #{Faker::University.name}"
-#   )
-# end
+AUTHORS = [];
+100.times do
+  author = Author.create(
+    username: Faker::Internet.user_name,
+    password: "password",
+    fullname: Faker::Book.author,
+    email: Faker::Internet.safe_email,
+    bio:  "#{Faker::Name.title} from #{Faker::University.name}"
+  )
 
-# (1..50).each do
-#   literary_article = ""
-#   (1..10).each { literary_article.concat(Faker::Hipster.paragraph) }
-#   literary_article.concat("\n")
-#   (1..10).each { literary_article.concat(Faker::Hipster.paragraph) }
-#
-#   tech_article = ""
-#   (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
-#   tech_article.concat("\n")
-#   (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
-#
-#
-#   Article.create(
-#     title: Faker::Book.title,
-#     body: literary_article,
-#     author_id: rand(1..100)
-#   )
-#
-#   Article.create(
-#     title: "#{ Faker::Hacker.noun } #{Faker::Hacker.ingverb}".titleize,
-#     body: tech_article,
-#     author_id: rand(1..100)
-#   )
-# end
+  AUTHORS << author
+end
+
+50.times do
+  literary_article = ""
+  rand(1..3).times do
+    literary_article.concat("\n") unless literary_article == ""
+    (1..10).each { literary_article.concat(Faker::Hipster.paragraph) }
+    literary_article.concat("\n")
+    (1..10).each { literary_article.concat(Faker::Hipster.paragraph) }
+  end
+
+  tech_article = ""
+  rand(1..3).times do
+    tech_article.concat("\n") unless tech_article == ""
+    (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
+    tech_article.concat("\n")
+    (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
+
+  end
+
+  num_authors = AUTHORS.length
+  author_id = AUTHORS[rand(0...num_authors)].id
+
+  Article.create(
+    title: Faker::Book.title,
+    body: literary_article,
+    author_id: author_id
+  )
+
+  author_id = AUTHORS[rand(0...num_authors)].id
+  Article.create!(
+    title: "#{ Faker::Hacker.noun } #{Faker::Hacker.ingverb}".titleize,
+    body: tech_article,
+    author_id: author_id
+  )
+end
