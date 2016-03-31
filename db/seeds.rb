@@ -22,11 +22,11 @@ end
   end
 
   tech_article = ""
-  rand(1..3).times do
+  rand(1..4).times do
     tech_article.concat("\n") unless tech_article == ""
-    (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
+    (1..10).each { tech_article.concat("#{Faker::Hacker.say_something_smart} ") }
     tech_article.concat("\n")
-    (1..10).each { tech_article.concat(Faker::Hacker.say_something_smart) }
+    (1..10).each { tech_article.concat("#{Faker::Hacker.say_something_smart} ") }
 
   end
 
@@ -36,13 +36,16 @@ end
   Article.create(
     title: Faker::Book.title,
     body: literary_article,
-    author_id: author_id
+    author_id: author_id,
+    body_short: literary_article.split[0..40].join(" ")
   )
 
   author_id = AUTHORS[rand(0...num_authors)].id
-  Article.create!(
+
+  Article.create(
     title: "#{ Faker::Hacker.noun } #{Faker::Hacker.ingverb}".titleize,
     body: tech_article,
-    author_id: author_id
+    author_id: author_id,
+    body_short: tech_article.split[0..40].join(" ")
   )
 end

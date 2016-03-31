@@ -5,8 +5,16 @@
 $grey-background: #FAFAFA;
 $white-background: #FFFFFF;
 $grey-border: #EFEFEF;
-$grey-link: #B3B3B3;
-$text: #404040;
+$grey-link: #a8a8a8;
+$text: #505050;
+$green-text: #2dcb7f;
+$heading-text: #373737;
+$button-border: #dedede;
+
+@font-face {
+  font-family: 'apparatus';
+  src: asset-url('fonts/apparatus.ttf')
+}
 
 
 // RESET ///////////////////////////////////////////////////////////
@@ -24,10 +32,22 @@ body, h1, h2, header, div, img, ul, li, input, button, div, a {
   vertical-align: inherit;
   color: inherit;
   background-color: transparent;
+  letter-spacing: .04em;
 }
 
 li {
   list-style: none;
+}
+
+p {
+  font-family: 'Lora', serif;
+  line-height: 1.5;
+  font-size: 17px;
+  color: $text;
+}
+
+h1, h2, h3 {
+  font-family: sans-serif;
 }
 
 .nav-logo, a, button, .nav-tools-search > img {
@@ -42,14 +62,13 @@ li {
   clear: both;
 }
 
-//CSS //////////////////////////////////////////////////////////// 
+//CSS ////////////////////////////////////////////////////////////
 body {
   font-family: sans-serif;
   background-color: $grey-background;
 }
 
 .nav {
-  padding: 0 20px;
   position: relative;
   background-color: $white-background;
   border-bottom: 1px solid $grey-border;
@@ -60,6 +79,7 @@ body {
   float: left;
   vertical-align: top;
   padding-top: 20px;
+  padding-left: 20px;
 }
 
 .nav-logo-icon {
@@ -71,6 +91,7 @@ body {
   // image coming soon change with asset-url
   content: "Seance";
   width: 80px;
+  padding-left: 15px;
 }
 
 .nav-links {
@@ -80,6 +101,7 @@ body {
   color: $grey-link;
   font-weight: 300;
   letter-spacing: 0.1em;
+  font-size: 14px;
 
   li {
     float: left;
@@ -88,7 +110,7 @@ body {
     }
     a{
       display: block;
-      padding: 30px 20px;
+      padding: 25px 20px 20px 20px;
     }
   }
 }
@@ -106,14 +128,17 @@ body {
 }
 
 .nav-tools:last-child {
-  padding: 20px;
+  padding: 15px 20px 10px 20px;
 }
 
 button, .nav-tools-search {
   text-align: left;
-  border: 1px solid $grey-border;
+  border: 1px solid $button-border;
   padding: 10px;
   border-radius: 20px;
+  color: $grey-link;
+  font-weight: lighter;
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 1010px){
@@ -136,4 +161,40 @@ button, .nav-tools-search {
   content: asset-url('search.svg');
   width: 20px;
   vertical-align: bottom;
+}
+
+.articles {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.article-container{
+  background-color: $white-background;
+  border: 1px solid $grey-border;
+  padding: 25px;
+  margin-bottom: 10px;
+}
+
+.article-header {
+  ul {
+    float: left;
+  }
+  padding-bottom: 10px;
+}
+
+.article--info-author {
+  color: $green-text;
+  font-size: 14px;
+}
+.article--info-content {
+  font-weight: lighter;
+  font-size: 12px;
+  color: $grey-link;
+}
+
+.article-content > h2{
+  font-weight: 600;
+  font-size: 28px;
+  color: $heading-text;
 }
