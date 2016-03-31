@@ -1,7 +1,8 @@
 class Api::ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all.order(created_at: :desc)
+    @articles = Article.all
+      .order(created_at: :desc)
       .includes(:author)
       .limit(20)
   end
