@@ -1,6 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 var ReactRouter = require("react-router");
+var Modal = require('react-modal');
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -25,6 +26,7 @@ var App = React.createClass({
 });
 
 $(function(){
+  Modal.setAppElement(document.body);
   ReactDOM.render((
     <Router history={hashHistory}>
       <Route path="/" component={App}>

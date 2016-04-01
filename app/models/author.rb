@@ -27,7 +27,7 @@ class Author < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.new(password_digest).is_password(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
   def reset_sesssion_token!

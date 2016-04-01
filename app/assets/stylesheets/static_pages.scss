@@ -10,6 +10,7 @@ $text: #505050;
 $green-text: #2dcb7f;
 $heading-text: #373737;
 $button-border: #dedede;
+$facebook: #3B5998;
 
 @font-face {
   font-family: 'apparatus';
@@ -61,7 +62,68 @@ h1, h2, h3, strong {
   clear: both;
 }
 
-//CSS ////////////////////////////////////////////////////////////
+//MODAL///////////////////////////////////////////////////////////
+
+.modal-button {
+  display: block;
+  margin: 10px auto;
+  color: $green-text;
+  background-color: $grey-background;
+}
+
+.modal > h1 {
+  font-size: 36px;
+  display: block;
+  margin: 0px auto;
+  padding: 15px 0;
+  text-align: center;
+  color: $text;
+}
+
+.seance-modal-logo {
+  content: asset-url("seanceLogo.svg");
+  display: block;
+  margin: 0px auto;
+  width: 75px;
+  padding-bottom: 15px;
+}
+
+.modal-button-facebook {
+  display: block;
+  padding-right: 25px;
+  margin: 10px auto;
+  background-color: $facebook;
+  color: $white-background;
+  .facebook-logo {
+    margin: 0 10px -2px 10px;
+    width: 15px;
+    content: asset-url("FB-f-Logo__white_29.png");
+  }
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+}
+
+.ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+}
+
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ReactModal__Content--before-close {
+  -webkit-transform: scale(0.5) rotateX(30deg);
+  transform: scale(0.5) rotateX(30deg);
+  transition: all 150ms ease-in;
+}
+
+//MAIN ////////////////////////////////////////////////////////////
 body {
   font-family: sans-serif;
   background-color: $grey-background;
@@ -137,6 +199,11 @@ strong {
   }
 }
 
+.nav-tools--login {
+  border: 1px solid $green-text;
+  color: $green-text;
+}
+
 button, .nav-tools-search {
   text-align: left;
   border: 1px solid $button-border;
@@ -206,4 +273,14 @@ button, .nav-tools-search {
   font-weight: 600;
   font-size: 28px;
   color: $heading-text;
+}
+
+//LOGIN MODAL FORM ///////////////////////////////////////////
+
+.login-form {
+  background-color: $grey-background;
+  border: 1px solid $grey-border;
+  border-radius: 4px;
+  padding: 20px;
+  width: 500px;
 }
