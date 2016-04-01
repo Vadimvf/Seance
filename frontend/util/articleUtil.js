@@ -1,4 +1,4 @@
-var ArticleActions = require('../actions/ArticleAction');
+var ArticleActions = require('../actions/articleAction');
 
 var ArticleUtil = {
   fetchArticles: function () {
