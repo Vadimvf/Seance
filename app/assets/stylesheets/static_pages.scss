@@ -282,5 +282,15 @@ button, .nav-tools-search {
   border: 1px solid $grey-border;
   border-radius: 4px;
   padding: 20px;
-  width: 500px;
+  width: 250px;
+  height: 600px;
+
+  label, input {
+    display: block;
+    margin: 5px 0;
+  }
+
+  input {
+    background-color: white;
+  }
 }
