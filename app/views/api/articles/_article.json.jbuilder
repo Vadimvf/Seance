@@ -1,4 +1,4 @@
-json.extract! article, :title, :read_time, :created_ago
+json.extract! article, :id, :title, :read_time, :created_ago
 json.author article.author, :fullname, :username
 
 show ||= false

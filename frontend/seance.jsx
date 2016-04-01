@@ -6,11 +6,17 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
+var Link = ReactRouter.Link;
 
-var ArticleIndex = require('./components/articleIndex');
 var Nav = require('./components/nav');
+var ArticleIndex = require('./components/articleIndex');
+var ArticleShow = require('./components/articleShow');
 
 var App = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   render: function() {
     return (
       <div className="seance-container">
@@ -25,8 +31,8 @@ $(function(){
   ReactDOM.render((
     <Router history={hashHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={ArticleIndex}>
-        </IndexRoute>
+        <IndexRoute component={ArticleIndex} />
+        <Route path="articles/:id" component={ArticleShow} />
       </Route>
     </Router>
     ), document.getElementById("seance")

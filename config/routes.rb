@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
 
 
-  root "static_pages#root"
+  root to: "static_pages#root"
 
 end

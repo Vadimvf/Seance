@@ -2,6 +2,13 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 var ReactListItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
+  directToArticle: function () {
+    this.context.router.push("articles/" + this.props.article.id);
+  },
 
   render: function() {
     article = this.props.article;
@@ -18,7 +25,8 @@ var ReactListItem = React.createClass({
             </li>
           </ul>
         </div>
-        <div className="article-content">
+        <div className="article-content"
+             onClick={this.directToArticle}>
           <h2>{article.title}</h2>
           <p>{article.body_short + "..."}</p>
         </div>

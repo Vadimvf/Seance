@@ -18,7 +18,7 @@ $button-border: #dedede;
 
 
 // RESET ///////////////////////////////////////////////////////////
-body, h1, h2, header, div, img, ul, li, input, button, div, a {
+body, h1, h2, header, div, img, ul, li, input, button, div, a, strong {
 
   border: 0;
   outline: 0;
@@ -46,14 +46,13 @@ p {
   color: $text;
 }
 
-h1, h2, h3 {
+h1, h2, h3, strong {
   font-family: sans-serif;
 }
 
 .nav-logo, a, button, .nav-tools-search > img {
   cursor: pointer;
 }
-
 
 //CLEARFIX /////////////////////////////////////////////////////////
 .group:after {
@@ -82,8 +81,18 @@ body {
   padding-left: 20px;
 }
 
+strong {
+  font-size: 20px;
+  font-weight: 300;
+  display: block;
+  float: right;
+  padding-top: 5px;
+  padding-left: 20px;
+}
+
 .nav-logo-icon {
-  content: asset-url('seance.png');
+  content: asset-url('seanceLogo.svg');
+  margin-top: -5px;
   width: 30px;
 }
 
@@ -96,7 +105,7 @@ body {
 
 .nav-links {
   display: inline-block;
-  padding-left: 7%;
+  padding-left: 17%;
   min-width: 460px;
   color: $grey-link;
   font-weight: 300;
@@ -121,14 +130,11 @@ body {
   text-align: right;
   li {
     float: left;
+    margin: 15px 10px 5px 0px;
   }
   input {
     padding-left: 15px;
   }
-}
-
-.nav-tools:last-child {
-  padding: 15px 20px 10px 20px;
 }
 
 button, .nav-tools-search {
@@ -150,16 +156,15 @@ button, .nav-tools-search {
 @media only screen and (max-width: 850px){
   .nav-links {
     position: absolute;
-    top: 75px;
-    left: 5%;
-    padding: 0;
-    margin: 0 auto;
+    display: block;
+    top: 50px;
+    left: -7%;
   }
 }
 
-.nav-tools-search > img {
+.nav-tools-search  img {
   content: asset-url('search.svg');
-  width: 20px;
+  width: 16px;
   vertical-align: bottom;
 }
 
@@ -191,6 +196,10 @@ button, .nav-tools-search {
   font-weight: lighter;
   font-size: 12px;
   color: $grey-link;
+}
+
+.article-content:hover {
+  cursor: pointer;
 }
 
 .article-content > h2{

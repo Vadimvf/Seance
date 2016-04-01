@@ -1,13 +1,13 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Link = require("react-router").Link;
 
 var NavLinks = React.createClass({
-
   render: function() {
     return (
       <ul className="nav-links">
         <li>
-          <a href="#">Home</a>
+          <Link to="">Home</Link>
         </li>
         <li>
           <a href="#">Top Stories</a>

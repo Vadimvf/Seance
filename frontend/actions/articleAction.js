@@ -12,8 +12,14 @@ var ArticleActions = {
   },
 
   receiveOne: function (jsonArticle){
+    payload = {
+      actionType: ArticleConstants.ARTICLE_RECEIVED,
+      article: jsonArticle
+    };
 
-  },
+    Dispatcher.dispatch(payload);
+  }
+
 };
 
 module.exports = ArticleActions;
