@@ -13,9 +13,6 @@ var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
 
 var App = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
 
   render: function() {
     return (

@@ -1,5 +1,6 @@
 var React = require('react');
 var Profile = require("./profile");
+var Login = require("./login");
 
 var NavTools = React.createClass({
 
@@ -11,10 +12,10 @@ var NavTools = React.createClass({
           <input type="text" placeholder="Search Seance"></ input>
         </li>
         <li>
-          <button className="nav-tools--write">Write a Story</button>
+          <button className="nav-tools--write">Write a story</button>
         </li>
         <li>
-          <Profile />
+          <Login />
         </li>
       </ul>
     );
