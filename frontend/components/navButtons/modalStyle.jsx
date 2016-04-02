@@ -16,7 +16,7 @@ var ModalStyle = {
     border                     : "none",
     width                      : "325px",
     height                     : "600px",
-    margin                     : "200px auto 0 auto",
+    margin                     : "auto",
     background                 : 'transparent',
     overflow                   : 'auto',
     WebkitOverflowScrolling    : 'touch',
