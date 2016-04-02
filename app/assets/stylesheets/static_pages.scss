@@ -130,9 +130,10 @@ body {
 }
 
 .nav {
-  position: relative;
-  background-color: $white-background;
-  border-bottom: 1px solid $grey-border;
+  display: none;
+  // position: relative;
+  // background-color: $white-background;
+  // border-bottom: 1px solid $grey-border;
 }
 
 .nav-logo {
