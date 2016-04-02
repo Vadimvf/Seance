@@ -130,10 +130,9 @@ body {
 }
 
 .nav {
-  display: none;
-  // position: relative;
-  // background-color: $white-background;
-  // border-bottom: 1px solid $grey-border;
+  position: relative;
+  background-color: $white-background;
+  border-bottom: 1px solid $grey-border;
 }
 
 .nav-logo {
@@ -228,6 +227,7 @@ button, .nav-tools-search {
   .nav-links {
     padding-left: 4%;
     overflow: hidden;
+    min-width: 0;
   }
 }
 @media only screen and (max-width: 850px){
