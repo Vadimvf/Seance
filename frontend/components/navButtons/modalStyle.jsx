@@ -14,7 +14,7 @@ var ModalStyle = {
     left                       : "0",
     right                      : "0",
     border                     : "none",
-    width                      : "300px",
+    width                      : "325px",
     height                     : "400px",
     margin                     : "auto",
     background                 : 'transparent',

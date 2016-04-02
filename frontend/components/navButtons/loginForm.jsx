@@ -42,16 +42,24 @@ var LoginForm = React.createClass({
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
 
-        <label htmlFor="username">Username</label>
-        <input onChange={this.updateUsername} type="text" />
+        <label htmlFor="fullname"></label>
+        <input onChange={this.updateFullname}
+               type="text"
+               placeholder="Full name (new account)"/>
 
-        <label htmlFor="fullname">Full Name</label>
-        <input onChange={this.updateFullname} type="text" />
+        <label htmlFor="username"></label>
+        <input onChange={this.updateUsername}
+               type="text"
+               placeholder="Username"/>
 
-        <label htmlFor="password">Password</label>
-        <input onChange={this.updatePassword} type="password" />
+        <label htmlFor="Password"></label>
+        <input onChange={this.updatePassword}
+               type="password"
+               placeholder="Password"/>
 
-        <input type="submit"></input>
+       <input type="submit"
+              className="submit"
+              value="Sign in / Sign up" />
 
       </form>
     );

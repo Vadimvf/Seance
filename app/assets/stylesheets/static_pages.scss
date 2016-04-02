@@ -17,7 +17,6 @@ $facebook: #3B5998;
   src: asset-url('fonts/apparatus.ttf')
 }
 
-
 // RESET ///////////////////////////////////////////////////////////
 body, h1, h2, header, div, img, ul, li, input, button, div, a, strong {
 
@@ -34,6 +33,11 @@ body, h1, h2, header, div, img, ul, li, input, button, div, a, strong {
   color: inherit;
   background-color: transparent;
   letter-spacing: .04em;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: $grey-background;
 }
 
 li {
@@ -62,73 +66,14 @@ h1, h2, h3, strong {
   clear: both;
 }
 
-//MODAL///////////////////////////////////////////////////////////
 
-.modal-button {
-  display: block;
-  margin: 10px auto;
-  color: $green-text;
-  background-color: $grey-background;
+.nav-tools-search  img {
+  content: asset-url('search.svg');
+  width: 16px;
+  vertical-align: bottom;
 }
 
-.modal > h1 {
-  font-size: 36px;
-  display: block;
-  margin: 0px auto;
-  padding: 15px 0;
-  text-align: center;
-  color: $text;
-}
-
-.seance-modal-logo {
-  content: asset-url("seanceLogo.svg");
-  display: block;
-  margin: 0px auto;
-  width: 75px;
-  padding-bottom: 15px;
-}
-
-.modal-button-facebook {
-  display: block;
-  padding-right: 25px;
-  margin: 10px auto;
-  background-color: $facebook;
-  color: $white-background;
-  .facebook-logo {
-    margin: 0 10px -2px 10px;
-    width: 15px;
-    content: asset-url("FB-f-Logo__white_29.png");
-  }
-}
-
-.ReactModal__Overlay--after-open {
-  opacity: 1;
-  transition: opacity 150ms ease-out;
-}
-
-.ReactModal__Content {
-  -webkit-transform: scale(0.5) rotateX(-30deg);
-  transform: scale(0.5) rotateX(-30deg);
-}
-
-.ReactModal__Content--after-open {
-  -webkit-transform: scale(1) rotateX(0deg);
-  transform: scale(1) rotateX(0deg);
-  transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.ReactModal__Content--before-close {
-  -webkit-transform: scale(0.5) rotateX(30deg);
-  transform: scale(0.5) rotateX(30deg);
-  transition: all 150ms ease-in;
-}
-
-//MAIN ////////////////////////////////////////////////////////////
-body {
-  font-family: sans-serif;
-  background-color: $grey-background;
-}
-
+///NAV///////////////////////////////////////////////////
 .nav {
   position: relative;
   background-color: $white-background;
@@ -220,6 +165,69 @@ button, .nav-tools-search {
 
 }
 
+
+//MODAL///////////////////////////////////////////////////////////
+
+.modal-button {
+  display: block;
+  margin: 10px auto;
+  color: $green-text;
+  background-color: $grey-background;
+}
+
+.modal > h1 {
+  font-size: 36px;
+  display: block;
+  margin: 0px auto;
+  padding: 15px 0;
+  text-align: center;
+  color: $text;
+}
+
+.seance-modal-logo {
+  content: asset-url("seanceLogo.svg");
+  display: block;
+  margin: 0px auto;
+  width: 75px;
+  padding-bottom: 15px;
+}
+
+.modal-button-facebook {
+  display: block;
+  padding-right: 25px;
+  margin: 10px auto;
+  background-color: $facebook;
+  color: $white-background;
+  .facebook-logo {
+    margin: 0 10px -2px 10px;
+    width: 15px;
+    content: asset-url("FB-f-Logo__white_29.png");
+  }
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+}
+
+.ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+}
+
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ReactModal__Content--before-close {
+  -webkit-transform: scale(0.5) rotateX(30deg);
+  transform: scale(0.5) rotateX(30deg);
+  transition: all 150ms ease-in;
+}
+
+//RESPONSIVE///////////////////////////////////////////
 @media only screen and (max-width: 1024px){
   .nav-tools-search > input {
     display: none;
@@ -239,8 +247,6 @@ button, .nav-tools-search {
   }
 }
 
-
-
 @media only screen and (max-width: 768px){
   .nav-tools--login > span {
     content: "Account";
@@ -259,11 +265,7 @@ button, .nav-tools-search {
   }
 }
 
-.nav-tools-search  img {
-  content: asset-url('search.svg');
-  width: 16px;
-  vertical-align: bottom;
-}
+
 
 .articles {
   max-width: 800px;
@@ -308,19 +310,31 @@ button, .nav-tools-search {
 //LOGIN MODAL FORM ///////////////////////////////////////////
 
 .login-form {
-  background-color: $grey-background;
-  border: 1px solid $grey-border;
   border-radius: 4px;
   padding: 20px;
-  width: 250px;
-  height: 600px;
-
-  label, input {
-    display: block;
-    margin: 5px 0;
-  }
+  padding-top: 50px;
+  width: 240px;
+  height: 250px;
 
   input {
-    background-color: white;
+    border-bottom: 1px solid $green-text;
+    width: 200px;
+    margin: 15px auto;
+    display: block;
+    font-weight: lighter;
   }
+
+  input.submit {
+    border: 1px solid $green-text;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: lighter;
+    text-align: center;
+    color: $text;
+    font-weight: lighter;
+    font-size: 14px;
+    margin-top: 40px;
+    cursor: pointer;
+  }
+
 }
