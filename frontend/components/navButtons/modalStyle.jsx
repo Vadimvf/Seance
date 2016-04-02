@@ -10,7 +10,7 @@ var ModalStyle = {
   content : {
     display                    : "inline-block",
     position                   : 'absolute',
-    top                        : "0",
+    bottom                     : "100px",
     left                       : "0",
     right                      : "0",
     border                     : "none",
