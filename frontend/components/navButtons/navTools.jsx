@@ -15,7 +15,7 @@ var NavTools = React.createClass({
           <button className="nav-tools--write">Write a story</button>
         </li>
         <li>
-          <Login />
+          <Login className="nav-tools--login"/>
         </li>
       </ul>
     );
