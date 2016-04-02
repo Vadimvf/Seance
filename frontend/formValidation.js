@@ -23,7 +23,7 @@ var validateForm = function (formObject, formType) {
     fullname: {
       presence: isCreate,
       format: {
-        pattern: "[a-zA-Z0-9]+",
+        pattern: "[a-zA-Z0-9 ]+",
         flags: "i",
         message: "can only have letters or numbers"
       },

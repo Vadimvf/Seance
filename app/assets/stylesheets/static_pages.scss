@@ -245,6 +245,15 @@ button, .nav-tools-search {
     top: 50px;
     left: 5%;
   }
+  button.modal--exit {
+    display: block;
+    position: absolute;
+    right:10px;
+    top: 10px;
+    float: right;
+    font-size: 18px;
+    border: none;
+  }
 }
 
 @media only screen and (max-width: 768px){
@@ -342,10 +351,15 @@ button, .nav-tools-search {
   }
 
   .form-errors {
+    padding-top: -50px;
     padding-left: 20px;
     font-size: 13px;
     color: $error-red;
     line-height: 1.5;
   }
+}
 
+//see @media for when it is displayed
+.modal--exit {
+  display: none;
 }

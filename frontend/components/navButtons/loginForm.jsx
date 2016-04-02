@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var validateForm = require('../../formValidation');
+var sessionUtil = require('../../util/sessionUtil');
 
 var LoginForm = React.createClass({
   contextTypes: {
@@ -20,19 +21,20 @@ var LoginForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     var router = this.context.router;
-    if (!this.invalidInput()) {
+    if (!!this.isValid()) {
       return;
     } else {
-      debugger
+      sessionUtil.createAuthor(this.state);
     }
   },
 
-  invalidInput: function () {
-    var errorMessages = validateForm(this.state, this.props.formType);
-    if (!!errorMessages){
+  isValid: function () {
+    var allMessages = validateForm(this.state, this.props.formType);
+    if (!!allMessages){
       this.setState({
-        errors: errorMessages
+        errors: allMessages
       });
+      return allMessages;
     } else {
       return null;
     }
@@ -113,7 +115,7 @@ var LoginForm = React.createClass({
 
        <input type="submit"
               className="submit"
-              value={submitVal} />
+              value={submitVal}/>
 
       </form>
     );

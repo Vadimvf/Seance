@@ -1,7 +1,8 @@
-var SessionStore = require('../stores/session');
+var SessionActions = require('../actions/sessionAction');
 
 var sessionUtil = {
   createAuthor: function (authorParams) {
+    debugger
     $.ajax({
       type: "POST",
       dataType: "json",

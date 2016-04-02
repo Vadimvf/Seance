@@ -68,6 +68,9 @@ var Login = React.createClass({
           onRequestClose={this.closeModal}
           style={ModalStyle}>
 
+        <button
+          className="modal--exit"
+          onClick={this.closeModal}>✖</button>
           {content}
 
         </Modal>
