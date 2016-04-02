@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var validateForm = require('../../formValidation');
 
 var LoginForm = React.createClass({
   contextTypes: {
@@ -10,14 +11,31 @@ var LoginForm = React.createClass({
     return {
       username: "",
       fullname: "",
-      password: ""
+      password: "",
+      email: "",
+      errors: []
     };
   },
 
   handleSubmit: function (e) {
     e.preventDefault();
     var router = this.context.router;
-    debugger
+    if (!this.invalidInput()) {
+      return;
+    } else {
+      debugger
+    }
+  },
+
+  invalidInput: function () {
+    var errorMessages = validateForm(this.state, this.props.formType);
+    if (!!errorMessages){
+      this.setState({
+        errors: errorMessages
+      });
+    } else {
+      return null;
+    }
   },
 
   updateUsername: function (e) {
@@ -38,19 +56,55 @@ var LoginForm = React.createClass({
     });
   },
 
-  render: function() {
-    return (
-      <form className="login-form" onSubmit={this.handleSubmit}>
+  updateEmail: function (e) {
+    this.setState({
+      email: e.currentTarget.value
+    });
+  },
 
+  errorMessages: function () {
+    var errorElements =  (
+      this.state.errors.map(function (error, idx) {
+        return <li key={idx}>{error}</li>;
+      })
+    );
+    return (<ul className="form-errors">
+              {errorElements}
+           </ul>);
+  },
+
+  render: function() {
+    var newUserFormOpts = null;
+    var submitVal = "Sign in";
+
+    if (this.props.formType === "Create" ) {
+      submitVal = "Sign up";
+      newUserFormOpts = (
+      <div>
         <label htmlFor="fullname"></label>
         <input onChange={this.updateFullname}
                type="text"
-               placeholder="Full name (new account)"/>
+               placeholder="Full name"/>
+
+       <label htmlFor="email"></label>
+       <input onChange={this.updateEmail}
+         type="email"
+         placeholder="Email"/>
+     </div>
+     );
+    }
+
+    return (
+      <form className="login-form" onSubmit={this.handleSubmit}>
+
+        {this.errorMessages()}
+        {newUserFormOpts}
 
         <label htmlFor="username"></label>
         <input onChange={this.updateUsername}
                type="text"
                placeholder="Username"/>
+
 
         <label htmlFor="Password"></label>
         <input onChange={this.updatePassword}
@@ -59,7 +113,7 @@ var LoginForm = React.createClass({
 
        <input type="submit"
               className="submit"
-              value="Sign in / Sign up" />
+              value={submitVal} />
 
       </form>
     );

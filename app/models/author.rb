@@ -5,7 +5,8 @@ class Author < ActiveRecord::Base
   validates :username, :fullname, :password_digest, :session_token,
     presence: true
   validates :username, :email, :session_token, uniqueness: true
-  validates :password, length: { in: 6..20, allow_nil: true}
+  validates :password, length: { in: 6..20, allow_nil: true }
+  validates :username, length: { in: 3..20 }
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
 
   has_many :articles

@@ -12,6 +12,9 @@ var Link = ReactRouter.Link;
 var Nav = require('./components/nav');
 var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
+var validate = require('validate.js');
+
+window.validate = validate;
 
 var App = React.createClass({
 

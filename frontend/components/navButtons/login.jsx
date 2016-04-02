@@ -9,7 +9,8 @@ var Login = React.createClass({
   getInitialState: function () {
       return({
         modalOpen: false,
-        isLoginAttempt: false
+        isLoginAttempt: false,
+        isCreateAttempt: false
       });
     },
 
@@ -22,7 +23,8 @@ var Login = React.createClass({
   openModal: function () {
     this.setState({
       modalOpen: true,
-      isLoginAttempt: false
+      isLoginAttempt: false,
+      isCreateAttempt: false,
      });
   },
 
@@ -32,15 +34,27 @@ var Login = React.createClass({
     });
   },
 
+  createAttempt: function () {
+    this.setState({
+      isCreateAttempt: true
+    });
+  },
+
   render: function () {
 
     var isLoginAttempt = this.state.isLoginAttempt;
+    var isCreateAttempt = this.state.isCreateAttempt;
     var content;
-    
+
     if (isLoginAttempt) {
-      content = <LoginForm/>;
-    } else {
-      content = <LogInOptions callback={this.loginAttempt}/>;
+      content = <LoginForm formType="Session"/>;
+    } else if (isCreateAttempt) {
+      content = <LoginForm formType="Create"/>;
+    }
+    else {
+      content = <LogInOptions
+        createCallback={this.createAttempt}
+        loginCallback={this.loginAttempt}/>;
     }
 
     return (
