@@ -5,7 +5,6 @@ var SessionStore = require('../../stores/session');
 var SessionUtil = require('../../util/sessionUtil');
 
 var NavTools = React.createClass({
-
   getInitialState: function() {
     if (!(SessionStore.currentAuthorHasBeenFetched())){
       return {
@@ -19,6 +18,7 @@ var NavTools = React.createClass({
   },
 
   componentDidMount: function() {
+    debugger
     this.authorListener = SessionStore.addListener(this._onChange);
   },
 

@@ -36,7 +36,6 @@ var sessionUtil = {
   },
 
   fetchCurrentAuthor: function(completion) {
-    debugger
     $.ajax({
       type: "GET",
       url: "/api/session",
@@ -46,6 +45,18 @@ var sessionUtil = {
       },
       complete: function() {
         completion && completion();
+      }
+    });
+  },
+
+  logout: function (redirect) {
+    $.ajax({
+      type: "DELETE",
+      url: "api/session",
+      dataType: "json",
+      success: function () {
+        SessionActions.logout();
+        redirect && redirect();
       }
     });
   }

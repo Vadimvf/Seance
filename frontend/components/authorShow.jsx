@@ -1,13 +1,24 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var SessionStore = require('../stores/session');
+var SessionUtil = require('../util/sessionUtil');
 
 var AuthorProfile = React.createClass({
+  contextTypes: {
+    router: PropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return {
       author: SessionStore.currentAuthor()
     };
+  },
+
+  _logout: function () {
+    router = this.context.router;
+    SessionUtil.logout(function () {
+      router.push("");
+    });
   },
 
   render: function() {
@@ -17,6 +28,7 @@ var AuthorProfile = React.createClass({
         <h3>{this.state.author.username}</h3>
         <h4>{this.state.author.email}</h4>
         <p>{this.state.author.bio}</p>
+        <button onClick={this._logout}>Log out</button>
       </div>
     );
   }
