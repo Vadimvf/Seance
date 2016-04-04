@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     @author ||= Author.find_by_session_token(session[:token])
   end
 
+  def logged_in?
+    !!current_author
+  end
+
   def login!(author)
     author.reset_sesssion_token!
     session[:token] = author.session_token

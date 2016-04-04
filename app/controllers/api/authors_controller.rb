@@ -4,15 +4,15 @@ class Api::AuthorsController < ApplicationController
   end
 
   def create
-    debugger
     params.delete(:errors)
     author = Author.new(author_params)
 
-    if author
+    if author.save
       login!(author)
       render json: author
     else
-      render json: { message: "Invalid credentials"}, status: 401
+      render json: { errors: author.errors.full_messages },
+                   status: 422
     end
   end
 

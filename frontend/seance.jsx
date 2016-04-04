@@ -12,9 +12,9 @@ var Link = ReactRouter.Link;
 var Nav = require('./components/nav');
 var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
-var validate = require('validate.js');
-
-window.validate = validate;
+var AuthorProfile = require('./components/authorShow');
+var SessionStore = require('./stores/session');
+var SessionUtil = require('./util/sessionUtil');
 
 var App = React.createClass({
 
@@ -35,8 +35,25 @@ $(function(){
       <Route path="/" component={App}>
         <IndexRoute component={ArticleIndex} />
         <Route path="articles/:id" component={ArticleShow} />
+        <Route path="authors/:id"
+               component={AuthorProfile}
+               onEnter={_requireLogIn}/>
       </Route>
     </Router>
     ), document.getElementById("seance")
   );
 });
+
+function _requireLogIn(nextState, replace, asyncCompletionCallback) {
+  if (!SessionStore.currentAuthorHasBeenFetched()) {
+    SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
+  } else {
+    _redirectIfNotLoggedIn();
+  }
+  function _redirectIfNotLoggedIn() {
+    if (!SessionStore.isLoggedIn()) {
+      replace("");
+    }
+    asyncCompletionCallback();
+  }
+}

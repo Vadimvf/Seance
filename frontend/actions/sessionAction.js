@@ -1,12 +1,19 @@
 var Dispatcher = require('../dispatcher/dispatcher');
-var ArticleConstants = require('../constants/articleConstants');
+var SessionConstants = require('../constants/sessionConstants');
+
 
 var SessionActions = {
   currentAuthorReceived: function (currentAuthor) {
-    debugger
     Dispatcher.dispatch({
       actionType: SessionConstants.CURRENT_AUTHOR_RECEIVED,
       currentAuthor: currentAuthor
+    });
+  },
+
+  errorsReceived: function (errors) {
+    Dispatcher.dispatch({
+      actionType: SessionConstants.ERRORS_RECEIVED,
+      errors: errors
     });
   },
 

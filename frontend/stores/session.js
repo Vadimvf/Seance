@@ -21,11 +21,9 @@ SessionStore.currentAuthorHasBeenFetched = function () {
 
 SessionStore.__onDispatch = function (payload){
   switch (payload.actionType) {
-    debugger
     case SessionConstants.CURRENT_AUTHOR_RECEIVED:
       _currentAuthor = payload.currentAuthor;
       _currentAuthorHasBeenFetched = true;
-      debugger
       SessionStore.__emitChange();
       break;
 

@@ -7,7 +7,7 @@ var ArticleShow = React.createClass({
 
   getInitialState: function() {
     return {
-      article: null
+      article: {}
     };
   },
 
@@ -34,9 +34,11 @@ var ArticleShow = React.createClass({
 
   render: function() {
     var article  = this.state.article;
-    if (!article) {
+
+    if ($.isEmptyObject(article)) {
       return <p/>;
     }
+    
     return (
       <article className="article-container">
         <div className="article-header group">

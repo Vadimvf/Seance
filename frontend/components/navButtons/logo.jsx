@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require("react-router").Link;
 
 var Logo = React.createClass({
   //REPLACE WITH A REAL LOGO
@@ -6,8 +7,13 @@ var Logo = React.createClass({
   render: function() {
     return (
       <b className="nav-logo">
-        <strong>Seance</strong>
-        <img alt="" className="nav-logo-icon"></img>
+        <Link to="" >
+          <strong>Seance</strong>
+        </Link>
+        
+        <Link to="" >
+          <img alt="" className="nav-logo-icon" />
+        </Link>
       </b>
     );
   }

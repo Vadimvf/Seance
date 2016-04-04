@@ -47,9 +47,11 @@ var Login = React.createClass({
     var content;
 
     if (isLoginAttempt) {
-      content = <LoginForm formType="Session"/>;
+      content = <LoginForm formType="Session"
+        closeCallback={this.closeModal}/>;
     } else if (isCreateAttempt) {
-      content = <LoginForm formType="Create"/>;
+      content = <LoginForm formType="Create"
+          closeCallback={this.closeModal}/>;
     }
     else {
       content = <LogInOptions

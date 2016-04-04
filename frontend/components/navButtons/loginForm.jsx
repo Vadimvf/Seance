@@ -2,7 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var validateForm = require('../../formValidation');
 var sessionUtil = require('../../util/sessionUtil');
-var ErrorStore = require('../../fetchErrorStore');
+var ErrorStore = require('../../stores/error');
 
 var LoginForm = React.createClass({
   contextTypes: {
@@ -21,15 +21,24 @@ var LoginForm = React.createClass({
 
   handleSubmit: function (e) {
     e.preventDefault();
+    router = this.context.router;
+    closeCallback = this.props.closeCallback;
 
     if (!!this.returnErrors()) {
       return;
-    } else {
+    } else if (this.props.formType === "Create" ) {
       sessionUtil.createAuthor(this.state,
-        function () { this.context.router.push("/");
+        function () {
+          closeCallback();
+          router.push("");
+      });
+    } else {
+      sessionUtil.loginAuthor(this.state,
+      function() {
+        closeCallback();
+        router.push("");
       });
     }
-
   },
 
   _onError: function () {
@@ -43,7 +52,7 @@ var LoginForm = React.createClass({
   },
 
   componentWillUnmount: function() {
-    this.errorListner.remove();
+    this.errorListener.remove();
   },
 
   returnErrors: function () {

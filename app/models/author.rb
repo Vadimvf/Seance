@@ -11,15 +11,15 @@ class Author < ActiveRecord::Base
 
   has_many :articles
 
-  def find_by_credentials(identifier, password)
-    if /@/.match(indentifier)
-      user = user.find_by_email(identifier)
+  def self.find_by_credentials(identifier, password)
+    if /@/.match(identifier)
+      author = Author.find_by_email(identifier)
     else
-      user = user.find_by_username(identifier)
+      author = Author.find_by_username(identifier)
     end
-    return false unless user
+    return nil unless author
 
-    user.is_password?(password)? false : user
+    author.is_password?(password)? author : nil
   end
 
   def password=(password)
