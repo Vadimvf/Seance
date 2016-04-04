@@ -1,14 +1,19 @@
 var SessionActions = require('../actions/sessionAction');
 
 var sessionUtil = {
-  createAuthor: function (authorParams) {
-    debugger
+  createAuthor: function (authorParams, redirect) {
     $.ajax({
       type: "POST",
+      url:"/api/authors",
       dataType: "json",
       data: authorParams,
-      success: function () {
+      success: function (currentAuthor) {
         debugger
+        SessionActions.currentAuthorReceived(currentAuthor);
+        redirect && redirect();
+      },
+      error: function () {
+        console.log("createAuthor Ajax error!");
       }
 
     });

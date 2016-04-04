@@ -1,18 +1,19 @@
 class Api::AuthorsController < ApplicationController
 
   def new
-
   end
 
   def create
-    @author = Author.save(author_params)
-  end
+    debugger
+    params.delete(:errors)
+    author = Author.new(author_params)
 
-
-  private
-
-  def author_params
-    params.require(:author).permit(:username, :fullname, :password)
+    if author
+      login!(author)
+      render json: author
+    else
+      render json: { message: "Invalid credentials"}, status: 401
+    end
   end
 
 end

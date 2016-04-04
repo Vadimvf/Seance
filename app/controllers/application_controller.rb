@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def login!(author)
     author.reset_sesssion_token!
-    session[:token] = user.session_token
+    session[:token] = author.session_token
   end
 
   def logout!
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def author_params
-    params.require(:author).permit(:username, :password, :email)
+    params.permit(:username, :password, :email, :fullname)
   end
 
 end

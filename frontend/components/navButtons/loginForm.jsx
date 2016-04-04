@@ -2,6 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var validateForm = require('../../formValidation');
 var sessionUtil = require('../../util/sessionUtil');
+var ErrorStore = require('../../fetchErrorStore');
 
 var LoginForm = React.createClass({
   contextTypes: {
@@ -20,24 +21,41 @@ var LoginForm = React.createClass({
 
   handleSubmit: function (e) {
     e.preventDefault();
-    var router = this.context.router;
-    if (!!this.isValid()) {
+
+    if (!!this.returnErrors()) {
       return;
     } else {
-      sessionUtil.createAuthor(this.state);
+      sessionUtil.createAuthor(this.state,
+        function () { this.context.router.push("/");
+      });
     }
+
   },
 
-  isValid: function () {
-    var allMessages = validateForm(this.state, this.props.formType);
-    if (!!allMessages){
-      this.setState({
-        errors: allMessages
-      });
-      return allMessages;
-    } else {
-      return null;
-    }
+  _onError: function () {
+    this.setState({
+      errors: ErrorStore.all()
+    });
+  },
+
+  componentDidMount: function() {
+    this.errorListener = ErrorStore.addListener(this._onError);
+  },
+
+  componentWillUnmount: function() {
+    this.errorListner.remove();
+  },
+
+  returnErrors: function () {
+    var allMessages = validateForm(
+      this.state, this.props.formType
+    );
+
+    this.setState({
+      errors: allMessages
+    });
+
+    return (allMessages.length !== 0)? allMessages : null;
   },
 
   updateUsername: function (e) {
@@ -70,6 +88,7 @@ var LoginForm = React.createClass({
         return <li key={idx}>{error}</li>;
       })
     );
+
     return (<ul className="form-errors">
               {errorElements}
            </ul>);
@@ -88,7 +107,7 @@ var LoginForm = React.createClass({
                type="text"
                placeholder="Full name"/>
 
-       <label htmlFor="email"></label>
+             <label htmlFor="email"></label>
        <input onChange={this.updateEmail}
          type="email"
          placeholder="Email"/>
@@ -99,17 +118,16 @@ var LoginForm = React.createClass({
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
 
-        {this.errorMessages()}
-        {newUserFormOpts}
+        { this.errorMessages() }
+        { newUserFormOpts }
 
-        <label htmlFor="username"></label>
-        <input onChange={this.updateUsername}
+      <label htmlFor="username"></label>
+      <input onChange={this.updateUsername}
                type="text"
                placeholder="Username"/>
 
-
-        <label htmlFor="Password"></label>
-        <input onChange={this.updatePassword}
+       <label htmlFor="password"></label>
+       <input onChange={this.updatePassword}
                type="password"
                placeholder="Password"/>
 

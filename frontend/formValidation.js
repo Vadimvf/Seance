@@ -50,7 +50,9 @@ var validateForm = function (formObject, formType) {
 
   };
 
-  return validate(formObject, constraints, {format: "flat"});
+  var errors = validate(formObject, constraints, {format: "flat"});
+
+  return (!!errors)? errors : [];
 
 };
 

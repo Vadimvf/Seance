@@ -1,5 +1,6 @@
 var SessionConstants = {
-  AUTHOR_CREATED: "AUTHOR_CREATED"
+  CURRENT_AUTHOR_RECEIVED: "CURRENT_AUTHOR_RECEIVED",
+  LOGOUT: "LOGOUT"
 };
 
 module.exports = sessionConstants;
