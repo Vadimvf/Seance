@@ -12,7 +12,8 @@ var Link = ReactRouter.Link;
 var Nav = require('./components/nav');
 var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
-var AuthorProfile = require('./components/authorShow');
+var AuthorProfile = require('./components/authorProfile');
+var AuthorShow = require('./components/authorShow');
 var SessionStore = require('./stores/session');
 var SessionUtil = require('./util/sessionUtil');
 
@@ -35,9 +36,10 @@ $(function(){
       <Route path="/" component={App} onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
         <Route path="articles/:id" component={ArticleShow} />
-        <Route path="authors/:id"
+        <Route path="authors/profile"
                component={AuthorProfile}
                onEnter={_requireLogIn}/>
+        <Route path="authors/:id" component={AuthorShow}/>
       </Route>
     </Router>
     ), document.getElementById("seance")

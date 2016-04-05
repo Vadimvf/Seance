@@ -2,6 +2,8 @@ var React = require('react');
 var ArticleUtil = require('../util/articleUtil');
 var ArticleStore = require('../stores/article');
 var PropTypes = React.PropTypes;
+var ReactRouter = require("react-router");
+var Link = ReactRouter.Link;
 
 var ArticleShow = React.createClass({
 
@@ -38,13 +40,15 @@ var ArticleShow = React.createClass({
     if ($.isEmptyObject(article)) {
       return <p/>;
     }
-    
+
     return (
-      <article className="article-container">
+      <article className="article-show-container">
         <div className="article-header group">
           <ul className="article--info">
             <li className="article--info-author">
-              {article.author.username}
+              <Link to={"/authors/" + article.author.id} >
+                {article.author.username}
+              </Link>
             </li>
             <li className="article--info-content">
               {article.created_ago + " ⋅ " + article.read_time}

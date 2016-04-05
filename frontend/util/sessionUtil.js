@@ -1,6 +1,6 @@
 var SessionActions = require('../actions/sessionAction');
 
-var sessionUtil = {
+var SessionUtil = {
   createAuthor: function (authorParams, redirect) {
     $.ajax({
       type: "POST",
@@ -29,7 +29,6 @@ var sessionUtil = {
         redirect && redirect();
       },
       error: function (errorJSON) {
-        debugger
         errors = errorJSON.responseJSON.errors;
         SessionActions.errorsReceived(errors);
       }
@@ -64,4 +63,4 @@ var sessionUtil = {
 
 };
 
-module.exports = sessionUtil;
+module.exports = SessionUtil;

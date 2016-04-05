@@ -7,7 +7,7 @@ var Profile = React.createClass({
   },
 
   fetchProfile: function () {
-    this.context.router.push("/authors/:id");
+    this.context.router.push("/authors/profile");
   },
 
   render: function() {

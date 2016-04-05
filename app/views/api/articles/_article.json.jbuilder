@@ -1,5 +1,5 @@
 json.extract! article, :id, :title, :read_time, :created_ago
-json.author article.author, :fullname, :username
+json.author article.author, :fullname, :username, :id
 
 show ||= false
 
