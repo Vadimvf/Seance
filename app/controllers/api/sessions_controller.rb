@@ -4,7 +4,7 @@ class Api::SessionsController < ApplicationController
     if logged_in?
       @author = current_author
     else
-      render json: { errors: "Not logged in" }, status: 401
+      render json: {}
     end
   end
 
@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
       login!(@author)
       render :show
     else
-      render json: { errors: "Invalid username or password"},
+      render json: { errors: ["Invalid username or password"]},
                    status: 401
     end
   end

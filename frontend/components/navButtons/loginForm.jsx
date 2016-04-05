@@ -22,20 +22,17 @@ var LoginForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     router = this.context.router;
-    closeCallback = this.props.closeCallback;
 
     if (!!this.returnErrors()) {
       return;
     } else if (this.props.formType === "Create" ) {
       sessionUtil.createAuthor(this.state,
         function () {
-          closeCallback();
           router.push("");
       });
     } else {
       sessionUtil.loginAuthor(this.state,
       function() {
-        closeCallback();
         router.push("");
       });
     }

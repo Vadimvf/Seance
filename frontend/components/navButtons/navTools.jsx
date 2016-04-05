@@ -6,19 +6,10 @@ var SessionUtil = require('../../util/sessionUtil');
 
 var NavTools = React.createClass({
   getInitialState: function() {
-    if (!(SessionStore.currentAuthorHasBeenFetched())){
-      return {
-        author: SessionUtil.fetchCurrentAuthor()
-      };
-    } else {
-      return {
-        author: null
-      };
-    }
+    return { author: SessionStore.currentAuthor };
   },
 
   componentDidMount: function() {
-    debugger
     this.authorListener = SessionStore.addListener(this._onChange);
   },
 
@@ -34,7 +25,7 @@ var NavTools = React.createClass({
 
   render: function() {
     var userButton;
-    if (SessionStore.currentAuthorHasBeenFetched()){
+    if (!$.isEmptyObject(this.state.author)){
       userButton = <Profile />;
     } else {
       userButton = <Login className="nav-tools--login"/>;

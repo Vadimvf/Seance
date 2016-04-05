@@ -32,7 +32,7 @@ $(function(){
   Modal.setAppElement(document.body);
   ReactDOM.render((
     <Router history={hashHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={App} onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
         <Route path="articles/:id" component={ArticleShow} />
         <Route path="authors/:id"
@@ -43,6 +43,12 @@ $(function(){
     ), document.getElementById("seance")
   );
 });
+
+function _checkLogin(){
+  if (!SessionStore.currentAuthorHasBeenFetched()) {
+    SessionUtil.fetchCurrentAuthor();
+  }
+}
 
 function _requireLogIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentAuthorHasBeenFetched()) {

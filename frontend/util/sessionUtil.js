@@ -29,6 +29,7 @@ var sessionUtil = {
         redirect && redirect();
       },
       error: function (errorJSON) {
+        debugger
         errors = errorJSON.responseJSON.errors;
         SessionActions.errorsReceived(errors);
       }
@@ -43,7 +44,7 @@ var sessionUtil = {
       success: function(currentAuthor) {
         SessionActions.currentAuthorReceived(currentAuthor);
       },
-      complete: function() {
+      complete: function () {
         completion && completion();
       }
     });
