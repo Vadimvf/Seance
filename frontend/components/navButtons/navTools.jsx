@@ -1,4 +1,7 @@
 var React = require('react');
+var ReactRouter = require("react-router");
+var Link = ReactRouter.Link;
+
 var Profile = require("./profile");
 var Login = require("./login");
 var SessionStore = require('../../stores/session');
@@ -37,7 +40,9 @@ var NavTools = React.createClass({
           <input type="text" placeholder="Search Seance"></ input>
         </li>
         <li>
-          <button className="nav-tools--write">Write a story</button>
+          <Link to="/articles/new" className="nav-tools--write">
+            Write a story
+          </Link>
         </li>
         <li>
           {userButton}

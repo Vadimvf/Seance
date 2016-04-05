@@ -25,7 +25,7 @@ var AuthorProfile = React.createClass({
     return (
       <div className="author-container">
         <section className="author-content" >
-          <h2>{this.state.author.fullname}</h2>
+          <h2>{this.state.author.fullnamef}</h2>
           <h3>{this.state.author.username}</h3>
           <h4>{this.state.author.email}</h4>
           <p>{this.state.author.bio}</p>

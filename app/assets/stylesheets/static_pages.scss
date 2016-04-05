@@ -167,6 +167,22 @@ img.avatar {
   color: $green-text;
 }
 
+a.nav-tools--write {
+  display: block;
+  text-align: left;
+  border: 1px solid $button-border;
+  padding: 10px;
+  border-radius: 20px;
+  color: $grey-link;
+  font-weight: lighter;
+  font-size: 14px;
+}
+a.nav-tools--write:hover {
+  color: $green_text;
+  -webkit-transition: color 300ms;
+  transition: color 300ms;
+}
+
 button, .nav-tools-search {
   text-align: left;
   border: 1px solid $button-border;
@@ -187,9 +203,41 @@ button, .nav-tools-search {
   display: block;
   margin: 10px auto;
   color: $green-text;
-  background-color: $grey-background;
+  background-color: $white-background;
   width: 225px;
   text-align: center;
+}
+
+.modal-button:hover {
+  color: $green-text;
+  background-color: rgb(237, 237, 237);
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
+}
+
+button.guest {
+  display: block;
+  margin: 10px auto;
+  color: rgb(71, 97, 89);
+  background-color: rgb(191, 255, 211);
+  width: 225px;
+  text-align: center;
+  font-weight: lighter;
+
+  .seance-login {
+    margin: -10px 10px -2px 0px;
+    width: 12px;
+    content: asset-url('seanceGreen.svg');
+  }
+}
+.guest:hover {
+  background-color: $green-text;
+  color: $white-background;
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
+  .seance-login {
+    content: asset-url('seanceWhite.svg');
+  }
 }
 
 .facebook {
@@ -200,6 +248,12 @@ button, .nav-tools-search {
     width: 15px;
     content: asset-url("FB-f-Logo__white_29.png");
   }
+}
+.facebook:hover {
+  background-color: #1d3679;
+  color: $white-background;
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
 }
 
 .modal > h1 {

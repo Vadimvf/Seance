@@ -1,7 +1,21 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var SessionUtil = require('../../util/sessionUtil');
 
 var LogInOptions = React.createClass({
+  contextTypes: {
+    router: PropTypes.object.isRequired
+  },
+
+  guestLogin: function () {
+    router = this.context.router;
+
+    SessionUtil.loginAuthor({
+      username: "FyoDost",
+      password: "underground"
+    }, function() { router.push("");
+    });
+  },
 
   render: function() {
     return (
@@ -16,6 +30,13 @@ var LogInOptions = React.createClass({
           </button>
 
           <button
+            className="modal-button guest"
+            onClick={this.guestLogin}>
+            <img className="seance-login" />
+            Guest Login
+          </button>
+
+          <button
             className="modal-button"
             onClick={this.props.createCallback}>
             Sign up
@@ -26,6 +47,7 @@ var LogInOptions = React.createClass({
             onClick={this.props.loginCallback}>
             Sign in
           </button>
+
 
         </section>
       );
