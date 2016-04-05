@@ -12,14 +12,15 @@ var Link = ReactRouter.Link;
 var Nav = require('./components/nav');
 var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
+var ArticleNew = require('./components/articleNew');
 var AuthorProfile = require('./components/authorProfile');
 var AuthorShow = require('./components/authorShow');
 var SessionStore = require('./stores/session');
 var SessionUtil = require('./util/sessionUtil');
 
 var App = React.createClass({
-
   render: function() {
+
     return (
       <div className="seance-container">
         <Nav />
@@ -35,6 +36,7 @@ $(function(){
     <Router history={hashHistory}>
       <Route path="/" component={App} onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
+        <Route path="articles/new" component={ArticleNew}/>
         <Route path="articles/:id" component={ArticleShow} />
         <Route path="authors/profile"
                component={AuthorProfile}

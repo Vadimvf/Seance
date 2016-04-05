@@ -9,7 +9,7 @@ var SessionUtil = require('../../util/sessionUtil');
 
 var NavTools = React.createClass({
   getInitialState: function() {
-    return { author: SessionStore.currentAuthor };
+    return { author: SessionStore.currentAuthor() };
   },
 
   componentDidMount: function() {
@@ -39,8 +39,8 @@ var NavTools = React.createClass({
           <img></img>
           <input type="text" placeholder="Search Seance"></ input>
         </li>
-        <li>
-          <Link to="/articles/new" className="nav-tools--write">
+        <li className="nav-tools--write">
+          <Link to="articles/new">
             Write a story
           </Link>
         </li>
