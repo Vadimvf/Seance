@@ -1,4 +1,3 @@
-/*BACKUP
 $grey-background: #FAFAFA;
 $white-background: #FFFFFF;
 $grey-border: #EFEFEF;
@@ -236,34 +235,24 @@ $error-red: rgb(166, 49, 49);
 .medium-editor-hidden {
   display: none; }
 .medium-toolbar-arrow-under:after {
-  border-color: #242424 transparent transparent transparent;
+  border-color: $heading-text transparent transparent transparent;
   top: 50px; }
 
 .medium-toolbar-arrow-over:before {
-  border-color: transparent transparent #242424 transparent;
+  border-color: transparent transparent $heading-text transparent;
   top: -8px; }
 
 .medium-editor-toolbar {
   background-color: $heading-text;
-  background: -webkit-linear-gradient(top, #242424, rgba(36, 36, 36, 0.75));
-  background: linear-gradient(to bottom, #242424, rgba(36, 36, 36, 0.75));
-  border: 1px solid #000;
+  border: 1px solid $heading-text;
+  border-bottom: 2px solid $heading-text;
   border-radius: 5px;
-  box-shadow: 0 0 3px #000; }
+  box-shadow: 0 0 2px $heading-text; }
   .medium-editor-toolbar li button {
-    background-color: #242424;
-    background: -webkit-linear-gradient(top, #242424, rgba(36, 36, 36, 0.89));
-    background: linear-gradient(to bottom, #242424, rgba(36, 36, 36, 0.89));
     border: 0;
-    border-right: 1px solid #000;
-    border-left: 1px solid #333;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    color: #fff;
-    height: 50px;
-    min-width: 50px;
     -webkit-transition: background-color .2s ease-in;
-            transition: background-color .2s ease-in; }
+            transition: background-color .2s ease-in;
+    }
     .medium-editor-toolbar li button:hover {
       background-color: #000;
       color: $green-text; }
@@ -275,9 +264,7 @@ $error-red: rgb(166, 49, 49);
     border-top-right-radius: 5px; }
   .medium-editor-toolbar li .medium-editor-button-active {
     background-color: #000;
-    background: -webkit-linear-gradient(top, #242424, rgba(0, 0, 0, 0.89));
-    background: linear-gradient(to bottom, #242424, rgba(0, 0, 0, 0.89));
-    color: #fff; }
+    color: $green-text; }
 
 .medium-editor-toolbar-form {
   background: #242424;
@@ -298,5 +285,3 @@ $error-red: rgb(166, 49, 49);
 
 .medium-editor-placeholder:after {
   color: #b3b3b1; }
-
-/*# sourceMappingURL=styles.css.map*/*/

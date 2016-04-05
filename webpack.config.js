@@ -24,15 +24,8 @@ module.exports = {
       {
         test: /\.node$/,
         loader: "node-loader"
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       }
     ]
   },
   devtool: 'source-maps',
-  plugins: [
-       new ExtractTextPlugin("styles.css")
-   ]
 };

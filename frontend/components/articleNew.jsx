@@ -2,10 +2,7 @@ var React = require('react');
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
 var PropTypes = React.PropTypes;
-
 var Editor = require('react-medium-editor');
-require('medium-editor/dist/css/medium-editor.css');
-require('medium-editor/dist/css/themes/default.css');
 
 var SessionStore = require('../stores/session');
 
@@ -77,7 +74,5 @@ var ArticleNew = React.createClass({
   }
 
 });
-// <input className="body"
-//        type="textarea"
-//        placeholder="Tell your story..." />
+
 module.exports = ArticleNew;
