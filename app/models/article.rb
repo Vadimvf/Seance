@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
-  validates :title, :body, :author_id, presence: true
+  validates :title, :body, :author_id, :body_short, presence: true
   validates :body, uniqueness: true
+  before_validation :create_body_short, :ensure_title
 
   belongs_to :author
 
@@ -14,6 +15,14 @@ class Article < ActiveRecord::Base
   end
 
   private
+
+  def ensure_title
+    self.title = "Untitled" if self.title == ""
+  end
+
+  def create_body_short
+    self.body_short = self.body.split[0..40].join(" ");
+  end
 
   def pretty_time(time_difference)
 

@@ -45,6 +45,7 @@ var ArticleShow = React.createClass({
 
     return (
       <article className="article-show-container">
+
         <div className="article-header group">
           <ul className="article--info">
             <li className="article--info-author">
@@ -57,10 +58,12 @@ var ArticleShow = React.createClass({
             </li>
           </ul>
         </div>
+
         <div className="content" >
           <h2>{article.title}</h2>
           <div>{article.body}</div>
         </div>
+
       </article>
     );
   }

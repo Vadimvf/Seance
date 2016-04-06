@@ -8,6 +8,8 @@ class Api::ArticlesController < ApplicationController
   end
 
   def create
+    author = Author.find(params[:author][:id])
+    @article = author.articles.create(article_params)
   end
 
   def new
@@ -21,9 +23,19 @@ class Api::ArticlesController < ApplicationController
   end
 
   def update
+    article = Article.find(params[:id])
+    article.update(article_params)
+    debugger
+    render json: {}
   end
 
   def destroy
+  end
+
+  private
+
+  def article_params
+    params.permit(:title, :body)
   end
 
 end
