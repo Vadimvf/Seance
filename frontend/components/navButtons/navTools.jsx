@@ -9,7 +9,9 @@ var SessionUtil = require('../../util/sessionUtil');
 
 var NavTools = React.createClass({
   getInitialState: function() {
-    return { author: SessionStore.currentAuthor() };
+    return {
+      author: SessionStore.currentAuthor()
+     };
   },
 
   componentDidMount: function() {
@@ -26,6 +28,10 @@ var NavTools = React.createClass({
     });
   },
 
+  renderWriteTools: function () {
+    return this.props.toggleWriteTools;
+  },
+
   render: function() {
     var userButton;
     if (!$.isEmptyObject(this.state.author)){
@@ -40,7 +46,7 @@ var NavTools = React.createClass({
           <input type="text" placeholder="Search Seance"></ input>
         </li>
         <li className="nav-tools--write">
-          <Link to="articles/new">
+          <Link to="articles/new" >
             Write a story
           </Link>
         </li>

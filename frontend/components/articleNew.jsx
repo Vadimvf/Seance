@@ -1,8 +1,9 @@
 var React = require('react');
 var ReactRouter = require("react-router");
+var Editor = require('react-medium-editor');
+
 var Link = ReactRouter.Link;
 var PropTypes = React.PropTypes;
-var Editor = require('react-medium-editor');
 
 var SessionStore = require('../stores/session');
 

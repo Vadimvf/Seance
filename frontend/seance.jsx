@@ -19,8 +19,9 @@ var SessionStore = require('./stores/session');
 var SessionUtil = require('./util/sessionUtil');
 
 var App = React.createClass({
-  render: function() {
 
+  render: function() {
+    var router = this.context.router;
     return (
       <div className="seance-container">
         <Nav />
@@ -34,14 +35,18 @@ $(function(){
   Modal.setAppElement(document.body);
   ReactDOM.render((
     <Router history={hashHistory}>
-      <Route path="/" component={App} onEnter={_checkLogin}>
+      <Route path="/" component={App}
+                      onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
-        <Route path="articles/new" component={ArticleNew}/>
-        <Route path="articles/:id" component={ArticleShow} />
+        <Route path="articles/new"
+               component={ArticleNew} />
+        <Route path="articles/:id"
+               component={ArticleShow} />
         <Route path="authors/profile"
                component={AuthorProfile}
                onEnter={_requireLogIn}/>
-        <Route path="authors/:id" component={AuthorShow}/>
+        <Route path="authors/:id"
+               component={AuthorShow}/>
       </Route>
     </Router>
     ), document.getElementById("seance")
