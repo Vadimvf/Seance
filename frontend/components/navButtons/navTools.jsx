@@ -28,10 +28,6 @@ var NavTools = React.createClass({
     });
   },
 
-  renderWriteTools: function () {
-    return this.props.toggleWriteTools;
-  },
-
   render: function() {
     var userButton;
     if (!$.isEmptyObject(this.state.author)){

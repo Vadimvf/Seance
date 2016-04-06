@@ -99,8 +99,7 @@ h1, h2, h3, strong {
   display: block;
   float: left;
   vertical-align: top;
-  padding-top: 20px;
-  padding-left: 20px;
+  padding: 20px 0 13px 20px;
 }
 
 strong {
@@ -116,6 +115,12 @@ strong {
   content: asset-url('seanceLogo.svg');
   margin-top: -5px;
   width: 30px;
+}
+
+.nav-logo-icon:hover {
+  content: asset-url('seanceGreen.svg');
+  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .nav-tools--profile {
@@ -199,6 +204,27 @@ img.avatar {
   -webkit-transition: color 300ms;
   transition: color 300ms;
   cursor: pointer;
+}
+
+.nav-write--publish {
+  button {
+  border: 1px solid $green-text;
+  color: $green-text; }
+
+  button:hover {
+    border: 1px solid rgb(56, 171, 102);
+    color: rgb(56, 171, 102);
+    -webkit-transition: 300ms;
+    transition: 300ms; }
+}
+
+.nav-write--delete {
+  button:hover {
+    border: 1px solid $text;
+    color: $text;
+    -webkit-transition: 300ms;
+    transition: 300ms;
+  }
 }
 
 button, .nav-tools-search {

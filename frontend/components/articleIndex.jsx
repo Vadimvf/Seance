@@ -2,6 +2,7 @@ var React = require('react');
 var articleUtil = require('../util/articleUtil');
 var ArticleStore = require('../stores/article');
 var ArticleListItem = require('./articleListItem');
+var NavAction = require('../actions/navAction');
 
 var ArticleIndex = React.createClass({
 
@@ -20,6 +21,7 @@ var ArticleIndex = React.createClass({
   componentDidMount: function() {
     this.indexListener = ArticleStore.addListener(this._onChange);
     articleUtil.fetchArticles();
+    NavAction.renderDefaultNav();
   },
 
   componentWillUnmount: function() {

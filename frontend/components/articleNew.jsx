@@ -6,6 +6,7 @@ var Link = ReactRouter.Link;
 var PropTypes = React.PropTypes;
 
 var SessionStore = require('../stores/session');
+var NavAction = require('../actions/navAction');
 
 var ArticleNew = React.createClass({
   getInitialState: function () {
@@ -18,6 +19,7 @@ var ArticleNew = React.createClass({
 
   componentDidMount: function() {
     this.authorListener = SessionStore.addListener(this._onChange);
+    NavAction.renderWriteTools();
   },
 
   componentWillUnmount: function() {

@@ -4,6 +4,7 @@ var ArticleStore = require('../stores/article');
 var PropTypes = React.PropTypes;
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
+var NavAction = require('../actions/navAction');
 
 var ArticleShow = React.createClass({
 
@@ -16,6 +17,7 @@ var ArticleShow = React.createClass({
   componentDidMount: function() {
     this.showListener = ArticleStore.addListener(this._onChange);
     ArticleUtil.fetchArticle(this.props.params.id);
+    NavAction.renderArticleShow();
   },
 
   componentWillUnmount: function() {
