@@ -4,21 +4,31 @@ var Profile = require('./profile');
 
 var navWriteTools = React.createClass({
 
-  render: function() {
+  publish: function (){
+    //articleUtil -> publishArticle -> articleAction, etc.
+    //push to articleShow for new Article (on callback from articleAction)
+  },
+
+  delete: function (){
+    //articleUtil -> deleteArticle -> articleAction, etc.
+    //push to articleShow for new Article (on callback from articleAction)
+  },
+
+  render: function () {
     return (
       <ul className="nav-tools">
         <li className="nav-write--publish">
-          <button>
-            Publish Draft
-          </ button>
+          <button onClick={this.publish}>
+            Publish
+          </button>
         </li>
         <li className="nav-write--delete">
-          <button >
+          <button onClick={this.deleteDraft}>
             Delete Draft
-          </ button>
+          </button>
         </li>
         <li>
-          <Profile/>
+          <Profile />
         </li>
       </ul>
     );

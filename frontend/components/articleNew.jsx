@@ -13,34 +13,52 @@ var ArticleNew = React.createClass({
     return {
       author: SessionStore.currentAuthor(),
       title: "",
-      body: ""
+      body: "",
+      isSaving: false
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     this.authorListener = SessionStore.addListener(this._onChange);
     NavAction.renderWriteTools();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     this.authorListener.remove();
+    this.autoSaveInterval && this.autoSaveInterval.clearInterval();
   },
 
   _onChange: function () {
-    this.setState({
-      author: SessionStore.currentAuthor()
-    });
+    if (this.state.isSaving){
+      this.setState({
+        author: SessionStore.currentAuthor()
+      });
+    } else{
+      this.setState({
+        author: SessionStore.currentAuthor(),
+        isSaving: true
+      });
+      this.autoSave();
+    }
+  },
+
+  autoSave: function () {
+    this.autoSaveInterval = setTimeOut(function (){
+      this.setState({isSaving: false});
+      //ajax save request
+    }, 3000);
   },
 
   handleSubmit: function (e) {
     e.preventDefault();
   },
 
-  handleChange: function(text, medium) {
+
+  handleChange: function (text, medium) {
    this.setState({body: text});
  },
 
-  render: function() {
+  render: function () {
     var author = this.state.author;
 
     return (

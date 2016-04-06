@@ -45,7 +45,6 @@ var NavBar = React.createClass({
         navContent = (
           <header className="nav group">
             <Logo />
-            <NavLinks />
             <NavWriteTools />
           </header>
         );
