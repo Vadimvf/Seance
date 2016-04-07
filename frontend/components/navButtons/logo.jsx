@@ -6,7 +6,7 @@ var Logo = React.createClass({
   render: function() {
     return (
       <b className="nav-logo">
-        <Link to="" >
+        <Link to="" className="nav-logo-text">
           <strong>Seance</strong>
         </Link>
 

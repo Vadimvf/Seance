@@ -8,7 +8,7 @@ var ArticleIndex = React.createClass({
 
   getInitialState: function() {
     return {
-      articles: ArticleStore.all()
+      articles: []
     };
   },
 
@@ -20,7 +20,7 @@ var ArticleIndex = React.createClass({
 
   componentDidMount: function() {
     this.indexListener = ArticleStore.addListener(this._onChange);
-    articleUtil.fetchArticles();
+    articleUtil.fetchArticles({query: {published: true}});
     NavAction.renderDefaultNav();
   },
 

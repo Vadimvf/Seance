@@ -1,21 +1,27 @@
 class Api::ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all
-      .order(created_at: :desc)
-      .includes(:author)
-      .limit(20)
+    if params[:query][:authorId]
+      @articles = Article.all
+        .where(
+                published: params[:query][:published],
+                author_id: params[:query][:authorId]
+              )
+        .order(created_at: :desc)
+        .includes(:author)
+        .limit(20)
+    else
+      @articles = Article.all
+        .where(published: params[:query][:published])
+        .order(created_at: :desc)
+        .includes(:author)
+        .limit(20)
+      end
   end
 
   def create
     author = Author.find(params[:author][:id])
     @article = author.articles.create(article_params)
-  end
-
-  def new
-  end
-
-  def edit
   end
 
   def show
@@ -29,12 +35,15 @@ class Api::ArticlesController < ApplicationController
   end
 
   def destroy
+    article = Article.find(params[:id])
+    article.destroy
+    render json: {}
   end
 
   private
 
   def article_params
-    params.permit(:title, :body)
+    params.permit(:title, :body, :published)
   end
 
 end

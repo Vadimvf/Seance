@@ -13,6 +13,7 @@ var Nav = require('./components/nav');
 var ArticleIndex = require('./components/articleIndex');
 var ArticleShow = require('./components/articleShow');
 var ArticleNew = require('./components/articleNew');
+var ArticleEdit = require('./components/articleEdit');
 var AuthorProfile = require('./components/authorProfile');
 var AuthorShow = require('./components/authorShow');
 var SessionStore = require('./stores/session');
@@ -39,6 +40,8 @@ $(function(){
                       onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
         <Route path="articles/new"
+               component={ArticleNew} />
+        <Route path="articles/edit/:id"
                component={ArticleNew} />
         <Route path="articles/:id"
                component={ArticleShow} />

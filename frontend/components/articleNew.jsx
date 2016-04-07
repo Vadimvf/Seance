@@ -17,28 +17,32 @@ var ArticleNew = React.createClass({
   getInitialState: function () {
     return {
       author: SessionStore.currentAuthor(),
-      // articleId: null,
       title: "",
       body: "",
+      published: false
     };
   },
-  ///Use for edit page instead of create or get default props?
-  // getDefaultProps: function() {
-  //   return {
-  //     articleId: null
-  //   };
-  // },
 
   componentDidMount: function () {
     this.authorListener = SessionStore.addListener(this._onChange);
-    this.articleListener = ArticleStore.addListener(this._onInitialSave);
+    this.articleListener = ArticleStore.addListener(this._onInitialFetch);
     NavAction.renderWriteTools();
+
+    if (this.props.params.id){
+      var self = this;
+      this.placeholder = "";
+      ArticleUtil.fetchArticle(this.props.params.id, function (article){
+        self.setState({
+          title: article.title,
+          body: article.body
+        });
+      });
+    }
   },
 
   componentWillUnmount: function () {
     this.authorListener.remove();
     this.articleListener.remove();
-    debugger
     this.autoSaveInterval && clearInterval(this.autoSaveInterval);
   },
 
@@ -48,7 +52,7 @@ var ArticleNew = React.createClass({
     });
   },
 
-  _onInitialSave: function () {
+  _onInitialFetch: function () {
     this.articleId = ArticleStore.one().id;
   },
 
@@ -56,7 +60,6 @@ var ArticleNew = React.createClass({
     var prevSaveLength = 0;
     var articleSaved = false;
     var articleSaving = false;
-    var saveError;
 
     function _saveOnlyOnce(articleProps){
       articleSaving = true;
@@ -66,7 +69,6 @@ var ArticleNew = React.createClass({
         articleSaved = true;
         articleSaving = false;
       }.bind(this));
-      //check if the article saved otherwise reset and show errors
     }
 
     function _checkLengthSave(){
@@ -76,7 +78,8 @@ var ArticleNew = React.createClass({
       if (Math.abs(currentBodyLength - prevSaveLength) > 20){
         prevSaveLength = currentBodyLength;
         ArticleAction.updateSaveStatus("Saving...");
-        if (articleSaved){
+        if (this.articleId){
+          debugger
           ArticleUtil.editArticle(this.state, this.articleId);
         }else {
           _saveOnlyOnce(this.state);
@@ -104,7 +107,7 @@ var ArticleNew = React.createClass({
 
   render: function () {
     var author = this.state.author;
-    console.log("why render?");
+    if (this.placeholder) { this.placeholder = "Tell your story...";}
 
     return (
       <div className="article-create-container">
@@ -120,21 +123,22 @@ var ArticleNew = React.createClass({
               <li className="article--info-content">
                 Draft
               </li>
-              <SaveArticle/>
+              <SaveArticle />
             </ul>
           </div>
 
-          <form className="article-create-form" >
+          <form className="article-create-form">
             <input
               className="title"
               type="text"
               placeholder="Title"
               onChange={this.handleTitle}
+              value={this.state.title}
             />
             <Editor
               className="body"
               text={this.state.body}
-              data-placeholder="Tell your story..."
+              data-placeholder={this.placeholder}
               onChange={this.handleChange}
             />
           </form>
