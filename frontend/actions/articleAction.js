@@ -18,6 +18,15 @@ var ArticleActions = {
     };
 
     Dispatcher.dispatch(payload);
+  },
+
+  updateSaveStatus: function (status) {
+    payload = {
+      actionType: ArticleConstants.STATUS_RECEIVED,
+      status: status
+    };
+
+    Dispatcher.dispatch(payload);
   }
 
 };

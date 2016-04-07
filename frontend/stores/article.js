@@ -5,12 +5,18 @@ var ArticleStore = new Store(Dispatcher);
 
 var _articles = [];
 var _article = {};
+var _status = "";
 
 var resetArticles = function (articles) {
   _articles = articles;
 };
+
 var resetArticle = function (article) {
   _article = article;
+};
+
+var resetStatus = function (status) {
+  _status = status;
 };
 
 ArticleStore.all = function (){
@@ -18,6 +24,10 @@ ArticleStore.all = function (){
 };
 ArticleStore.one = function (){
   return _article;
+};
+
+ArticleStore.status = function (){
+  return _status;
 };
 
 ArticleStore.__onDispatch = function (payload) {
@@ -28,6 +38,10 @@ ArticleStore.__onDispatch = function (payload) {
       break;
     case ArticleConstants.ARTICLE_RECEIVED:
       resetArticle(payload.article);
+      ArticleStore.__emitChange();
+      break;
+    case ArticleConstants.STATUS_RECEIVED:
+      resetStatus(payload.status);
       ArticleStore.__emitChange();
       break;
   }
