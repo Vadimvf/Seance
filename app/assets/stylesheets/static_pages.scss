@@ -68,10 +68,15 @@ p, blockquote {
 
 blockquote {
   font-size: 24px;
+  font-weight: lighter;
 }
 
 h1, h2, h3, strong, i, blockquote {
   font-family: sans-serif;
+}
+h1, h2, h3 {
+  font-weight: bold;
+  color: $heading-text;
 }
 
 u {
@@ -80,8 +85,20 @@ u {
 
 h1 {
   font-size: 44px;
-  font-weight: bold;
-  color: $heading-text;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+i {
+  font-size: 19px;
+  font-weight: 300;
 }
 
 .nav-logo, a, button, .nav-tools-search > img {
