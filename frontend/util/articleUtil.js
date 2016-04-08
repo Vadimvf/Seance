@@ -74,6 +74,7 @@ var _getTime = function () {
   var amPm = "AM";
 
   if (hours > 12){ hours = hours - 12; amPm = "PM"; }
+  if (minutes < 10) { minutes = "0" + minutes; }
   return hours + ":" + minutes + " " + amPm;
 };
 

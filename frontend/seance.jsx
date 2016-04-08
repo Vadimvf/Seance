@@ -42,7 +42,7 @@ $(function(){
         <Route path="articles/new"
                component={ArticleNew} />
         <Route path="articles/edit/:id"
-               component={ArticleNew} />
+               component={ArticleNew}/>
         <Route path="articles/:id"
                component={ArticleShow} />
         <Route path="authors/profile"

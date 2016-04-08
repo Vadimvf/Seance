@@ -120,6 +120,7 @@ var QueryArticles = React.createClass({
                 </button>
               </li>
 
+
             </ul>
           </article>
         );

@@ -25,7 +25,6 @@ var ArticleActions = {
       actionType: ArticleConstants.STATUS_RECEIVED,
       status: status
     };
-
     Dispatcher.dispatch(payload);
   }
 

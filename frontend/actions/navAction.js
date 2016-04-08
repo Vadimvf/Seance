@@ -27,7 +27,32 @@ var NavActions = {
     };
 
     Dispatcher.dispatch(payload);
+  },
+
+  requestDelete: function () {
+    payload = {
+      actionType: NavConstants.DELETE_REQUESTED,
+      message: NavConstants.DELETE_ARTICLE
+    };
+    Dispatcher.dispatch(payload);
+  },
+
+  requestPublish: function () {
+    payload = {
+      actionType: NavConstants.PUBLISH_REQUESTED,
+      message: NavConstants.PUBLISH_ARTICLE
+    };
+    Dispatcher.dispatch(payload);
+  },
+
+  requestSave: function () {
+    payload = {
+      actionType: NavConstants.SAVE_REQUESTED,
+      message: NavConstants.SAVE_ARTICLE
+    };
+    Dispatcher.dispatch(payload);
   }
+
 };
 
 

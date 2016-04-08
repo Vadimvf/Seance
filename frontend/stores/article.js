@@ -26,10 +26,6 @@ ArticleStore.one = function (){
   return _article;
 };
 
-ArticleStore.status = function (){
-  return _status;
-};
-
 ArticleStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case ArticleConstants.ARTICLES_RECEIVED:
@@ -38,10 +34,6 @@ ArticleStore.__onDispatch = function (payload) {
       break;
     case ArticleConstants.ARTICLE_RECEIVED:
       resetArticle(payload.article);
-      ArticleStore.__emitChange();
-      break;
-    case ArticleConstants.STATUS_RECEIVED:
-      resetStatus(payload.status);
       ArticleStore.__emitChange();
       break;
   }
