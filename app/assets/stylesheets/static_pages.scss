@@ -538,8 +538,15 @@ button.guest {
   p {
     font-size: 14px;}
 
-  .author-articles-container {
+  .author-articles-container:last-child {
     max-width: 750px;
+  }
+
+  .author-articles-container img {
+    width: 100% !important;
+  }
+
+  .author-articles-container {
     margin: 0 auto;
     box-sizing: content-box;
     padding: 0 25px;
