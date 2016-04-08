@@ -64,7 +64,7 @@ var ArticleShow = React.createClass({
         </div>
 
         <div className="content" >
-          <h2>{article.title}</h2>
+          <h1>{article.title}</h1>
           <div dangerouslySetInnerHTML={_createHTML(article.body)}>
           </div>
         </div>
