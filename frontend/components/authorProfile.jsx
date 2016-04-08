@@ -36,6 +36,7 @@ var AuthorProfile = React.createClass({
           <h4>{this.state.author.email}</h4>
           <p>{this.state.author.bio}</p>
           <button onClick={this._logout}>Log out</button>
+          <button onClick={this._logout}>Edit Profile</button>
         </section>
         <QueryArticles />
       </div>

@@ -24,6 +24,10 @@ NavToolMessagesStore.__onDispatch = function (payload){
       resetMessage(payload.message);
       NavToolMessagesStore.__emitChange();
       break;
+    case NavConstants.SAVE_REQUESTED:
+      resetMessage(payload.message);
+      NavToolMessagesStore.__emitChange();
+      break;
   }
 };
 

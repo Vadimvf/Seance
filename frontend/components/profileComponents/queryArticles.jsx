@@ -99,9 +99,9 @@ var QueryArticles = React.createClass({
     if (this.state.articles.length > 0){
       articles = this.state.articles.map(function (article, idx){
         return (
-          <article key={idx}>
+          <article key={idx} className="author-show-article">
             <h3>{article.title}</h3>
-            <div
+            <div className="author-show-article--content"
               dangerouslySetInnerHTML={_createHTML(article.body_short)}>
             </div>
 

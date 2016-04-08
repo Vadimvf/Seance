@@ -12,6 +12,9 @@ var ReactListItem = React.createClass({
 
   render: function() {
     article = this.props.article;
+    function _createHTML(content){
+      return {__html: content};
+    }
 
     return (
       <article className="article-container">
@@ -28,7 +31,9 @@ var ReactListItem = React.createClass({
         <div className="article-content"
              onClick={this.directToArticle}>
           <h2>{article.title}</h2>
-          <p>{article.body_short + "..."}</p>
+          <p
+            dangerouslySetInnerHTML={_createHTML(article.body_short)}>
+          </p>
         </div>
       </article>
     );

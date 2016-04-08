@@ -14,6 +14,10 @@ var SaveArticle = React.createClass({
     this.statusListener = ErrorStore.addListener(this._onChange);
   },
 
+  componentWillUnmount: function () {
+    this.statusListener.remove();
+  },
+
   _onChange: function () {
     this.setState({
       status: ErrorStore.currentStatus()

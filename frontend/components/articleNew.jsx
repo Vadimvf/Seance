@@ -88,6 +88,7 @@ var ArticleNew = React.createClass({
     var self = this;
     switch (message) {
       case NavConstants.DELETE_ARTICLE:
+        if (!this.articleId) {return ;}
         ArticleUtil.deleteArticle(this.articleId, function(){
           router.push('/authors/profile');
         });
@@ -99,10 +100,7 @@ var ArticleNew = React.createClass({
         });
         break;
       case NavConstants.SAVE_ARTICLE:
-        ArticleAction.updateSaveStatus("Saving...");
-        ArticleUtil.editArticle(self.state, this.articleId, function(){
-          router.push('/articles/' + self.articleId);
-        });
+        ArticleUtil.editArticle(self.state, self.articleId);
         break;
     }
   },
@@ -164,6 +162,7 @@ var ArticleNew = React.createClass({
         <div className="article-create-content">
 
           <div className="article-header group">
+            <SaveArticle />
             <ul className="article--info">
               <li className="article--info-author">
                 <Link to={"/authors/profile"} >
@@ -173,7 +172,6 @@ var ArticleNew = React.createClass({
               <li className="article--info-content">
                 Draft
               </li>
-              <SaveArticle />
             </ul>
           </div>
 

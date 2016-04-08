@@ -1,13 +1,15 @@
 var React = require('react');
-var articleUtil = require('../util/articleUtil');
+var ArticleUtil = require('../util/articleUtil');
 var ArticleStore = require('../stores/article');
 var ArticleListItem = require('./articleListItem');
 var NavAction = require('../actions/navAction');
+var SessionStore = require('../stores/session');
 
 var ArticleIndex = React.createClass({
 
   getInitialState: function() {
     return {
+      author: SessionStore.currentAuthor(),
       articles: []
     };
   },
@@ -18,26 +20,37 @@ var ArticleIndex = React.createClass({
     });
   },
 
+  _onAuthor: function() {
+    this.setState({
+      author: SessionStore.currentAuthor()
+    });
+  },
+
   componentDidMount: function() {
     this.indexListener = ArticleStore.addListener(this._onChange);
-    articleUtil.fetchArticles({query: {published: true}});
+    ArticleUtil.fetchArticles({query: {published: true}});
+    this.authorListener =
+    SessionStore.addListener(this._onAuthor);
+
     NavAction.renderDefaultNav();
   },
 
   componentWillUnmount: function() {
     this.indexListener.remove();
+    this.authorListener.remove();
   },
 
   render: function() {
-    articles = this.state.articles.map(function (article, idx){
+    var articles = this.state.articles.map(function (article, idx){
       return (
         <ArticleListItem article={article} key={idx} />
         );
     });
+
     return (
-      <section className="articles">
+        <section className="articles">
           {articles}
-      </section>
+        </section>
     );
   }
 

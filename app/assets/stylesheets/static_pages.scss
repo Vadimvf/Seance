@@ -385,8 +385,6 @@ button.guest {
     display: none;}
 }
 
-//ARTICLES VIEW//////////////////////////////////////////
-
 .articles {
   max-width: 800px;
   margin: 0 auto;
@@ -512,6 +510,17 @@ button.guest {
     margin: 0 auto;
     padding: 0 25px;}
 
+    .author-content > button {
+      padding: 0;
+      border: none;
+      margin-right: 15px;
+    }
+    .author-content > button:hover {
+      border: none;
+      color: $text;
+      transition: 500ms;
+    }
+
   h2 {
     font-size: 32px;
     font-weight: 700;
@@ -608,7 +617,11 @@ button.guest {
 
 }
 
+.author-show-article--content {
+  max-width: 450px;
+  word-wrap: break-word;
 
+}
 
 
 //ARTICLE NEW ///////////////////////////////////////////////////////
@@ -626,6 +639,14 @@ button.guest {
   .article-header {
     padding-bottom: 25px;
     font-weight: 400;}
+}
+
+.article--info-save-status {
+  color: $grey_link;
+  float: right;
+  font-weight: lighter;
+  font-size: 14px;
+
 }
 
 .article-create-form {

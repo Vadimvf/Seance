@@ -43,6 +43,10 @@ var ArticleShow = React.createClass({
       return <p/>;
     }
 
+    function _createHTML(content){
+      return {__html: content};
+    }
+
     return (
       <article className="article-show-container">
 
@@ -61,7 +65,8 @@ var ArticleShow = React.createClass({
 
         <div className="content" >
           <h2>{article.title}</h2>
-          <div>{article.body}</div>
+          <div dangerouslySetInnerHTML={_createHTML(article.body)}>
+          </div>
         </div>
 
       </article>
