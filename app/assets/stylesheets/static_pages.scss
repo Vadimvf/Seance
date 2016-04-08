@@ -33,7 +33,7 @@ html, body {
   height: 100%;
 }
 
-body, h1, h2, header, div, img, ul, li, input, button, div, a, strong {
+body, h1, h2, header, div, img, u, ul, li, input, button, div, a, strong {
 
   border: 0;
   outline: 0;
@@ -59,15 +59,23 @@ li {
   list-style: none;
 }
 
-p {
+p, blockquote {
   font-family: 'Lora', serif;
   line-height: 1.5;
   font-size: 20px;
   color: $text;
 }
 
-h1, h2, h3, strong {
+blockquote {
+  font-size: 24px;
+}
+
+h1, h2, h3, strong, i, blockquote {
   font-family: sans-serif;
+}
+
+u {
+  border-bottom: 1px solid $green_text;
 }
 
 h1 {
@@ -399,6 +407,11 @@ button.guest {
   border: 1px solid $grey-border;
   padding: 25px;
   margin-bottom: 10px;
+  overflow: hidden;
+  p {
+    max-height: 400px;
+    overflow: hidden;
+  }
 }
 
 .article-header {
@@ -479,6 +492,13 @@ button.guest {
   display: block;
   padding-top: 50px;
 
+  p {
+    img {
+      transform: translate(-25%, 0%);
+      height: auto;
+    }
+  }
+
   .article-header {
     max-width: 750px;
     margin: 0 auto;
@@ -542,14 +562,19 @@ button.guest {
     max-width: 750px;
   }
 
-  .author-articles-container img {
-    width: 100% !important;
-  }
-
   .author-articles-container {
     margin: 0 auto;
     box-sizing: content-box;
     padding: 0 25px;
+    p {
+      max-height: 250px;
+      overflow: hidden;
+      img {
+        transform: translate(-25%, -25%);
+        height: auto;
+      }
+    }
+
 
     h1 {
       padding: 50px 0;}
