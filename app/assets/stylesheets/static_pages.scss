@@ -402,6 +402,10 @@ button.guest {
 
   .nav-logo-icon {
     margin-top: -7px;}
+    
+  p {
+    overflow-x: hidden;
+  }
 }
 
 @media only screen and (max-width: 420px){
@@ -509,6 +513,7 @@ button.guest {
   padding-top: 50px;
 
   p {
+    max-width: 100%;
     img {
       transform: translate(-25%, 0%);
       height: auto;
