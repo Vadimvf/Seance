@@ -9,6 +9,7 @@ var ArticleUtil = {
       data: query,
       success: function (jsonArticles){
         ArticleActions.receiveAll(jsonArticles);
+        callback && callback(jsonArticles);
       }
     });
   },
