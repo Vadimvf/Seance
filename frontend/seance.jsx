@@ -39,9 +39,11 @@ $(function(){
                       onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
         <Route path="articles/new"
-               component={ArticleNew} />
+               component={ArticleNew}
+               onEnter={_requireLogIn}/>
         <Route path="articles/edit/:id"
-               component={ArticleNew}/>
+               component={ArticleNew}
+               onEnter={_requireLogIn}/>
         <Route path="articles/:id"
                component={ArticleShow} />
         <Route path="authors/profile"
@@ -67,10 +69,12 @@ function _requireLogIn(nextState, replace, asyncCompletionCallback) {
   } else {
     _redirectIfNotLoggedIn();
   }
+
   function _redirectIfNotLoggedIn() {
-    if (!SessionStore.isLoggedIn()) {
-      replace("");
+    if ($.isEmptyObject(SessionStore.currentAuthor())){
+      replace({pathname: "/"});
     }
+
     asyncCompletionCallback();
   }
 }
