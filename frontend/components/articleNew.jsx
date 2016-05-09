@@ -72,38 +72,6 @@ var ArticleNew = React.createClass({
     this.autoSaveInterval && clearInterval(this.autoSaveInterval);
   },
 
-  _onChange: function () {
-    this.setState({
-      author: SessionStore.currentAuthor()
-    });
-  },
-
-  _onInitialFetch: function () {
-    this.articleId = ArticleStore.one().id;
-  },
-
-  _onToolUse: function () {
-    var router = this.context.router;
-    var message = NavToolMessagesStore.message();
-    var self = this;
-    switch (message) {
-      case NavConstants.DELETE_ARTICLE:
-        if (!this.articleId) {return ;}
-        ArticleUtil.deleteArticle(this.articleId, function(){
-          router.push('/authors/profile');
-        });
-        break;
-      case NavConstants.PUBLISH_ARTICLE:
-        self.state.published = true;
-        ArticleUtil.editArticle(self.state, this.articleId, function(){
-          router.push('/articles/' + self.articleId);
-        });
-        break;
-      case NavConstants.SAVE_ARTICLE:
-        ArticleUtil.editArticle(self.state, self.articleId);
-        break;
-    }
-  },
 
   autoSave: function (resetMouseDown) {
     var prevSaveLength = 0;
@@ -123,7 +91,6 @@ var ArticleNew = React.createClass({
     function _checkLengthSave(){
       var currentBodyLength = this.state.body.length;
       if (articleSaving) {return ;}
-
       if (Math.abs(currentBodyLength - prevSaveLength) > 10){
         prevSaveLength = currentBodyLength;
         ArticleAction.updateSaveStatus("Saving...");
@@ -194,8 +161,42 @@ var ArticleNew = React.createClass({
         </div>
       </div>
     );
+  },
+
+  _onChange: function () {
+    this.setState({
+      author: SessionStore.currentAuthor()
+    });
+  },
+
+  _onInitialFetch: function () {
+    this.articleId = ArticleStore.one().id;
+  },
+
+  _onToolUse: function () {
+    var router = this.context.router;
+    var message = NavToolMessagesStore.message();
+    var self = this;
+    switch (message) {
+      case NavConstants.DELETE_ARTICLE:
+        if (!this.articleId) {return ;}
+        ArticleUtil.deleteArticle(this.articleId, function(){
+          router.push('/authors/profile');
+        });
+      break;
+      case NavConstants.PUBLISH_ARTICLE:
+        self.state.published = true;
+        ArticleUtil.editArticle(self.state, this.articleId,
+          function(){ router.push('/articles/' + self.articleId);
+        });
+      break;
+      case NavConstants.SAVE_ARTICLE:
+        ArticleUtil.editArticle(self.state, self.articleId);
+      break;
+    }
   }
 
 });
+
 
 module.exports = ArticleNew;

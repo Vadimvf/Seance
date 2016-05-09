@@ -15,4 +15,9 @@ class Api::AuthorsController < ApplicationController
     end
   end
 
+  def show
+    @author = Author.find_with_published_articles(params[:id])
+    render json: {} unless @author
+  end
+
 end

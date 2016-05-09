@@ -1,9 +1,11 @@
 var React = require('react');
-var ArticleUtil = require('../util/articleUtil');
-var ArticleStore = require('../stores/article');
 var PropTypes = React.PropTypes;
+
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
+
+var ArticleUtil = require('../util/articleUtil');
+var ArticleStore = require('../stores/article');
 var NavAction = require('../actions/navAction');
 
 var ArticleShow = React.createClass({

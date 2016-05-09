@@ -1,4 +1,5 @@
 var React = require('react');
+
 var ArticleUtil = require('../util/articleUtil');
 var ArticleStore = require('../stores/article');
 var ArticleListItem = require('./articleListItem');

@@ -22,7 +22,7 @@ $error-red: rgb(166, 49, 49);
 // RESET ///////////////////////////////////////////////////////////
 html, body {
   height: 100%;
-  min-height: 100%
+  min-height: 100%;
 }
 
 #seance {
@@ -132,7 +132,6 @@ i {
   padding: 20px 0 0 20px;
   .nav-logo-text {
     vertical-align: sub;
-    padding: 20px;
     font-size: 20px;
     font-weight: 300;
     display: block;
@@ -143,7 +142,7 @@ i {
 
 .nav-logo-icon {
   content: asset-url('seanceLogo.svg');
-  margin-top: -5px;
+  margin-top: -7px;
   width: 30px;
 }
 
@@ -380,7 +379,7 @@ button.guest {
   .nav-links {
     position: absolute;
     display: block;
-    top: 60px;
+    top: 50px;
     left: 5%;}
 
   button.modal--exit {
@@ -400,17 +399,15 @@ button.guest {
   .nav-logo strong {
     display: none;}
 
+  li.nav-tools--write {
+    display: none;}
+
   .nav-logo-icon {
     margin-top: -7px;}
-    
+
   p {
     overflow-x: hidden;
   }
-}
-
-@media only screen and (max-width: 420px){
-  li.nav-tools--write {
-    display: none;}
 }
 
 .articles {
@@ -539,25 +536,26 @@ button.guest {
 //AUTHOR PROFILE ///////////////////////////////////////////////////////
 
 .author-container {
-  padding: 50px 0;
-  background-color: $white-background;
+  padding-bottom: 50px;
   margin: 0 auto;
 
-  .author-content {
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 0 25px;}
+  .author-content-background {
+    background-color: $white-background;}
 
-    .author-content > button {
-      padding: 0;
-      border: none;
-      margin-right: 15px;
-    }
-    .author-content > button:hover {
-      border: none;
-      color: $text;
-      transition: 500ms;
-    }
+  .author-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px;}
+
+  .author-content > button {
+    padding: 0;
+    border: none;
+    margin-right: 15px;}
+
+  .author-content > button:hover {
+    border: none;
+    color: $text;
+    transition: 500ms;}
 
   h2 {
     font-size: 32px;
@@ -573,12 +571,13 @@ button.guest {
     color: $text;
     font-weight: 300;}
 
-  p {
-    font-size: 14px;}
+  .latest-articles--header {
+    font-size: 20px;
+    color: $text;
+  }
 
   .author-articles-container:last-child {
-    max-width: 750px;
-  }
+    max-width: 750px;}
 
   .author-articles-container {
     margin: 0 auto;
@@ -589,8 +588,7 @@ button.guest {
       overflow: hidden;
       img {
         transform: translate(-25%, -25%);
-        height: auto;
-      }
+        height: auto;}
     }
 
 
@@ -670,7 +668,6 @@ button.guest {
 .author-show-article--content {
   max-width: 450px;
   word-wrap: break-word;
-
 }
 
 

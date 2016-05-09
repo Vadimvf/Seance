@@ -3,7 +3,7 @@ var ArticleConstants = require('../constants/articleConstants');
 
 var ArticleActions = {
   receiveAll: function (jsonArticles){
-    payload = {
+    var payload = {
       actionType: ArticleConstants.ARTICLES_RECEIVED,
       articles: jsonArticles
     };
@@ -12,7 +12,7 @@ var ArticleActions = {
   },
 
   receiveOne: function (jsonArticle){
-    payload = {
+    var payload = {
       actionType: ArticleConstants.ARTICLE_RECEIVED,
       article: jsonArticle
     };
@@ -21,7 +21,7 @@ var ArticleActions = {
   },
 
   updateSaveStatus: function (status) {
-    payload = {
+    var payload = {
       actionType: ArticleConstants.STATUS_RECEIVED,
       status: status
     };

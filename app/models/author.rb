@@ -22,6 +22,13 @@ class Author < ActiveRecord::Base
     author.is_password?(password)? author : nil
   end
 
+  def self.find_with_published_articles(author_id)
+    author = Author.includes(:articles)
+    .where(articles: { published: true }, id: author_id).first
+
+    author ? author : Author.find(author_id)
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

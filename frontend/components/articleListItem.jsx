@@ -1,6 +1,9 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
+var ReactRouter = require("react-router");
+var Link = ReactRouter.Link;
+
 var ReactListItem = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
@@ -21,7 +24,9 @@ var ReactListItem = React.createClass({
         <div className="article-header group">
           <ul className="article--info">
             <li className="article--info-author">
-              {article.author.username}
+              <Link to={"/authors/" + article.author.id} >
+                {article.author.username}
+              </Link>
             </li>
             <li className="article--info-content">
               {article.created_ago + " ⋅ " + article.read_time}

@@ -3,7 +3,7 @@ var NavConstants = require('../constants/navConstants');
 
 var NavActions = {
   renderDefaultNav: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.DEFAULT_NAV_RENDERED,
       navType: NavConstants.DEFAULT
     };
@@ -12,7 +12,7 @@ var NavActions = {
   },
 
   renderWriteTools: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.WRITE_TOOLS_RENDERED,
       navType: NavConstants.WRITE_TOOLS
     };
@@ -21,7 +21,7 @@ var NavActions = {
   },
 
   renderArticleShow: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.ARTICLE_SHOW_RENDERED,
       navType: NavConstants.ARTICLE_SHOW
     };
@@ -30,7 +30,7 @@ var NavActions = {
   },
 
   requestDelete: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.DELETE_REQUESTED,
       message: NavConstants.DELETE_ARTICLE
     };
@@ -38,7 +38,7 @@ var NavActions = {
   },
 
   requestPublish: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.PUBLISH_REQUESTED,
       message: NavConstants.PUBLISH_ARTICLE
     };
@@ -46,7 +46,7 @@ var NavActions = {
   },
 
   requestSave: function () {
-    payload = {
+    var payload = {
       actionType: NavConstants.SAVE_REQUESTED,
       message: NavConstants.SAVE_ARTICLE
     };
