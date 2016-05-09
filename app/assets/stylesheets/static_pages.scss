@@ -74,6 +74,7 @@ blockquote {
 h1, h2, h3, strong, i, blockquote {
   font-family: sans-serif;
 }
+
 h1, h2, h3 {
   font-weight: bold;
   color: $heading-text;
@@ -123,6 +124,7 @@ i {
   position: relative;
   background-color: $white-background;
   border-bottom: 1px solid $grey-border;
+  height: 70px;
 }
 
 .nav-logo {
@@ -174,6 +176,9 @@ img.avatar {
   display: block;
   margin-top: -5px;
   padding-left: 15px;
+
+  strong:hover {
+  color: $green-text;}
 }
 
 .nav-links {
@@ -192,7 +197,7 @@ img.avatar {
 
     a{
       display: block;
-      padding: 25px 20px 20px 20px;}
+      padding: 30px 20px 20px 20px;}
   }
 }
 
@@ -379,7 +384,7 @@ button.guest {
   .nav-links {
     position: absolute;
     display: block;
-    top: 50px;
+    top: 57px;
     left: 5%;}
 
   button.modal--exit {
