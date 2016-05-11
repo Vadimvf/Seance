@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var Link = require("react-router").Link;
 
 var NavLinks = React.createClass({
+
   render: function() {
     return (
       <ul className="nav-links">
@@ -10,7 +11,7 @@ var NavLinks = React.createClass({
           <Link to="">Home</Link>
         </li>
         <li>
-          <a href="#">Top Stories</a>
+          <Link to={{ pathname: "/articles/top", query: { impressionable: "true" } }}>Top Stories</Link>
         </li>
         <li>
           <a href="#">Bookmarks</a>

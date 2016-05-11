@@ -1,4 +1,5 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 
 var ArticleUtil = require('../util/articleUtil');
 var ArticleStore = require('../stores/article');
@@ -7,6 +8,9 @@ var NavAction = require('../actions/navAction');
 var SessionStore = require('../stores/session');
 
 var ArticleIndex = React.createClass({
+  contextTypes: {
+    router: PropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return {
@@ -29,11 +33,24 @@ var ArticleIndex = React.createClass({
 
   componentDidMount: function() {
     this.indexListener = ArticleStore.addListener(this._onChange);
-    ArticleUtil.fetchArticles({query: {published: true}});
+    var impressionable = !!this.props.location.query.impressionable;
+    ArticleUtil.fetchArticles({query: {
+      published: true,
+      impressionable: impressionable
+    }});
+
     this.authorListener =
     SessionStore.addListener(this._onAuthor);
 
     NavAction.renderDefaultNav();
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var impressionable = !!nextProps.location.query.impressionable;
+    ArticleUtil.fetchArticles({query: {
+      published: true,
+      impressionable: impressionable
+    }});
   },
 
   componentWillUnmount: function() {
