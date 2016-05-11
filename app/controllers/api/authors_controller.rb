@@ -15,4 +15,18 @@ class Api::AuthorsController < ApplicationController
     end
   end
 
+  def update
+    @author = Author.find(params[:id])
+
+    unless @author.update(author_params)
+      render json: { errors: @author.errors.full_messages },
+                   status: 422
+    end
+  end
+
+  def show
+    @author = Author.find_with_published_articles(params[:id])
+    render json: {} unless @author
+  end
+
 end

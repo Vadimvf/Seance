@@ -7,6 +7,7 @@ class Author < ActiveRecord::Base
   validates :username, :email, :session_token, uniqueness: true
   validates :password, length: { in: 6..20, allow_nil: true }
   validates :username, length: { in: 3..20 }
+  validates :bio, length: { maximum: 150 }
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
 
   has_many :articles
@@ -20,6 +21,13 @@ class Author < ActiveRecord::Base
     return nil unless author
 
     author.is_password?(password)? author : nil
+  end
+
+  def self.find_with_published_articles(author_id)
+    author = Author.includes(:articles)
+    .where(articles: { published: true }, id: author_id).first
+
+    author ? author : Author.find(author_id)
   end
 
   def password=(password)

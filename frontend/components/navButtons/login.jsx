@@ -10,7 +10,8 @@ var Login = React.createClass({
       return({
         modalOpen: false,
         isLoginAttempt: false,
-        isCreateAttempt: false
+        isCreateAttempt: false,
+        isWrite: false
       });
     },
 
@@ -18,6 +19,14 @@ var Login = React.createClass({
     this.setState({
       modalOpen: false
     });
+  },
+
+  componentWillMount: function() {
+    if (this.props.isWrite){
+      this.setState({
+        isWrite: this.props.isWrite
+      });
+    }
   },
 
   openModal: function () {
@@ -56,10 +65,22 @@ var Login = React.createClass({
         loginCallback={this.loginAttempt}/>;
     }
 
+    var buttonText;
+    var className;
+    if (this.state.isWrite){
+      className = "nav-tools--write";
+      buttonText = "Write A Story";
+    } else {
+      className = "nav-tools--login";
+      buttonText = "Sign in / Sign up";
+    }
+
     return (
+
       <button
-        className="nav-tools--login"
-        onClick={this.openModal}> Sign in / Sign up
+        className={className}
+        onClick={this.openModal}>
+        {buttonText}
 
         <Modal
           closeTimeoutMS={150}

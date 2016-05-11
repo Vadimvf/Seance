@@ -30,11 +30,15 @@ var NavTools = React.createClass({
 
   render: function() {
     var userButton;
+    var write = <Login isWrite={true}/>;
+
     if (!$.isEmptyObject(this.state.author)){
       userButton = <Profile />;
+      write = <Link to="articles/new" >Write a story</ Link>
     } else {
-      userButton = <Login className="nav-tools--login"/>;
+      userButton = <Login />;
     }
+
     return (
       <ul className="nav-tools">
         <li className="nav-tools-search">
@@ -42,9 +46,7 @@ var NavTools = React.createClass({
           <input type="text" placeholder="Search Seance"></ input>
         </li>
         <li className="nav-tools--write">
-          <Link to="articles/new" >
-            Write a story
-          </Link>
+          {write}
         </li>
         <li>
           {userButton}

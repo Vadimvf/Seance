@@ -1,8 +1,10 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var ArticleUtil = require('../util/articleUtil');
-var ArticleStore = require('../stores/article');
+// var ArticleUtil = require('../util/articleUtil');
+var AuthorUtil = require('../util/authorUtil');
+// var ArticleStore = require('../stores/article');
+var AuthorStore = require('../stores/author');
 var NavAction = require('../actions/navAction');
 var ArticleListItem = require('./articleListItem');
 
@@ -11,64 +13,41 @@ var AuthorShow = React.createClass({
     router: PropTypes.object.isRequired
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
-      authorId: null,
-      published: true,
-      articles: []
+      author: null
     };
   },
 
-  componentDidMount: function() {
-    var self = this;
+  componentDidMount: function () {
     NavAction.renderArticleShow();
-    this.indexListener = ArticleStore.addListener(this._onChange);
-
-    if (!this.props.params.id) {return;}
-
-    this.setState({
-      authorId: this.props.params.id
-    }, function () {ArticleUtil.fetchArticles(
-      {query: {
-        authorId: self.props.params.id,
-        published: true
-      }}
-    );});
-
+    this.authorListener = AuthorStore.addListener(this._onChange);
+    AuthorUtil.fetchAuthor(this.props.params.id);
   },
 
   _onChange: function () {
     this.setState({
-      articles: ArticleStore.all()
+      author: AuthorStore.author()
     });
   },
 
-  componentWillUnmount: function() {
-    this.indexListener.remove();
+  componentWillUnmount: function () {
+    this.authorListener.remove();
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  _ensureAuthorRender: function (){
+
+  },
+
+  render: function () {
+    if (!this.state.author) {return <div/>;}
+    var author = this.state.author;
+    var authorArticles = this.state.author.articles || [];
     var self = this;
-    if (!nextProps.params.id) {return;}
 
-    this.setState({
-      authorId: this.props.params.id
-    }, function () {ArticleUtil.fetchArticles(
-      {query: {
-        authorId: self.props.params.id,
-        published: true
-      }}
-    );});
-  },
-
-  render: function() {
-
-    if (!this.state.authorId) {return <div/>;}
-    if (this.state.articles.length < 1) {return <div/>;}
-    author = this.state.articles[0].author;
-
-
-    var articles = this.state.articles.map(function (article, idx){
+    var articles = authorArticles.map(function (article, idx){
+      article.author = {};
+      article.author.username = self.state.author.username;
       return (
         <ArticleListItem article={article} key={idx} />
         );
@@ -76,13 +55,16 @@ var AuthorShow = React.createClass({
 
     return (
       <div className="author-container">
-        <section className="author-content" >
-          <h2>{author.fullname}</h2>
-          <h3>{author.username}</h3>
-          <h4>{author.email}</h4>
-          <p>{author.bio}</p>
-        </section>
+        <div className="author-content-background" >
+          <section className="author-content">
+            <h2>{author.fullname}</h2>
+            <h3>{author.username}</h3>
+            <h4>{author.email}</h4>
+            <p>{author.bio}</p>
+          </section>
+        </div>
         <section className="articles">
+          <h3 className="latest-articles--header">Recent Stories</h3>
           {articles}
         </section >
       </div>

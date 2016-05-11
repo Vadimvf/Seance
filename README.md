@@ -4,19 +4,9 @@
 
 [heroku]: http://www.herokuapp.com
 
-## Minimum Viable Product
+## Description
 
 Seance is a web blogger inspired by Medium and built on Ruby on Rails and React.js. Seance allows users to focus on and create written content. The app's interface allows for writing and editing articles in a manner where the edit/creation form mirrors it's printed output.
-
-<!-- This is a Markdown checklist. Use it to keep track of your
-progress. Put an x between the brackets for a checkmark: [x] -->
-
-- [ ] Create an account
-- [ ] Log in / Log out
-- [ ] Create, read, edit, and delete articles
-- [ ] Apply styling to articles while editing
-- [ ] Create, read and delete comments on authors articles
-- [ ] Search for stories and authors
 
 ## Design Docs
 * [View Wireframes][views]
