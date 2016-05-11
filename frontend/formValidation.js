@@ -47,6 +47,14 @@ var validateForm = function (formObject, formType) {
         maximum: 20,
         tooLong: "must be less than 20 characters"
       }
+    },
+
+    bio: {
+      presence: isEdit,
+      length: {
+        maximum: 150,
+        tooLong: "should be less than 150 characters"
+      }
     }
 
   };

@@ -9,7 +9,15 @@ var AuthorActions = {
       };
 
       Dispatcher.dispatch(payload);
-  }
+  },
+
+  errorsReceived: function (errors) {
+    Dispatcher.dispatch({
+      actionType: AuthorConstants.ERRORS_RECEIVED,
+      errors: errors
+    });
+  },
+
 
 
 };

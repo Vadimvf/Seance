@@ -23,6 +23,11 @@ var AuthorUtil = {
       success: function (jsonAuthor){
         AuthorActions.receiveAuthor(jsonAuthor);
         callback && callback();
+      },
+      error: function (errorJSON) {
+        errors = errorJSON.responseJSON.errors;
+        AuthorActions.errorsReceived(errors);
+        callback && callback();
       }
     });
   }

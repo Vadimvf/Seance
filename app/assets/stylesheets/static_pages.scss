@@ -33,7 +33,7 @@ html, body {
   height: 100%;
 }
 
-body, h1, h2, header, div, img, u, ul, li, input, button, div, a, strong {
+body, h1, h2, header, div, img, u, ul, li, input, textarea, button, div, a, strong {
 
   border: 0;
   outline: 0;
@@ -48,6 +48,11 @@ body, h1, h2, header, div, img, u, ul, li, input, button, div, a, strong {
   color: inherit;
   background-color: transparent;
   letter-spacing: .04em;
+}
+
+textarea, input {
+  resize: none;
+  width: 100%;
 }
 
 body {
@@ -154,7 +159,7 @@ i {
   transition: opacity 1s ease-in-out;
 }
 
-.nav-tools-- {
+.nav-tools--profile {
   padding: 0;
   margin: 0;
   border: none;
@@ -578,11 +583,10 @@ button.guest {
 
   .latest-articles--header {
     font-size: 20px;
-    color: $text;
-  }
+    color: $text;}
 
   .author-articles-container:last-child {
-    max-width: 750px;}
+    max-width: 800px;}
 
   .author-articles-container {
     margin: 0 auto;
@@ -653,8 +657,7 @@ button.guest {
     float: left;
     border: none;
     padding-right: 15px;
-    height: 15px;
-  }
+    height: 15px;}
 
   .article--edit > a, .article--delete > button{
     border: none;
@@ -665,9 +668,13 @@ button.guest {
     padding-bottom: 2px;
     font-size: 13px;
     font-weight: lighter;
-    color: $green-text;
-  }
+    color: $green-text;}
 
+  .save-animation {
+    color: $green-text;
+    -webkit-transition: 300ms;
+    transition: 300ms;
+    cursor: progress;}
 }
 
 .author-show-article--content {
@@ -676,10 +683,12 @@ button.guest {
 }
 
 .author-edit-form {
+  :focus{
+    background-color: #d3fee9;
+  }
   button {
     border: none;
-    padding: none;
-  }
+    padding: none;}
 }
 
 
