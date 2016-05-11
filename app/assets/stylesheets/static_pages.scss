@@ -154,7 +154,7 @@ i {
   transition: opacity 1s ease-in-out;
 }
 
-.nav-tools--profile {
+.nav-tools-- {
   padding: 0;
   margin: 0;
   border: none;
@@ -673,6 +673,13 @@ button.guest {
 .author-show-article--content {
   max-width: 450px;
   word-wrap: break-word;
+}
+
+.author-edit-form {
+  button {
+    border: none;
+    padding: none;
+  }
 }
 
 

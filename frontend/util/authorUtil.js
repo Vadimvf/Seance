@@ -12,6 +12,19 @@ var AuthorUtil = {
         callback && callback();
       }
     });
+  },
+
+  update: function (author, callback){
+    $.ajax({
+      type: "PUT",
+      url: "api/authors/" + author.id,
+      dataType: "json",
+      data: author,
+      success: function (jsonAuthor){
+        AuthorActions.receiveAuthor(jsonAuthor);
+        callback && callback();
+      }
+    });
   }
 
 };

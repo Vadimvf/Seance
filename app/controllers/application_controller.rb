@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def author_params
-    params.permit(:username, :password, :email, :fullname)
+    params.permit(:username, :password, :email, :fullname, :bio)
   end
 
 end

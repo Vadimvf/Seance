@@ -90,7 +90,7 @@ var ArticleNew = React.createClass({
 
     function _checkLengthSave(){
       var currentBodyLength = this.state.body.length;
-      if (articleSaving) {return ;}
+      if (articleSaving) return ;
       if (Math.abs(currentBodyLength - prevSaveLength) > 10){
         prevSaveLength = currentBodyLength;
         ArticleAction.updateSaveStatus("Saving...");
@@ -122,7 +122,7 @@ var ArticleNew = React.createClass({
 
   render: function () {
     var author = this.state.author;
-    if (this.placeholder) { this.placeholder = "Tell your story...";}
+    if (this.placeholder) this.placeholder = "Tell your story...";
 
     return (
       <div className="article-create-container">

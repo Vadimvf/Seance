@@ -2,6 +2,7 @@ var validate = require('validate.js');
 
 var validateForm = function (formObject, formType) {
   var isCreate = (formType === "Create") ? true : false;
+  var isEdit = (formType === "Edit") ? true : false;
 
   var constraints = {
 
@@ -21,7 +22,7 @@ var validateForm = function (formObject, formType) {
     },
 
     fullname: {
-      presence: isCreate,
+      presence: isCreate || isEdit,
       format: {
         pattern: "[a-zA-Z0-9 ]+",
         flags: "i",
@@ -34,12 +35,12 @@ var validateForm = function (formObject, formType) {
     },
 
     email: {
-      presence: isCreate,
+      presence: isCreate || isEdit,
       email: true
     },
 
     password: {
-      presence: true,
+      presence: !isEdit,
       length: {
         minimum: 6,
         tooShort: "must be at least 6 characters",
