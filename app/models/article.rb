@@ -2,6 +2,7 @@ class Article < ActiveRecord::Base
   validates :title, :body, :author_id, :body_short, presence: true
   validates :body, uniqueness: true
   before_validation :create_body_short, :ensure_title
+  is_impressionable
 
   belongs_to :author
 
@@ -12,6 +13,10 @@ class Article < ActiveRecord::Base
   def created_ago
     time_difference = Time.now.to_i - self.created_at.to_i
     pretty_time(time_difference)
+  end
+
+  def find_with_impressions
+    Article.joins(:impressions).group("articles.id").order("count(impressions.id) DESC")
   end
 
   private

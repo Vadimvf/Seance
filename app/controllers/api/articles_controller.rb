@@ -1,4 +1,5 @@
 class Api::ArticlesController < ApplicationController
+  impressionist actions: [:show], unique: [:session_hash]
 
   def index
     if params[:query][:authorId]
@@ -9,6 +10,11 @@ class Api::ArticlesController < ApplicationController
               )
         .order(created_at: :desc)
         .includes(:author)
+        .limit(20)
+    elsif params[:query][:impressionable] == "true"
+      @articles = Article.joins(:impressions)
+        .group("articles.id")
+        .order("count(impressions.id) DESC")
         .limit(20)
     else
       @articles = Article.all

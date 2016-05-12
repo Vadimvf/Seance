@@ -38,6 +38,9 @@ $(function(){
       <Route path="/" component={App}
                       onEnter={_checkLogin}>
         <IndexRoute component={ArticleIndex} />
+        <Route path="articles/top"
+               component={ArticleIndex}
+               />
         <Route path="articles/new"
                component={ArticleNew}
                onEnter={_requireLogIn}/>
