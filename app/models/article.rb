@@ -1,7 +1,13 @@
 class Article < ActiveRecord::Base
+  include PgSearch
   validates :title, :body, :author_id, :body_short, presence: true
   validates :body, uniqueness: true
   before_validation :create_body_short, :ensure_title
+
+  multisearchable against: [:title],
+                  if: Proc.new { |article| article.published },
+                  using: { tsearch: {:prefix => true} }
+                  
   is_impressionable
 
   belongs_to :author

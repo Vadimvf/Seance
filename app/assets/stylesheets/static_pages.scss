@@ -13,10 +13,11 @@ $heading-text: #373737;
 $button-border: #dedede;
 $facebook: #3B5998;
 $error-red: rgb(166, 49, 49);
+$hightlight: #d3fee9;
 
 @font-face {
-  font-family: 'apparatus';
-  src: asset-url('fonts/apparatus.ttf')
+  font-family: 'Lora';
+  src: asset-url('Lora-Regular.ttf')
 }
 
 // RESET ///////////////////////////////////////////////////////////
@@ -108,6 +109,14 @@ i {
 
 .nav-logo, a, button, .nav-tools-search > img {
   cursor: pointer;
+  font-weight: lighter;
+}
+
+::-moz-selection {
+  background: $hightlight;
+}
+::selection {
+  background: $hightlight;
 }
 
 //CLEARFIX /////////////////////////////////////////////////////////
@@ -574,6 +583,7 @@ button.guest {
 
   h3 {
     font-size: 14px;
+    font-weight: lighter;
     color: $green_text;}
 
   h4 {
@@ -646,7 +656,7 @@ button.guest {
       padding: 50px 0;
       color: $grey-link;
       font-size: 24px;
-      font-weight: bold;
+      font-weight: lighter;
       font-family: sans-serif;}
 
      a:hover {
@@ -684,7 +694,7 @@ button.guest {
 
 .author-edit-form {
   :focus{
-    background-color: #d3fee9;
+    background-color: $hightlight;
   }
   button {
     border: none;

@@ -1,4 +1,5 @@
 class Author < ActiveRecord::Base
+  include PgSearch
   attr_reader :password
   after_initialize :ensure_session_token
 
@@ -9,6 +10,8 @@ class Author < ActiveRecord::Base
   validates :username, length: { in: 3..20 }
   validates :bio, length: { maximum: 150 }
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+
+  multisearchable against: [:username, :fullname]
 
   has_many :articles
 

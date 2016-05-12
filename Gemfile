@@ -25,6 +25,9 @@ gem 'bcrypt', '~> 3.1.7'
 #Track Impressions
 gem 'impressionist'
 
+#Search
+gem 'pg_search'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
