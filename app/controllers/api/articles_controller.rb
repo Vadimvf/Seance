@@ -1,6 +1,5 @@
 class Api::ArticlesController < ApplicationController
-  impressionist unique: [:session_hash]
-  impressionist actions: [:show]
+  impressionist actions: [:show], unique: [:session_hash]
 
   def index
     if params[:query][:authorId]
