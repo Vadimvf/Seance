@@ -6,8 +6,8 @@ var SearchActions = {
     var payload = {
       actionType: SearchConstants.SEARCH_RECEIVED,
       results: jsonSearchResults
-    }
-    
+    };
+
     Dispatcher.dispatch(payload);
   }
 };

@@ -144,7 +144,7 @@ var SearchBar = React.createClass({
     },
 
     render: function() {
-      let searchResults = this._createResultEl();
+      var searchResults = this._createResultEl();
 
       return (
         <div className="group" >
