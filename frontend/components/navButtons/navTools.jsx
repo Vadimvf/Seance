@@ -4,6 +4,7 @@ var Link = ReactRouter.Link;
 
 var Profile = require("./profile");
 var Login = require("./login");
+var SearchBar = require("./search");
 var SessionStore = require('../../stores/session');
 var SessionUtil = require('../../util/sessionUtil');
 
@@ -39,11 +40,12 @@ var NavTools = React.createClass({
       userButton = <Login />;
     }
 
+
     return (
       <ul className="nav-tools">
         <li className="nav-tools-search">
           <img></img>
-          <input type="text" placeholder="Search Seance"></ input>
+          <SearchBar />
         </li>
         <li className="nav-tools--write">
           {write}

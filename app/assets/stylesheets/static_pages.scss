@@ -9,6 +9,7 @@ $grey-border: #EFEFEF;
 $grey-link: #a8a8a8;
 $text: #505050;
 $green-text: #2dcb7f;
+$green-dark: rgb(56, 171, 102);
 $heading-text: #373737;
 $button-border: #dedede;
 $facebook: #3B5998;
@@ -105,6 +106,10 @@ h3 {
 i {
   font-size: 19px;
   font-weight: 300;
+}
+
+form {
+  float: right;
 }
 
 .nav-logo, a, button, .nav-tools-search > img {
@@ -258,8 +263,8 @@ img.avatar {
   color: $green-text; }
 
   button:hover {
-    border: 1px solid rgb(56, 171, 102);
-    color: rgb(56, 171, 102);
+    border: 1px solid $green_dark;
+    color: $green_dark;
     -webkit-transition: 300ms;
     transition: 300ms; }
 }
@@ -277,7 +282,6 @@ button, .nav-tools-search {
   border: 1px solid $button-border;
   padding: 10px;
   border-radius: 20px;
-  color: $grey-link;
   font-weight: lighter;
   font-size: 14px;
 
@@ -385,7 +389,7 @@ button.guest {
 
 //RESPONSIVE///////////////////////////////////////////
 @media only screen and (max-width: 1024px){
-  .nav-tools-search > input {
+  .nav-tools-search > form {
     display: none;}
 
   .nav-links {
@@ -460,6 +464,9 @@ button.guest {
 .article--info-author {
   color: $green-text;
   font-size: 14px;
+
+  a:hover {
+    color: $green-dark;}
 }
 
 .article--info-content {
