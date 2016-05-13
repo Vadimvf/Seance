@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :authors, except: [:index, :destroy, :edit]
     resource :session, except: [:edit]
     resources :articles, except: [:new, :edit]
+    resources :searches, only: [:index]
   end
 
 

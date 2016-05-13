@@ -44,7 +44,6 @@ var NavTools = React.createClass({
     return (
       <ul className="nav-tools">
         <li className="nav-tools-search">
-          <img></img>
           <SearchBar />
         </li>
         <li className="nav-tools--write">

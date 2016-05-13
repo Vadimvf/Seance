@@ -108,11 +108,11 @@ i {
   font-weight: 300;
 }
 
-form {
-  float: right;
+.hidden {
+  display: none;
 }
 
-.nav-logo, a, button, .nav-tools-search > img {
+.nav-logo, a, button, .nav-tools-search img {
   cursor: pointer;
   font-weight: lighter;
 }
@@ -189,7 +189,6 @@ img.avatar {
 }
 
 .nav-logo-text {
-  // image coming soon change with asset-url
   content: "Seance";
   width: 80px;
   display: block;
@@ -224,6 +223,7 @@ img.avatar {
   display: block;
   float: right;
   text-align: right;
+  position: relative;
 
   li {
     float: left;
@@ -238,6 +238,12 @@ img.avatar {
   color: $green-text;
 }
 
+button.nav-tools--login:hover {
+  border: 1px solid $green_dark;
+  color: $green_dark;
+  -webkit-transition: 300ms;
+  transition: 300ms; }
+
 .nav-tools--write {
   a {
     display: block;
@@ -250,7 +256,7 @@ img.avatar {
     font-size: 14px;}
 }
 
-.nav-tools--write > a:hover {
+.nav-tools--write:hover {
   color: $green_text;
   -webkit-transition: color 300ms;
   transition: color 300ms;
@@ -269,14 +275,6 @@ img.avatar {
     transition: 300ms; }
 }
 
-.nav-write--delete {
-  button:hover {
-    border: 1px solid $text;
-    color: $text;
-    -webkit-transition: 300ms;
-    transition: 300ms;}
-}
-
 button, .nav-tools-search {
   text-align: left;
   border: 1px solid $button-border;
@@ -284,9 +282,59 @@ button, .nav-tools-search {
   border-radius: 20px;
   font-weight: lighter;
   font-size: 14px;
-
+  color: $grey_link;
   input {
     width: 125px;}
+}
+
+.mobile-search-icon {
+  display: none;
+}
+
+//SEARCH///////////////////////////////////////////////////////////
+.nav-tools-search {
+  color: $text;
+}
+
+.nav-tools-search--results {
+  position: absolute;
+  background: white;
+  z-index: 1;
+  top: 70px;
+  // right: 25%;
+  left: -40%;
+  width: 100%;
+  font-size: 13px;
+  padding: 20px;
+  padding-top: 0;
+  border-radius: 10px;
+  margin-left: 40px;
+  -webkit-box-shadow: 1px 2px 10px -1px rgba(80,80,80,0.44);
+  -moz-box-shadow: 1px 2px 10px -1px rgba(80,80,80,0.44);
+  box-shadow: 1px 2px 10px -1px rgba(80,80,80,0.44);
+
+  .nav-tools-search--result-header {
+    border-bottom: 1px solid $grey-link;
+    padding-top: 10px;}
+
+  span.username {
+    color: $green-text;}
+
+  li {
+    float: none;
+    margin: 0;
+    margin-top: 5px;}
+
+  a {
+    display: block;
+    padding: 10px 0;
+    width: 100%;}
+
+  a:hover {
+    background-color: $hightlight;
+    span.username {
+      color: $green-dark;}
+  }
 }
 
 //MODAL///////////////////////////////////////////////////////////
@@ -389,7 +437,10 @@ button.guest {
 
 //RESPONSIVE///////////////////////////////////////////
 @media only screen and (max-width: 1024px){
-  .nav-tools-search > form {
+  // .nav-tools-search  input {
+  //   display: none;}
+
+  .nav-logo a.nav-logo-text {
     display: none;}
 
   .nav-links {

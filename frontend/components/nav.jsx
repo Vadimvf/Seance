@@ -1,8 +1,10 @@
 var React = require('react');
 var ReactRouter = require("react-router");
+
 var Logo = require('./navButtons/logo');
 var NavLinks = require('./navButtons/navLinks');
 var NavTools = require('./navButtons/navTools');
+var SearchBar = require("./navButtons/search");
 var NavConstants = require('../constants/navConstants');
 var NavStore = require('../stores/navStore');
 var NavWriteTools = require('./navButtons/navWriteTools');
@@ -55,8 +57,7 @@ var NavBar = React.createClass({
             <Logo />
             <ul className="nav-tools">
               <li className="nav-tools-search">
-                <img></img>
-                <input type="text" placeholder="Search Seance"></ input>
+                <SearchBar />
               </li>
             </ul>
           </header>
