@@ -1,0 +1,1387 @@
+@font-face {
+  font-family: 'apparatus';
+  src: url(/fonts/apparatus.ttf);
+}
+@-webkit-keyframes medium-editor-image-loading {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes medium-editor-image-loading {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes medium-editor-pop-upwards {
+  0% {
+    opacity: 0;
+    -webkit-transform: matrix(0.97, 0, 0, 1, 0, 12);
+    transform: matrix(0.97, 0, 0, 1, 0, 12);
+  }
+  20% {
+    opacity: .7;
+    -webkit-transform: matrix(0.99, 0, 0, 1, 0, 2);
+    transform: matrix(0.99, 0, 0, 1, 0, 2);
+  }
+  40% {
+    opacity: 1;
+    -webkit-transform: matrix(1, 0, 0, 1, 0, -1);
+    transform: matrix(1, 0, 0, 1, 0, -1);
+  }
+  100% {
+    -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+}
+@keyframes medium-editor-pop-upwards {
+  0% {
+    opacity: 0;
+    -webkit-transform: matrix(0.97, 0, 0, 1, 0, 12);
+    transform: matrix(0.97, 0, 0, 1, 0, 12);
+  }
+  20% {
+    opacity: .7;
+    -webkit-transform: matrix(0.99, 0, 0, 1, 0, 2);
+    transform: matrix(0.99, 0, 0, 1, 0, 2);
+  }
+  40% {
+    opacity: 1;
+    -webkit-transform: matrix(1, 0, 0, 1, 0, -1);
+    transform: matrix(1, 0, 0, 1, 0, -1);
+  }
+  100% {
+    -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+}
+/* line 67, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-anchor-preview {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  left: 0;
+  line-height: 1.4;
+  max-width: 280px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  visibility: hidden;
+  z-index: 2000;
+}
+
+/* line 80, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-anchor-preview a {
+  color: #fff;
+  display: inline-block;
+  margin: 5px 5px 10px;
+}
+
+/* line 85, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-anchor-preview-active {
+  visibility: visible;
+}
+
+/* line 88, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-dragover {
+  background: #ddd;
+}
+
+/* line 91, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-image-loading {
+  -webkit-animation: medium-editor-image-loading 1s infinite ease-in-out;
+  animation: medium-editor-image-loading 1s infinite ease-in-out;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+
+/* line 100, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-placeholder {
+  position: relative;
+}
+
+/* line 102, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-placeholder:after {
+  content: attr(data-placeholder) !important;
+  font-style: normal;
+  font-weight: lighter;
+  left: 0;
+  position: absolute;
+  top: 0;
+  white-space: pre;
+  padding: inherit;
+  margin: inherit;
+}
+
+/* line 113, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-toolbar-arrow-under:after, .medium-toolbar-arrow-over:before {
+  border-style: solid;
+  content: '';
+  display: block;
+  height: 0;
+  left: 50%;
+  margin-left: -8px;
+  position: absolute;
+  width: 0;
+}
+
+/* line 123, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-toolbar-arrow-under:after {
+  border-width: 8px 8px 0 8px;
+}
+
+/* line 126, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-toolbar-arrow-over:before {
+  border-width: 0 8px 8px 8px;
+  top: -8px;
+}
+
+/* line 130, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  z-index: 2000;
+}
+
+/* line 138, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 141, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 146, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li button {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  line-height: 1.33;
+  margin: 0;
+  padding: 15px;
+  text-decoration: none;
+}
+
+/* line 155, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li button:focus {
+  outline: none;
+}
+
+/* line 157, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li .medium-editor-action-underline {
+  text-decoration: underline;
+}
+
+/* line 159, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li .medium-editor-action-pre {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 15px 0;
+}
+
+/* line 165, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-active {
+  visibility: visible;
+}
+
+/* line 168, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-sticky-toolbar {
+  position: fixed;
+  top: 1px;
+}
+
+/* line 172, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-relative-toolbar {
+  position: relative;
+}
+
+/* line 175, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-active.medium-editor-stalker-toolbar {
+  -webkit-animation: medium-editor-pop-upwards 160ms forwards linear;
+  animation: medium-editor-pop-upwards 160ms forwards linear;
+}
+
+/* line 179, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-action-bold {
+  font-weight: bolder;
+}
+
+/* line 182, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-action-italic {
+  font-style: italic;
+}
+
+/* line 185, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form {
+  display: none;
+}
+
+/* line 187, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form input,
+.medium-editor-toolbar-form a {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 190, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form .medium-editor-toolbar-form-row {
+  line-height: 14px;
+  margin-left: 5px;
+  padding-bottom: 5px;
+}
+
+/* line 194, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form .medium-editor-toolbar-input,
+.medium-editor-toolbar-form label {
+  border: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0;
+  padding: 6px;
+  width: 316px;
+  display: inline-block;
+}
+
+/* line 203, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form .medium-editor-toolbar-input:focus,
+.medium-editor-toolbar-form label:focus {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  outline: 0;
+}
+
+/* line 211, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form a {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bolder;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+/* line 218, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form-active {
+  display: block;
+}
+
+/* line 221, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-actions:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+/* line 226, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+[data-medium-editor-element] img {
+  max-width: 100%;
+}
+
+/* line 229, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+[data-medium-editor-element] sub {
+  vertical-align: sub;
+}
+
+/* line 232, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+[data-medium-editor-element] sup {
+  vertical-align: super;
+}
+
+/* line 235, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-hidden {
+  display: none;
+}
+
+/* line 237, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-toolbar-arrow-under:after {
+  border-color: #373737 transparent transparent transparent;
+  top: 50px;
+}
+
+/* line 241, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-toolbar-arrow-over:before {
+  border-color: transparent transparent #373737 transparent;
+  top: -8px;
+}
+
+/* line 245, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar {
+  background-color: #373737;
+  border: 1px solid #373737;
+  border-bottom: 2px solid #373737;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #373737;
+}
+
+/* line 251, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li button {
+  border: 0;
+  -webkit-transition: background-color .2s ease-in;
+  transition: background-color .2s ease-in;
+}
+
+/* line 256, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li button:hover {
+  background-color: #000;
+  color: #2dcb7f;
+}
+
+/* line 259, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li .medium-editor-button-first {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+/* line 262, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li .medium-editor-button-last {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* line 265, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar li .medium-editor-button-active {
+  background-color: #000;
+  color: #2dcb7f;
+}
+
+/* line 269, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form {
+  background: #242424;
+  border-radius: 5px;
+  color: #999;
+}
+
+/* line 273, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form .medium-editor-toolbar-input {
+  background: #242424;
+  box-sizing: border-box;
+  color: #ccc;
+  height: 50px;
+}
+
+/* line 278, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-form a {
+  color: #fff;
+}
+
+/* line 281, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-toolbar-anchor-preview {
+  background: #242424;
+  border-radius: 5px;
+  color: #fff;
+}
+
+/* line 286, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/api/medium_editor.scss */
+.medium-editor-placeholder:after {
+  color: #b3b3b1;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url(/assets/Lora-Regular-cb9fb5bba33081358660d16333b755ce74ddc2c34d03b7b4de41d561b3507d47.ttf);
+}
+/* line 25, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* line 30, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+#seance {
+  height: 100%;
+}
+
+/* line 34, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.seance-container {
+  height: 100%;
+}
+
+/* line 38, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+body, h1, h2, header, div, img, u, ul, li, input, textarea, button, div, a, strong {
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  box-sizing: border-box;
+  text-align: inherit;
+  text-decoration: none;
+  vertical-align: inherit;
+  color: inherit;
+  background-color: transparent;
+  letter-spacing: .04em;
+}
+
+/* line 55, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+textarea, input {
+  resize: none;
+  width: 100%;
+}
+
+/* line 60, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+body {
+  font-family: sans-serif;
+  background-color: #FAFAFA;
+}
+
+/* line 65, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+li {
+  list-style: none;
+}
+
+/* line 69, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+p, blockquote {
+  font-family: 'Lora', serif;
+  line-height: 1.5;
+  font-size: 20px;
+  color: #505050;
+}
+
+/* line 76, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+blockquote {
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+/* line 81, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+h1, h2, h3, strong, i, blockquote {
+  font-family: sans-serif;
+}
+
+/* line 85, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+h1, h2, h3 {
+  font-weight: bold;
+  color: #373737;
+}
+
+/* line 90, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+u {
+  border-bottom: 1px solid #2dcb7f;
+}
+
+/* line 94, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+h1 {
+  font-size: 44px;
+}
+
+/* line 98, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+h2 {
+  font-size: 32px;
+}
+
+/* line 102, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+h3 {
+  font-size: 24px;
+}
+
+/* line 106, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+i {
+  font-size: 19px;
+  font-weight: 300;
+}
+
+/* line 111, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.hidden {
+  display: none;
+}
+
+/* line 115, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo, a, button, .nav-tools-search img {
+  cursor: pointer;
+  font-weight: lighter;
+}
+
+/* line 120, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+::-moz-selection {
+  background: #d3fee9;
+}
+
+/* line 123, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+::selection {
+  background: #d3fee9;
+}
+
+/* line 128, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* line 135, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search img {
+  content: url(/assets/search-cbfddb8d9dee6e50a317348587c1d362ab3232e3db99488763c5134c0137b6cc.svg);
+  width: 16px;
+  vertical-align: bottom;
+}
+
+/* line 142, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav {
+  position: relative;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EFEFEF;
+  height: 70px;
+}
+
+/* line 149, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo {
+  display: block;
+  float: left;
+  vertical-align: top;
+  padding: 20px 0 0 20px;
+}
+/* line 154, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo .nav-logo-text {
+  vertical-align: sub;
+  font-size: 20px;
+  font-weight: 300;
+  display: block;
+  float: right;
+  padding-top: 5px;
+}
+
+/* line 164, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo-icon {
+  content: url(/assets/seanceLogo-1f4d696cf1849310f5c9ce90f1eeb43c79208af73a3c0d806e20b6016a329c94.svg);
+  margin-top: -7px;
+  width: 30px;
+}
+
+/* line 170, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo-icon:hover {
+  content: url(/assets/seanceGreen-704cf50d38511e37de2e44a730476fb654bded506c29e9920cc193284b9f02ab.svg);
+  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+/* line 176, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools--profile {
+  padding: 0;
+  margin: 0;
+  border: none;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: -5px;
+}
+
+/* line 185, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+img.avatar {
+  border-radius: 50%;
+  width: 48px;
+  content: url(/assets/avatar-4c24a1ff660ae90a041cd9b219adbb77347e609f468e1b99d2b1b8555983b995.svg);
+}
+
+/* line 191, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo-text {
+  content: "Seance";
+  width: 80px;
+  display: block;
+  margin-top: -5px;
+  padding-left: 15px;
+}
+/* line 198, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-logo-text strong:hover {
+  color: #2dcb7f;
+}
+
+/* line 202, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-links {
+  display: inline-block;
+  padding-left: 7%;
+  min-width: 375px;
+  color: #a8a8a8;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+}
+/* line 211, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-links li {
+  float: left;
+}
+/* line 213, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-links li :hover {
+  color: #505050;
+}
+/* line 216, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-links li a {
+  display: block;
+  padding: 30px 20px 20px 20px;
+}
+
+/* line 222, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools {
+  display: block;
+  float: right;
+  text-align: right;
+  position: relative;
+}
+/* line 228, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools li {
+  float: left;
+  margin: 15px 10px 5px 0px;
+}
+/* line 232, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools input {
+  padding-left: 15px;
+}
+
+/* line 236, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools--login {
+  border: 1px solid #2dcb7f;
+  color: #2dcb7f;
+}
+
+/* line 241, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+button.nav-tools--login:hover {
+  border: 1px solid #38ab66;
+  color: #38ab66;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+/* line 248, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools--write a {
+  display: block;
+  text-align: left;
+  border: 1px solid #dedede;
+  padding: 10px;
+  border-radius: 20px;
+  color: #a8a8a8;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+/* line 259, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools--write:hover {
+  color: #2dcb7f;
+  -webkit-transition: color 300ms;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+/* line 267, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-write--publish button {
+  border: 1px solid #2dcb7f;
+  color: #2dcb7f;
+}
+/* line 271, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-write--publish button:hover {
+  border: 1px solid #38ab66;
+  color: #38ab66;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+/* line 278, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+button, .nav-tools-search {
+  text-align: left;
+  border: 1px solid #dedede;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #a8a8a8;
+}
+/* line 286, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+button input, .nav-tools-search input {
+  width: 125px;
+}
+
+/* line 290, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.mobile-search-icon {
+  display: none;
+}
+
+/* line 294, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.mobile-search-exit {
+  float: left;
+  display: none;
+}
+
+/* line 299, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search {
+  color: #505050;
+}
+
+/* line 303, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results {
+  position: absolute;
+  background: white;
+  z-index: 1;
+  top: 70px;
+  left: -40%;
+  width: 100%;
+  font-size: 13px;
+  padding: 20px;
+  padding-top: 0;
+  border-radius: 10px;
+  margin-left: 40px;
+  -webkit-box-shadow: 1px 2px 10px -1px rgba(80, 80, 80, 0.44);
+  -moz-box-shadow: 1px 2px 10px -1px rgba(80, 80, 80, 0.44);
+  box-shadow: 1px 2px 10px -1px rgba(80, 80, 80, 0.44);
+}
+/* line 320, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results .nav-tools-search--result-header {
+  border-bottom: 1px solid #a8a8a8;
+  padding-top: 10px;
+}
+/* line 324, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results span.username {
+  color: #2dcb7f;
+}
+/* line 327, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results li {
+  float: none;
+  margin: 0;
+  margin-top: 5px;
+}
+/* line 332, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results a {
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+}
+/* line 337, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results a:hover {
+  background-color: #d3fee9;
+}
+/* line 339, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.nav-tools-search--results a:hover span.username {
+  color: #38ab66;
+}
+
+/* line 346, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.modal-button {
+  display: block;
+  margin: 10px auto;
+  color: #2dcb7f;
+  background-color: #FFFFFF;
+  width: 225px;
+  text-align: center;
+}
+
+/* line 355, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.modal-button:hover {
+  color: #2dcb7f;
+  background-color: #ededed;
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
+}
+
+/* line 362, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+button.guest {
+  display: block;
+  margin: 10px auto;
+  color: #476159;
+  background-color: #bfffd3;
+  width: 225px;
+  text-align: center;
+  font-weight: lighter;
+}
+/* line 371, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+button.guest .seance-login {
+  margin: -10px 10px -2px 0px;
+  width: 12px;
+  content: url(/assets/seanceGreen-704cf50d38511e37de2e44a730476fb654bded506c29e9920cc193284b9f02ab.svg);
+}
+
+/* line 377, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.guest:hover {
+  background-color: #2dcb7f;
+  color: #FFFFFF;
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
+}
+/* line 383, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.guest:hover .seance-login {
+  content: url(/assets/seanceWhite-ae60bcafda292bcf8e904324711c4ac7fccb54ab1abd081e70e136f64d905234.svg);
+}
+
+/* line 387, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.facebook {
+  background-color: #3B5998;
+  color: #FFFFFF;
+}
+/* line 391, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.facebook .facebook-logo {
+  margin: 0 10px -2px 0px;
+  width: 15px;
+  content: url(/assets/FB-f-Logo__white_29-53c410f2864972705c250f8c95f111e583c15f6efce891dae6f902c3490d97bf.png);
+}
+
+/* line 396, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.facebook:hover {
+  background-color: #1d3679;
+  color: #FFFFFF;
+  -webkit-transition: background-color 700ms;
+  transition: background-color 700ms;
+}
+
+/* line 403, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.modal > h1 {
+  font-size: 36px;
+  display: block;
+  margin: 0px auto;
+  padding: 15px 0;
+  text-align: center;
+  color: #505050;
+}
+
+/* line 412, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.seance-modal-logo {
+  content: url(/assets/seanceLogo-1f4d696cf1849310f5c9ce90f1eeb43c79208af73a3c0d806e20b6016a329c94.svg);
+  display: block;
+  margin: 0px auto;
+  width: 75px;
+  padding-bottom: 15px;
+}
+
+/* line 420, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+}
+
+/* line 425, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+}
+
+/* line 430, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* line 436, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.ReactModal__Content--before-close {
+  -webkit-transform: scale(0.5) rotateX(30deg);
+  transform: scale(0.5) rotateX(30deg);
+  transition: all 150ms ease-in;
+}
+
+@media only screen and (max-width: 1024px) {
+  /* line 445, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-logo a.nav-logo-text {
+    display: none;
+  }
+
+  /* line 448, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-links {
+    padding-left: 4%;
+    overflow: hidden;
+    min-width: 0;
+  }
+}
+@media only screen and (max-width: 850px) {
+  /* line 455, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-links {
+    position: absolute;
+    display: block;
+    top: 57px;
+    left: 5%;
+  }
+
+  /* line 461, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  button.modal--exit {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    float: right;
+    font-size: 18px;
+    border: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* line 472, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools--login > span {
+    content: "Account";
+  }
+
+  /* line 475, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools img.mobile-search-icon {
+    float: left;
+    display: block;
+  }
+
+  /* line 479, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools img.mobile-search-exit {
+    float: left;
+    display: block;
+  }
+
+  /* line 483, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .normal-search-icon {
+    display: none;
+  }
+
+  /* line 486, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-logo strong {
+    display: none;
+  }
+
+  /* line 489, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  li.nav-tools--write {
+    display: none;
+  }
+
+  /* line 492, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-logo-icon {
+    margin-top: -7px;
+  }
+
+  /* line 495, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  p {
+    overflow-x: hidden;
+  }
+
+  /* line 498, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  input.search-input {
+    display: none;
+    position: absolute;
+    top: 70px;
+    height: 70px;
+    background: white;
+    width: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-bottom: 1px solid #a8a8a8;
+  }
+
+  /* line 510, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools {
+    position: static;
+  }
+
+  /* line 513, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools-search--results {
+    position: absolute;
+    margin: 0;
+    background: white;
+    z-index: 1;
+    top: 140px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    font-size: 13px;
+    padding: 20px;
+    padding-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  /* line 528, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  #view {
+    display: block;
+  }
+
+  /* line 531, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+  .nav-tools-search img.mobile-search-exit {
+    content: url(/assets/exit-115bf820a9dcbdbec667575261b5f6e140a2f0471f1fa9d7a831510aad7413f0.svg);
+  }
+}
+/* line 537, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.articles {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+/* line 542, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.articles p {
+  font-size: 17px;
+}
+
+/* line 546, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-container {
+  background-color: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  padding: 25px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+/* line 552, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-container p {
+  max-height: 400px;
+  overflow: hidden;
+}
+
+/* line 558, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-header {
+  padding-bottom: 10px;
+}
+/* line 561, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-header ul {
+  float: left;
+}
+
+/* line 565, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article--info-author {
+  color: #2dcb7f;
+  font-size: 14px;
+}
+/* line 569, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article--info-author a:hover {
+  color: #38ab66;
+}
+
+/* line 573, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article--info-content {
+  font-weight: lighter;
+  font-size: 12px;
+  color: #a8a8a8;
+}
+
+/* line 579, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-content:hover {
+  cursor: pointer;
+}
+
+/* line 583, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-content > h2 {
+  font-weight: 600;
+  font-size: 28px;
+  color: #373737;
+}
+
+/* line 590, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.modal--exit {
+  display: none;
+}
+
+/* line 595, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.login-form {
+  border-radius: 4px;
+  padding: 20px;
+  padding-top: 100px;
+  width: 240px;
+  height: 200px;
+}
+/* line 602, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.login-form input {
+  border-bottom: 1px solid #2dcb7f;
+  width: 200px;
+  margin: 15px auto;
+  display: block;
+  font-weight: lighter;
+}
+/* line 609, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.login-form input.submit {
+  border: 1px solid #2dcb7f;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: lighter;
+  text-align: center;
+  color: #505050;
+  font-weight: lighter;
+  font-size: 14px;
+  margin-top: 40px;
+  cursor: pointer;
+}
+/* line 621, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.login-form .error {
+  border-bottom: 1px solid #a63131;
+}
+/* line 624, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.login-form .form-errors {
+  padding-top: -50px;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #a63131;
+  line-height: 1.5;
+}
+
+/* line 634, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container {
+  background-color: #FFFFFF;
+  display: block;
+  padding-top: 50px;
+}
+/* line 639, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container p {
+  max-width: 100%;
+}
+/* line 641, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container p img {
+  transform: translate(-25%, 0%);
+  height: auto;
+}
+/* line 647, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container .article-header {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0px 25px;
+}
+/* line 652, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container .content {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 50px 25px;
+}
+/* line 657, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-show-container .content h1 {
+  padding-bottom: 50px;
+}
+
+/* line 665, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container {
+  padding-bottom: 50px;
+  margin: 0 auto;
+}
+/* line 669, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-content-background {
+  background-color: #FFFFFF;
+}
+/* line 672, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 25px;
+}
+/* line 677, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-content > button {
+  padding: 0;
+  border: none;
+  margin-right: 15px;
+}
+/* line 682, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-content > button:hover {
+  border: none;
+  color: #505050;
+  transition: 500ms;
+}
+/* line 687, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #373737;
+}
+/* line 692, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container h3 {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #2dcb7f;
+}
+/* line 697, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container h4 {
+  font-size: 14px;
+  color: #505050;
+  font-weight: 300;
+}
+/* line 702, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .latest-articles--header {
+  font-size: 20px;
+  color: #505050;
+}
+/* line 706, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container:last-child {
+  max-width: 800px;
+}
+/* line 709, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container {
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 0 25px;
+}
+/* line 713, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container p {
+  max-height: 250px;
+  overflow: hidden;
+}
+/* line 716, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container p img {
+  transform: translate(-25%, -25%);
+  height: auto;
+}
+/* line 722, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container h1 {
+  padding: 50px 0;
+}
+/* line 725, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container .articles--type-selector {
+  padding-bottom: 25px;
+  border-top: 1px solid #EFEFEF;
+}
+/* line 729, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container .articles--type-selector li:hover {
+  color: #505050;
+  cursor: pointer;
+}
+/* line 733, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container .articles--type-selector li {
+  float: left;
+  color: #a8a8a8;
+  padding: 15px 20px 0 0;
+  font-weight: lighter;
+}
+/* line 739, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .author-articles-container .articles--type-selector li.active {
+  margin-top: -1px;
+  border-top: 1px solid #505050;
+  color: #505050;
+}
+/* line 746, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .articles-list h3 {
+  display: block;
+  margin: 0;
+  font-size: 24px;
+  color: #373737;
+}
+/* line 752, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .articles-list > article {
+  position: relative;
+  padding: 25px 0;
+  border-bottom: 1px solid #EFEFEF;
+}
+/* line 757, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .articles-list > article:last-child {
+  border-bottom: none;
+  padding-bottom: 50px;
+}
+/* line 762, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .articles-list a {
+  display: block;
+  padding: 50px 0;
+  color: #a8a8a8;
+  font-size: 24px;
+  font-weight: lighter;
+  font-family: sans-serif;
+}
+/* line 770, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .articles-list a:hover {
+  color: #505050;
+}
+/* line 774, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .article-options > li {
+  float: left;
+  border: none;
+  padding-right: 15px;
+  height: 15px;
+}
+/* line 780, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .article--edit > a, .author-container .article--delete > button {
+  border: none;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 2px;
+  font-size: 13px;
+  font-weight: lighter;
+  color: #2dcb7f;
+}
+/* line 791, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-container .save-animation {
+  color: #2dcb7f;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  cursor: progress;
+}
+
+/* line 798, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-show-article--content {
+  max-width: 450px;
+  word-wrap: break-word;
+}
+
+/* line 804, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-edit-form :focus {
+  background-color: #d3fee9;
+}
+/* line 807, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.author-edit-form button {
+  border: none;
+  padding: none;
+}
+
+/* line 815, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-container {
+  width: 100%;
+  background-color: #FFFFFF;
+  min-height: 100%;
+}
+
+/* line 820, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-content {
+  margin: 0 auto;
+  max-width: 750px;
+  padding: 50px 25px;
+}
+/* line 825, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-content .article-header {
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+
+/* line 830, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article--info-save-status {
+  color: #a8a8a8;
+  float: right;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+/* line 840, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-form .title {
+  display: block;
+  font-size: 32px;
+  font-weight: 600;
+  color: #373737;
+  padding-bottom: 25px;
+}
+/* line 847, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-form .body {
+  display: block;
+  font-family: 'Lora', serif;
+  line-height: 1.5;
+  font-size: 20px;
+  color: #505050;
+}
+/* line 854, /Users/vadimfainberg/Desktop/Seance/app/assets/stylesheets/static_pages.scss */
+.article-create-form .body :first-child {
+  margin-top: 0;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
