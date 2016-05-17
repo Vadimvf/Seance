@@ -170,6 +170,7 @@ var SearchBar = React.createClass({
             <input type="text"
                    className="search-input"
                    placeholder="Search Seance"
+                   autoComplete="off"
                    onChange={this.handleChange}
                    onFocus={this.setActive}
                    onBlur={this.blurred}
