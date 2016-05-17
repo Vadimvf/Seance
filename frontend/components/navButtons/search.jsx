@@ -12,7 +12,7 @@ var SearchBar = React.createClass({
       return {
         searchParam: '',
         results: [],
-        active: false
+        active: false,
       };
     },
 
@@ -143,15 +143,32 @@ var SearchBar = React.createClass({
       }
     },
 
+    mobileSearch: function(e){
+      e.preventDefault();
+      var id = e.target.parentElement.children[2].id;
+
+      if (id === "view"){
+        e.target.parentElement.children[2].id = " ";
+        e.target.classList = "mobile-search-icon";
+        return;
+      } else
+        e.target.parentElement.children[2].id = "view";
+        e.target.classList = "mobile-search-exit"
+    },
+
     render: function() {
       var searchResults = this._createResultEl();
 
       return (
         <div className="group" >
           <form onSubmit={this.handleSubmit}>
-            <img className="mobile-search-icon"></img>
             <img className="normal-search-icon"></img>
+              <img className="mobile-search-icon"
+                   onClick={this.mobileSearch}
+                   onTouchEnd={this.mobileSearch}
+                />
             <input type="text"
+                   className="search-input"
                    placeholder="Search Seance"
                    onChange={this.handleChange}
                    onFocus={this.setActive}

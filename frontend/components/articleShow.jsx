@@ -33,6 +33,7 @@ var ArticleShow = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
+    ArticleUtil.fetchArticle(this.props.params.id)
     this.setState({
       article: ArticleStore.one()
     });

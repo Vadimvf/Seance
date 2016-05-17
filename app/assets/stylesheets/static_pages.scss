@@ -291,6 +291,10 @@ button, .nav-tools-search {
   display: none;
 }
 
+.mobile-search-exit{
+  float: left;
+  display: none;}
+
 //SEARCH///////////////////////////////////////////////////////////
 .nav-tools-search {
   color: $text;
@@ -470,6 +474,17 @@ button.guest {
   .nav-tools--login > span {
     content: "Account";}
 
+  .nav-tools img.mobile-search-icon{
+    float: left;
+    display: block;}
+
+  .nav-tools img.mobile-search-exit{
+    float: left;
+    display: block;}
+
+  .normal-search-icon{
+    display: none;}
+
   .nav-logo strong {
     display: none;}
 
@@ -482,7 +497,50 @@ button.guest {
   p {
     overflow-x: hidden;
   }
+
+  input.search-input {
+    display: none;
+    position: absolute;
+    top: 70px;
+    height: 70px;
+    background: white;
+    width: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-bottom: 1px solid $grey-link;
+  }
+
+  .nav-tools {
+    position: static;
+  }
+
+  .nav-tools-search--results {
+    position: absolute;
+    margin: 0;
+    background: white;
+    z-index: 1;
+    top: 140px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    font-size: 13px;
+    padding: 20px;
+    padding-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  #view {
+    display: block;
+  }
+
+  .nav-tools-search img.mobile-search-exit {
+    content: asset-url("exit.svg");
+  }
+
 }
+
 
 .articles {
   max-width: 800px;
