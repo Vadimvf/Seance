@@ -2,7 +2,7 @@
 
 [Heroku link][heroku] **NB:** Coming Tue., March 29th
 
-[heroku]: http://www.herokuapp.com
+[heroku]: http://www.seance.press
 
 ## Description
 
