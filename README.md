@@ -1,6 +1,6 @@
 # Seance
 
-[Heroku link][heroku] **NB:** Coming Tue., March 29th
+[Heroku link][heroku] **NB:** Current Work in Progress, new Features ongoing
 
 [heroku]: http://www.seance.press
 
