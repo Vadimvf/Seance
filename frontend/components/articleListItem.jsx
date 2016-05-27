@@ -14,7 +14,7 @@ var ReactListItem = React.createClass({
   },
 
   render: function() {
-    article = this.props.article;
+    let article = this.props.article;
     function _createHTML(content){
       return {__html: content};
     }

@@ -1,184 +1,184 @@
-var React = require('react');
-var ReactRouter = require("react-router");
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
-var PropTypes = React.PropTypes;
-var SearchStore = require('../../stores/search');
-var SearchUtil = require('../../util/searchUtil');
+import SearchStore from '../../stores/search';
+import SearchUtil from '../../util/searchUtil';
 
-var SearchBar = React.createClass({
+const SearchBar = React.createClass({
 
-    getInitialState: function() {
-      return {
-        searchParam: '',
-        results: [],
-        active: false,
-      };
-    },
+  getInitialState() {
+    return {
+      searchParam: '',
+      results: [],
+      active: false,
+    };
+  },
 
-    componentDidMount: function() {
-      this.searchListener = SearchStore.addListener(this._onSearch);
-    },
+  componentDidMount() {
+    this.searchListener = SearchStore.addListener(this._onSearch);
+  },
 
-    componentWillUnmount: function() {
-      this.searchListener.remove();
-    },
+  componentWillUnmount() {
+    this.searchListener.remove();
+  },
 
-    _onSearch: function (){
-      this.setState({
-        results: SearchStore.all()
-      });
-    },
+  _onSearch() {
+    this.setState({
+      results: SearchStore.all()
+    });
+  },
 
-    handleChange: function(e){
-      e.preventDefault();
-      this.setState({
-        searchParam: e.target.value
-      });
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      searchParam: e.target.value
+    });
 
-      SearchUtil.search({query: e.target.value})
-    },
+    SearchUtil.search({
+      query: e.target.value
+    })
+  },
 
-    handleSubmit: function (e){
-      e.preventDefault();
-      SearchUtil.search({query: this.state.searchParam});
-    },
+  handleSubmit(e) {
+    e.preventDefault();
+    SearchUtil.search({query: this.state.searchParam});
+  },
 
-    _createResultEl: function (){
-      var articles = [];
-      var authors = [];
-      var articleHeader = null;
-      var authorHeader = null;
-      var klass = (this.state.active) ? "" : " hidden";
+  _createResultEl() {
+    var articles = [];
+    var authors = [];
+    var articleHeader = null;
+    var authorHeader = null;
+    var klass = (this.state.active) ? "" : " hidden";
 
-      var resultEls = this.state.results.map(function(result, idx) {
-        if (result.type === "Article"){
-          articles.push(_linkLi(result, idx))
-        } else {
-          authors.push(_linkLi(result, idx))
-        }
-      });
-
-      if (articles.length > 0) {
-        var articleList = (
-          <ul>
-            <li className="nav-tools-search--result-header">ARTICLES</li>
-            {articles}
-          </ul>
-        )
-      }
-
-      if (authors.length > 0) {
-        var authorList = (
-          <ul>
-            <li className="nav-tools-search--result-header">AUTHORS</li>
-            {authors}
-          </ul>
-        )
-      } else if (articles.length === 0 && this.state.active && this.state.searchParam.length > 0) {
-        var authorList = (
-          <ul>
-            <li className="nav-tools-search--result-header">No Results Found</li>
-          </ul>
-        );
+    var resultEls = this.state.results.map(function(result, idx) {
+      if (result.type === "Article"){
+        articles.push(_linkLi(result, idx))
       } else {
-        return;
+        authors.push(_linkLi(result, idx))
       }
+    });
 
-      return (
-        <div onMouseOver={this.mousedOver}
-             onMouseOut={this.mousedOut}
-             className={"nav-tools-search--results" + klass}>
-         {articleList}
-         {authorList}
-        </div>
+    if (articles.length > 0) {
+      var articleList = (
+        <ul>
+          <li className="nav-tools-search--result-header">ARTICLES</li>
+          {articles}
+        </ul>
       )
+    }
 
-      function _resultPath(result){
-        if (result.type === "Article"){
-          return "articles/"
-        } else {
-          return "authors/"
-        }
-      }
-
-      function _linkLi(result, idx){
-        return (<li key={idx}>
-          <Link to={_resultPath(result) + result.id}>
-            {result.content}
-          </Link>
-        </li>);
-      }
-    },
-
-    setActive: function(){
-      this.setState({
-        active: true
-      });
-    },
-
-    setInactive: function(){
-      this.setState({
-        active: false
-      });
-    },
-
-    blurred: function(){
-      this.blur = true;
-      if (!this.mouseOver) {
-        this.setInactive();
-        this.blur = false;
-      }
-    },
-
-    mousedOver: function(){
-      this.mouseOver = true;
-    },
-
-    mousedOut: function(){
-      this.mouseOver = false;
-      if (this.blur) {
-        this.setInactive();
-        this.blur = false;
-      }
-    },
-
-    mobileSearch: function(e){
-      e.preventDefault();
-      var id = e.target.parentElement.children[2].id;
-
-      if (id === "view"){
-        e.target.parentElement.children[2].id = " ";
-        e.target.classList = "mobile-search-icon";
-        return;
-      } else
-        e.target.parentElement.children[2].id = "view";
-        e.target.classList = "mobile-search-exit"
-    },
-
-    render: function() {
-      var searchResults = this._createResultEl();
-
-      return (
-        <div className="group" >
-          <form onSubmit={this.handleSubmit}>
-            <img className="normal-search-icon"></img>
-              <img className="mobile-search-icon"
-                   onClick={this.mobileSearch}
-                   onTouchEnd={this.mobileSearch}
-                />
-            <input type="text"
-                   className="search-input"
-                   placeholder="Search Seance"
-                   autoComplete="off"
-                   onChange={this.handleChange}
-                   onFocus={this.setActive}
-                   onBlur={this.blurred}
-            />
-          </form>
-          {searchResults}
-        </div>
+    if (authors.length > 0) {
+      var authorList = (
+        <ul>
+          <li className="nav-tools-search--result-header">AUTHORS</li>
+          {authors}
+        </ul>
+      )
+    } else if (articles.length === 0 && this.state.active && this.state.searchParam.length > 0) {
+      var authorList = (
+        <ul>
+          <li className="nav-tools-search--result-header">No Results Found</li>
+        </ul>
       );
+    } else {
+      return;
+    }
+
+    return (
+      <div onMouseOver={this.mousedOver}
+           onMouseOut={this.mousedOut}
+           className={"nav-tools-search--results" + klass}>
+       {articleList}
+       {authorList}
+      </div>
+    )
+
+    function _resultPath(result){
+      if (result.type === "Article"){
+        return "articles/"
+      } else {
+        return "authors/"
+      }
+    }
+
+    function _linkLi(result, idx){
+      return (<li key={idx}>
+        <Link to={_resultPath(result) + result.id}>
+          {result.content}
+        </Link>
+      </li>);
+    }
+  },
+
+  setActive(){
+    this.setState({
+      active: true
+    });
+  },
+
+  setInactive(){
+    this.setState({
+      active: false
+    });
+  },
+
+  blurred(){
+    this.blur = true;
+    if (!this.mouseOver) {
+      this.setInactive();
+      this.blur = false;
+    }
+  },
+
+  mousedOver(){
+    this.mouseOver = true;
+  },
+
+  mousedOut(){
+    this.mouseOver = false;
+    if (this.blur) {
+      this.setInactive();
+      this.blur = false;
+    }
+  },
+
+  mobileSearch(e){
+    e.preventDefault();
+    var id = e.target.parentElement.children[2].id;
+
+    if (id === "view"){
+      e.target.parentElement.children[2].id = " ";
+      e.target.classList = "mobile-search-icon";
+      return;
+    } else
+      e.target.parentElement.children[2].id = "view";
+      e.target.classList = "mobile-search-exit"
+  },
+
+  render() {
+    var searchResults = this._createResultEl();
+
+    return (
+      <div className="group" >
+        <form onSubmit={this.handleSubmit}>
+          <img className="normal-search-icon"></img>
+            <img className="mobile-search-icon"
+                 onClick={this.mobileSearch}
+                 onTouchEnd={this.mobileSearch}
+              />
+          <input type="text"
+                 className="search-input"
+                 placeholder="Search Seance"
+                 autoComplete="off"
+                 onChange={this.handleChange}
+                 onFocus={this.setActive}
+                 onBlur={this.blurred}
+          />
+        </form>
+        {searchResults}
+      </div>
+    );
   }
 });
 
