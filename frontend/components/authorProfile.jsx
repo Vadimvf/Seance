@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Editor = require('react-medium-editor');
+var ReactReactor = require('react-router');
 
 var SessionStore = require('../stores/session');
 var SessionUtil = require('../util/sessionUtil');
@@ -63,9 +64,8 @@ var AuthorProfile = React.createClass({
   },
 
   _logout: function () {
-    router = this.context.router;
-    SessionUtil.logout(function () {
-      router.push("");
+    SessionUtil.logout(() => {
+      this.context.router.push("");
     });
   },
 

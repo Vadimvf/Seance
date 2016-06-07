@@ -7,14 +7,11 @@ var LogInOptions = React.createClass({
     router: PropTypes.object.isRequired
   },
 
-  guestLogin: function () {
-    router = this.context.router;
-
+  guestLogin() {
     SessionUtil.loginAuthor({
-      username: "FyoDost",
-      password: "underground"
-    }, function() { router.push("");
-    });
+      username: 'FyoDost',
+      password: 'underground',
+    }, () => this.context.router.push(''));
   },
 
   render: function() {

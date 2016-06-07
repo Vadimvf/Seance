@@ -1,24 +1,19 @@
-var SearchConstants = require('../constants/searchConstants');
-var Dispatcher = require('../dispatcher/dispatcher');
-var Store = require('flux/utils').Store;
-var SearchStore = new Store(Dispatcher);
+const SearchConstants = require('../constants/searchConstants');
+const Dispatcher = require('../dispatcher/dispatcher');
+const Store = require('flux/utils').Store;
+const SearchStore = new Store(Dispatcher);
 
-var _results = [];
+let _results = [];
 
-var _resetResults = function (results){
-  _results = results;
-}
+const _resetResults = newResults => {
+  _results = newResults;
+};
 
-var _clearResults = function (){
-  _results = [];
-}
+SearchStore.all = () => _results;
 
-SearchStore.all = function (){
-  return _results;
-}
 
-SearchStore.__onDispatch = function (payload){
-  if (payload.actionType === SearchConstants.SEARCH_RECEIVED){
+SearchStore.__onDispatch = payload => {
+  if (payload.actionType === SearchConstants.SEARCH_RECEIVED) {
     _resetResults(payload.results);
     SearchStore.__emitChange();
   }

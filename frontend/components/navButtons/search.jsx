@@ -1,185 +1,200 @@
 import React from 'react';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 
-import SearchStore from '../../stores/search';
+// import SearchStore from '../../stores/search';
+import SearchResults from './searchResults';
 import SearchUtil from '../../util/searchUtil';
 
-const SearchBar = React.createClass({
-
-  getInitialState() {
-    return {
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       searchParam: '',
       results: [],
       active: false,
     };
-  },
+  }
 
-  componentDidMount() {
-    this.searchListener = SearchStore.addListener(this._onSearch);
-  },
+  // componentDidMount() {
+  //   this.searchListener = SearchStore.addListener(this.onSearch);
+  // }
+  //
+  // componentWillUnmount = () => {
+  //   this.searchListener.remove();
+  // }
 
-  componentWillUnmount() {
-    this.searchListener.remove();
-  },
+  // onSearch = () => {
+  //   this.setState({
+  //     results: SearchStore.all(),
+  //   });
+  // }
 
-  _onSearch() {
+  setActive = () => {
     this.setState({
-      results: SearchStore.all()
+      active: true,
     });
-  },
+  }
 
-  handleChange(e) {
-    e.preventDefault();
+  setInactive = () => {
     this.setState({
-      searchParam: e.target.value
+      active: false,
     });
-
-    SearchUtil.search({
-      query: e.target.value
-    })
-  },
+  }
 
   handleSubmit(e) {
     e.preventDefault();
-    SearchUtil.search({query: this.state.searchParam});
-  },
-
-  _createResultEl() {
-    var articles = [];
-    var authors = [];
-    var articleHeader = null;
-    var authorHeader = null;
-    var klass = (this.state.active) ? "" : " hidden";
-
-    var resultEls = this.state.results.map(function(result, idx) {
-      if (result.type === "Article"){
-        articles.push(_linkLi(result, idx))
-      } else {
-        authors.push(_linkLi(result, idx))
-      }
+    SearchUtil.search({
+      query: this.state.searchParam,
     });
+  }
 
-    if (articles.length > 0) {
-      var articleList = (
-        <ul>
-          <li className="nav-tools-search--result-header">ARTICLES</li>
-          {articles}
-        </ul>
-      )
-    }
-
-    if (authors.length > 0) {
-      var authorList = (
-        <ul>
-          <li className="nav-tools-search--result-header">AUTHORS</li>
-          {authors}
-        </ul>
-      )
-    } else if (articles.length === 0 && this.state.active && this.state.searchParam.length > 0) {
-      var authorList = (
-        <ul>
-          <li className="nav-tools-search--result-header">No Results Found</li>
-        </ul>
-      );
-    } else {
-      return;
-    }
-
-    return (
-      <div onMouseOver={this.mousedOver}
-           onMouseOut={this.mousedOut}
-           className={"nav-tools-search--results" + klass}>
-       {articleList}
-       {authorList}
-      </div>
-    )
-
-    function _resultPath(result){
-      if (result.type === "Article"){
-        return "articles/"
-      } else {
-        return "authors/"
-      }
-    }
-
-    function _linkLi(result, idx){
-      return (<li key={idx}>
-        <Link to={_resultPath(result) + result.id}>
-          {result.content}
-        </Link>
-      </li>);
-    }
-  },
-
-  setActive(){
+  handleChange = (e) => {
+    e.preventDefault();
     this.setState({
-      active: true
+      searchParam: e.target.value,
     });
-  },
 
-  setInactive(){
-    this.setState({
-      active: false
+    SearchUtil.search({
+      query: e.target.value,
     });
-  },
+  }
 
-  blurred(){
+  // createLinks(result, idx) {
+  //   const resultPath = () => {
+  //     if (result.type === 'Article') return 'articles/';
+  //     return 'authors/';
+  //   };
+  //
+  //   return (
+  //     <li key={idx}>
+  //       <Link to={resultPath(result) + result.id}>
+  //         {result.content}
+  //       </Link>
+  //     </li>);
+  // }
+  //
+  // createResultSubList(subList, type) {
+  //   if (!!subList.length) {
+  //     return (
+  //       <ul>
+  //         <li className="nav-tools-search--result-header">{type}</li>
+  //         {subList}
+  //       </ul>
+  //     );
+  //   }
+  //
+  //   return null;
+  // }
+  //
+  // createResultEl() {
+  //   const articles = [];
+  //   const authors = [];
+  //   const klass = (this.state.active) ? '' : ' hidden';
+  //   let noResults = null;
+  //
+  //
+  //   this.state.results.forEach((result, idx) => {
+  //     if (result.type === 'Article') {
+  //       articles.push(this.createLinks(result, idx));
+  //     } else {
+  //       authors.push(this.createLinks(result, idx));
+  //     }
+  //   });
+  //
+  //   const articleList = this.createResultSubList(articles, 'ARTICLES');
+  //   const authorList = this.createResultSubList(authors, 'AUTHORS');
+  //
+  //   if (!this.state.results.length && !!this.state.searchParam.length) {
+  //     noResults = (
+  //       <ul>
+  //         <li className="nav-tools-search--result-header">No Results Found</li>
+  //       </ul>
+  //     );
+  //   } else if (!this.state.results.length && !this.state.searchParam.length) {
+  //     return null;
+  //   }
+  //
+  //   return (
+  //     <div
+  //       onMouseOver={this.mousedOver}
+  //       onMouseOut={this.mousedOut}
+  //       className={`nav-tools-search--results ${klass}`}
+  //     >
+  //        {articleList}
+  //        {authorList}
+  //        {noResults}
+  //     </div>
+  //   );
+  // }
+
+  blurred = () => {
     this.blur = true;
     if (!this.mouseOver) {
       this.setInactive();
       this.blur = false;
     }
-  },
+  }
 
-  mousedOver(){
+  mousedOver = () => {
     this.mouseOver = true;
-  },
+  }
 
-  mousedOut(){
+  mousedOut = () => {
     this.mouseOver = false;
     if (this.blur) {
       this.setInactive();
       this.blur = false;
     }
-  },
+  }
 
-  mobileSearch(e){
+  mobileSearch(e) {
     e.preventDefault();
-    var id = e.target.parentElement.children[2].id;
+    const target = e.target;
+    const id = e.target.parentElement.children[2].id;
 
-    if (id === "view"){
-      e.target.parentElement.children[2].id = " ";
-      e.target.classList = "mobile-search-icon";
-      return;
-    } else
-      e.target.parentElement.children[2].id = "view";
-      e.target.classList = "mobile-search-exit"
-  },
+    if (id === 'view') {
+      target.parentElement.children[2].id = ' ';
+      target.classList = 'mobile-search-icon';
+    } else {
+      target.parentElement.children[2].id = 'view';
+      target.classList = 'mobile-search-exit';
+    }
+  }
 
   render() {
-    var searchResults = this._createResultEl();
+    // const searchResults = this.createResultEl();
 
     return (
       <div className="group" >
         <form onSubmit={this.handleSubmit}>
-          <img className="normal-search-icon"></img>
-            <img className="mobile-search-icon"
-                 onClick={this.mobileSearch}
-                 onTouchEnd={this.mobileSearch}
-              />
-          <input type="text"
-                 className="search-input"
-                 placeholder="Search Seance"
-                 autoComplete="off"
-                 onChange={this.handleChange}
-                 onFocus={this.setActive}
-                 onBlur={this.blurred}
+          <img
+            className="normal-search-icon"
+            alt="Search Icon"
+          />
+          <img
+            alt="Search Icon"
+            className="mobile-search-icon"
+            onClick={this.mobileSearch}
+            onTouchEnd={this.mobileSearch}
+          />
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search Seance"
+            autoComplete="off"
+            onChange={this.handleChange}
+            onFocus={this.setActive}
+            onBlur={this.blurred}
           />
         </form>
-        {searchResults}
+        <SearchResults
+          onMouseOver={this.mousedOver}
+          onMouseOut={this.mousedOut}
+          isVisible={!!this.state.searchParam.length}
+        />
       </div>
     );
   }
-});
+}
 
 module.exports = SearchBar;

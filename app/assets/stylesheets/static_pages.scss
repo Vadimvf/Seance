@@ -245,6 +245,12 @@ button.nav-tools--login:hover {
   transition: 300ms; }
 
 .nav-tools--write {
+  :hover {
+    color: $green_text;
+    -webkit-transition: color 300ms;
+    transition: color 300ms;
+    cursor: pointer;
+  }
   a {
     display: block;
     text-align: left;
@@ -254,13 +260,6 @@ button.nav-tools--login:hover {
     color: $grey-link;
     font-weight: lighter;
     font-size: 14px;}
-}
-
-.nav-tools--write:hover {
-  color: $green_text;
-  -webkit-transition: color 300ms;
-  transition: color 300ms;
-  cursor: pointer;
 }
 
 .nav-write--publish {
