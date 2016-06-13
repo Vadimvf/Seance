@@ -1,25 +1,23 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 
-var Profile = React.createClass({
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
-
-  fetchProfile: function () {
-    this.context.router.push("/authors/profile");
-  },
-
-  render: function() {
+class Profile extends React.Component {
+  static contextTypes: {
+    router: PropTypes.object.isRequired,
+  }
+  fetchProfile() {
+    hashHistory.push('authors/profile');
+  }
+  render() {
     return (
       <button
         className="nav-tools--profile"
-        onClick={this.fetchProfile}>
-        <img className="avatar"></img>
+        onClick={this.fetchProfile}
+      >
+        <img className="avatar" alt="avatar" />
       </button>
     );
   }
-
-});
+}
 
 module.exports = Profile;

@@ -455,7 +455,9 @@ button.guest {
     position: absolute;
     display: block;
     top: 57px;
-    left: 5%;}
+    width: 350px;
+    margin-left: -175px;
+    left: 50%;}
 
   button.modal--exit {
     display: block;
@@ -524,7 +526,7 @@ button.guest {
     border-top-left-radius: 0;
     border-top-right-radius: 0;}
 
-  #view {
+  .search-input.view {
     display: block;}
 
   .nav-tools-search img.mobile-search-exit {

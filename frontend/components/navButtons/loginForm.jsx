@@ -1,150 +1,124 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var validateForm = require('../../formValidation');
-var sessionUtil = require('../../util/sessionUtil');
-var ErrorStore = require('../../stores/error');
+import React, { PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 
-var LoginForm = React.createClass({
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
+import validateForm from '../../formValidation';
+import sessionUtil from '../../util/sessionUtil';
+import ErrorStore from '../../stores/error';
 
-  getInitialState: function() {
-    return {
-      username: "",
-      fullname: "",
-      password: "",
-      email: "",
-      errors: []
+class LoginForm extends React.Component {
+  static propTypes = {
+    formType: PropTypes.string.isRequired,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      fullname: '',
+      password: '',
+      email: '',
+      errors: [],
     };
-  },
-
-  handleSubmit: function (e) {
+  }
+  componentDidMount() {
+    this.errorListener = ErrorStore.addListener(this._onError);
+  }
+  componentWillUnmount = () => {
+    this.errorListener.remove();
+  }
+  handleSubmit = (e) => {
     e.preventDefault();
-    router = this.context.router;
-
     if (!!this.returnErrors()) {
       return;
-    } else if (this.props.formType === "Create" ) {
-      sessionUtil.createAuthor(this.state,
-        function () {
-          router.push("");
-      });
+    } else if (this.props.formType === 'Create') {
+      sessionUtil.createAuthor(this.state, () => hashHistory.push(''));
     } else {
-      sessionUtil.loginAuthor(this.state,
-      function() {
-        router.push("");
-      });
+      sessionUtil.loginAuthor(this.state, () => hashHistory.push(''));
     }
-  },
-
-  _onError: function () {
+  }
+  _onError = () => {
     this.setState({
-      errors: ErrorStore.all()
+      errors: ErrorStore.all(),
     });
-  },
-
-  componentDidMount: function() {
-    this.errorListener = ErrorStore.addListener(this._onError);
-  },
-
-  componentWillUnmount: function() {
-    this.errorListener.remove();
-  },
-
-  returnErrors: function () {
-    var allMessages = validateForm(
-      this.state, this.props.formType
+  }
+  returnErrors = () => {
+    const allMessages = validateForm(this.state, this.props.formType);
+    this.setState({
+      errors: allMessages,
+    });
+    return (allMessages.length !== 0) ? allMessages : null;
+  }
+  updateUsername = (e) => {
+    this.setState({
+      username: e.currentTarget.value,
+    });
+  }
+  updateFullname = (e) => {
+    this.setState({
+      fullname: e.currentTarget.value,
+    });
+  }
+  updatePassword = (e) => {
+    this.setState({
+      password: e.currentTarget.value,
+    });
+  }
+  updateEmail = (e) => {
+    this.setState({
+      email: e.currentTarget.value,
+    });
+  }
+  errorMessages = () => {
+    const errorElements = (
+      this.state.errors.map((error, idx) => <li key={idx}>{error}</li>)
     );
-
-    this.setState({
-      errors: allMessages
-    });
-
-    return (allMessages.length !== 0)? allMessages : null;
-  },
-
-  updateUsername: function (e) {
-    this.setState({
-      username: e.currentTarget.value
-    });
-  },
-
-  updateFullname: function (e) {
-    this.setState({
-      fullname: e.currentTarget.value
-    });
-  },
-
-  updatePassword: function (e) {
-    this.setState({
-      password: e.currentTarget.value
-    });
-  },
-
-  updateEmail: function (e) {
-    this.setState({
-      email: e.currentTarget.value
-    });
-  },
-
-  errorMessages: function () {
-    var errorElements =  (
-      this.state.errors.map(function (error, idx) {
-        return <li key={idx}>{error}</li>;
-      })
-    );
-
-    return (<ul className="form-errors">
-              {errorElements}
-           </ul>);
-  },
-
-  render: function() {
-    var newUserFormOpts = null;
-    var submitVal = "Sign in";
-
-    if (this.props.formType === "Create" ) {
-      submitVal = "Sign up";
+    return (<ul className="form-errors">{errorElements}</ul>);
+  }
+  render() {
+    let newUserFormOpts = null;
+    let submitVal = 'Sign in';
+    if (this.props.formType === 'Create') {
+      submitVal = 'Sign up';
       newUserFormOpts = (
-      <div>
-        <label htmlFor="fullname"></label>
-        <input onChange={this.updateFullname}
-               type="text"
-               placeholder="Full name"/>
-
-             <label htmlFor="email"></label>
-       <input onChange={this.updateEmail}
-         type="email"
-         placeholder="Email"/>
-     </div>
+        <div>
+          <label htmlFor="fullname"></label>
+          <input
+            onChange={this.updateFullname}
+            type="text"
+            placeholder="Full name"
+          />
+          <label htmlFor="email" />
+          <input
+            onChange={this.updateEmail}
+            type="email"
+            placeholder="Email"
+          />
+        </div>
      );
     }
-
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
-
-        { this.errorMessages() }
-        { newUserFormOpts }
-
-      <label htmlFor="username"></label>
-      <input onChange={this.updateUsername}
-               type="text"
-               placeholder="Username"/>
-
-       <label htmlFor="password"></label>
-       <input onChange={this.updatePassword}
-               type="password"
-               placeholder="Password"/>
-
-       <input type="submit"
-              className="submit"
-              value={submitVal}/>
-
+        {this.errorMessages()}
+        {newUserFormOpts}
+        <label htmlFor="username" />
+        <input
+          onChange={this.updateUsername}
+          type="text"
+          placeholder="Username"
+        />
+        <label htmlFor="password" />
+        <input
+          onChange={this.updatePassword}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          type="submit"
+          className="submit"
+          value={submitVal}
+        />
       </form>
     );
   }
-
-});
+}
 
 module.exports = LoginForm;

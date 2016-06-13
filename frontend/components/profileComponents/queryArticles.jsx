@@ -1,67 +1,57 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var ReactRouter = require("react-router");
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
-var ArticleStore = require('../../stores/article');
-var SessionStore = require('../../stores/session');
-var ArticleUtil = require('../../util/articleUtil');
+import ArticleStore from '../../stores/article';
+import SessionStore from '../../stores/session';
+import ArticleUtil from '../../util/articleUtil';
 
-var QueryArticles = React.createClass({
-
-  getInitialState: function() {
-    return {
+class QueryArticles extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       articles: [],
       published: false,
     };
-  },
-
-  _onChange: function() {
-    this.setState({
-      articles: ArticleStore.all()
-    });
-  },
-
-  componentDidMount: function() {
+  }
+  componentDidMount() {
     this.articleListener = ArticleStore.addListener(this._onChange);
     ArticleUtil.fetchArticles({
       query: {
         published: false,
-        authorId: SessionStore.currentAuthor().id
-      }
+        authorId: SessionStore.currentAuthor().id,
+      },
     });
-  },
-
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount = () => {
     this.articleListener.remove();
-  },
-
-  toggleQuery: function() {
-
+  }
+  _onChange = () => {
+    this.setState({
+      articles: ArticleStore.all(),
+    });
+  }
+  toggleQuery = () => {
     ArticleUtil.fetchArticles({
       query: {
         published: !this.state.published,
-        authorId: SessionStore.currentAuthor().id
-      }
+        authorId: SessionStore.currentAuthor().id,
+      },
     }, this.setState({ published: !this.state.published }));
-  },
-
-  deleteArticle: function (articleId){
-    function _fetchNewArticles () {
+  }
+  deleteArticle = (articleId) => {
+    const fetchNewArticles = () => {
       ArticleUtil.fetchArticles({
         query: {
           published: this.state.published,
-          authorId: SessionStore.currentAuthor().id
-        }
+          authorId: SessionStore.currentAuthor().id,
+        },
       });
-    }
-
-    ArticleUtil.deleteArticle(articleId, _fetchNewArticles.bind(this));
-  },
-
-  render: function() {
-    var draftKlass = !this.state.published ? "active" : "";
-    var publicKlass = this.state.published ? "active" : "";
+    };
+    ArticleUtil.deleteArticle(articleId, fetchNewArticles);
+  }
+  render() {
+    const draftKlass = !this.state.published ? 'active' : '';
+    const publicKlass = this.state.published ? 'active' : '';
 
     return (
       <div className="author-articles-container">
@@ -87,15 +77,13 @@ var QueryArticles = React.createClass({
         </section>
       </div>
     );
-  },
-
-  _renderArticles: function (){
+  }
+  _renderArticles() {
     var articles;
     var self = this;
     function _createHTML(content){
       return {__html: content};
     }
-
     if (this.state.articles.length > 0){
       articles = this.state.articles.map(function (article, idx){
         return (
@@ -104,28 +92,23 @@ var QueryArticles = React.createClass({
             <div className="author-show-article--content"
               dangerouslySetInnerHTML={_createHTML(article.body_short)}>
             </div>
-
             <ul className="article-options group">
               <li className="article--info-content">
                 {article.created_ago + " ⋅ " + article.read_time}
               </li>
-
               <li className="article--edit">
                 <Link to={"/articles/edit/" + article.id}>Edit</Link>
               </li>
-
               <li className="article--delete">
                 <button onClick={self.deleteArticle.bind(null, article.id)}>
                   Delete
                 </button>
               </li>
-
-
             </ul>
           </article>
         );
       });
-    }else {
+    } else {
       articles = (
         <Link to="articles/new" >
           Write a new story?
@@ -135,7 +118,6 @@ var QueryArticles = React.createClass({
 
     return articles;
   }
-
-});
+}
 
 module.exports = QueryArticles;

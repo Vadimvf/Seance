@@ -1,46 +1,36 @@
-var React = require('react');
-var ReactRouter = require("react-router");
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
-var Profile = require("./profile");
-var Login = require("./login");
-var SearchBar = require("./search");
-var SessionStore = require('../../stores/session');
-var SessionUtil = require('../../util/sessionUtil');
+import Profile from './profile';
+import Login from './login';
+import SearchBar from './search';
+import SessionStore from '../../stores/session';
 
-var NavTools = React.createClass({
-  getInitialState: function() {
-    return {
-      author: SessionStore.currentAuthor()
-     };
-  },
-
-  componentDidMount: function() {
-    this.authorListener = SessionStore.addListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
+class NavTools extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      author: SessionStore.currentAuthor(),
+    };
+  }
+  componentDidMount() {
+    this.authorListener = SessionStore.addListener(this.onChange);
+  }
+  componentWillUnmount = () => {
     this.authorListener.remove();
-  },
-
-  _onChange: function () {
+  }
+  onChange = () => {
     this.setState({
-      author: SessionStore.currentAuthor()
+      author: SessionStore.currentAuthor(),
     });
-  },
-
-  render: function() {
-    var userButton;
-    var write = <Login isWrite={true}/>;
-
-    if (!$.isEmptyObject(this.state.author)){
+  }
+  render() {
+    let userButton = <Login isWrite={false} />;
+    let write = <Login isWrite />;
+    if (this.state.author && this.state.author.hasOwnProperty('id')) {
       userButton = <Profile />;
-      write = <Link to="articles/new" >Write a story</ Link>
-    } else {
-      userButton = <Login />;
+      write = <Link to="articles/new" >Write a story</ Link>;
     }
-
-
     return (
       <ul className="nav-tools">
         <li className="nav-tools-search">
@@ -55,7 +45,6 @@ var NavTools = React.createClass({
       </ul>
     );
   }
-
-});
+}
 
 module.exports = NavTools;

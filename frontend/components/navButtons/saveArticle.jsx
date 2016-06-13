@@ -1,37 +1,31 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var ErrorStore = require('../../stores/error');
+import React from 'react';
+import ErrorStore from '../../stores/error';
 
-var SaveArticle = React.createClass({
-
-  getInitialState: function () {
-    return {
-      status: "",
+class SaveArticle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      status: '',
     };
-  },
-
-  componentDidMount: function () {
-    this.statusListener = ErrorStore.addListener(this._onChange);
-  },
-
-  componentWillUnmount: function () {
+  }
+  componentDidMount() {
+    this.statusListener = ErrorStore.addListener(this.onChange);
+  }
+  componentWillUnmount = () => {
     this.statusListener.remove();
-  },
-
-  _onChange: function () {
+  }
+  onChange = () => {
     this.setState({
-      status: ErrorStore.currentStatus()
+      status: ErrorStore.currentStatus(),
     });
-  },
-
-  render: function () {
+  }
+  render() {
     return (
       <li className="article--info-save-status" >
         {this.state.status}
       </li>
     );
-  },
-
-});
+  }
+}
 
 module.exports = SaveArticle;

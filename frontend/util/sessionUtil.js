@@ -1,65 +1,65 @@
-var SessionActions = require('../actions/sessionAction');
+import SessionActions from '../actions/sessionAction';
 
-var SessionUtil = {
-  createAuthor: function (authorParams, redirect) {
+const SessionUtil = {
+  createAuthor(authorParams, redirect) {
     $.ajax({
-      type: "POST",
-      url:"/api/authors",
-      dataType: "json",
+      type: 'POST',
+      url: '/api/authors',
+      dataType: 'json',
       data: authorParams,
-      success: function (currentAuthor) {
+      success(currentAuthor) {
         SessionActions.currentAuthorReceived(currentAuthor);
-        redirect && redirect();
+        if (redirect) redirect();
       },
-      error: function (errorJSON) {
-        errors = errorJSON.responseJSON.errors;
+      error(errorJSON) {
+        const errors = errorJSON.responseJSON.errors;
         SessionActions.errorsReceived(errors);
-      }
+      },
     });
   },
 
-  loginAuthor: function (authorParams, redirect) {
+  loginAuthor(authorParams, redirect) {
     $.ajax({
-      type: "POST",
-      url:"/api/session",
-      dataType: "json",
+      type: 'POST',
+      url: '/api/session',
+      dataType: 'json',
       data: authorParams,
-      success: function (currentAuthor) {
+      success(currentAuthor) {
         SessionActions.currentAuthorReceived(currentAuthor);
-        redirect && redirect();
+        if (redirect) redirect();
       },
-      error: function (errorJSON) {
-        errors = errorJSON.responseJSON.errors;
+      error(errorJSON) {
+        const errors = errorJSON.responseJSON.errors;
         SessionActions.errorsReceived(errors);
-      }
+      },
     });
   },
 
-  fetchCurrentAuthor: function(completion) {
+  fetchCurrentAuthor(completion) {
     $.ajax({
-      type: "GET",
-      url: "/api/session",
-      dataType: "json",
-      success: function(currentAuthor) {
+      type: 'GET',
+      url: '/api/session',
+      dataType: 'json',
+      success(currentAuthor) {
         SessionActions.currentAuthorReceived(currentAuthor);
       },
-      complete: function () {
-        completion && completion();
-      }
+      complete() {
+        if (completion) completion();
+      },
     });
   },
 
-  logout: function (redirect) {
+  logout(redirect) {
     $.ajax({
-      type: "DELETE",
-      url: "api/session",
-      dataType: "json",
-      success: function () {
+      type: 'DELETE',
+      url: 'api/session',
+      dataType: 'json',
+      success() {
         SessionActions.logout();
-        redirect && redirect();
-      }
+        if (redirect) redirect();
+      },
     });
-  }
+  },
 
 };
 

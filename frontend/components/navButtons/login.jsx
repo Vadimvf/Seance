@@ -1,105 +1,97 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var Modal = require('react-modal');
-var ModalStyle = require('./modalStyle');
-var LoginForm = require('./loginForm');
-var LogInOptions = require('./modalLogInOpts');
+import React, { PropTypes } from 'react';
 
-var Login = React.createClass({
-  getInitialState: function () {
-      return({
-        modalOpen: false,
-        isLoginAttempt: false,
-        isCreateAttempt: false,
-        isWrite: false
-      });
-    },
+import Modal from 'react-modal';
+import ModalStyle from './modalStyle';
 
-  closeModal: function () {
-    this.setState({
-      modalOpen: false
-    });
-  },
+import LoginForm from './loginForm';
+import LogInOptions from './modalLogInOpts';
 
-  componentWillMount: function() {
-    if (this.props.isWrite){
+class Login extends React.Component {
+  static propTypes = {
+    isWrite: PropTypes.bool.isRequired,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+      isLoginAttempt: false,
+      isCreateAttempt: false,
+      isWrite: false,
+    };
+  }
+  componentWillMount() {
+    if (this.props.isWrite) {
       this.setState({
-        isWrite: this.props.isWrite
+        isWrite: this.props.isWrite,
       });
     }
-  },
-
-  openModal: function () {
+  }
+  closeModal = () => {
+    this.setState({
+      modalOpen: false,
+    });
+  }
+  openModal = () => {
     this.setState({
       modalOpen: true,
       isLoginAttempt: false,
       isCreateAttempt: false,
-     });
-  },
-
-  loginAttempt: function () {
-    this.setState({
-      isLoginAttempt: true
     });
-  },
-
-  createAttempt: function () {
+  }
+  loginAttempt = () => {
     this.setState({
-      isCreateAttempt: true
+      isLoginAttempt: true,
     });
-  },
-
-  render: function () {
-
-    var isLoginAttempt = this.state.isLoginAttempt;
-    var isCreateAttempt = this.state.isCreateAttempt;
-    var content;
+  }
+  createAttempt = () => {
+    this.setState({
+      isCreateAttempt: true,
+    });
+  }
+  render() {
+    const isLoginAttempt = this.state.isLoginAttempt;
+    const isCreateAttempt = this.state.isCreateAttempt;
+    let content;
 
     if (isLoginAttempt) {
       content = <LoginForm formType="Session" />;
     } else if (isCreateAttempt) {
       content = <LoginForm formType="Create" />;
     } else {
-      content = <LogInOptions
-        createCallback={this.createAttempt}
-        loginCallback={this.loginAttempt}/>;
+      content = (
+        <LogInOptions
+          createCallback={this.createAttempt}
+          loginCallback={this.loginAttempt}
+        />
+      );
     }
-
-    var buttonText;
-    var className;
-    if (this.state.isWrite){
-      className = "nav-tools--write";
-      buttonText = "Write A Story";
+    let buttonText;
+    let className;
+    if (this.state.isWrite) {
+      className = 'nav-tools--write';
+      buttonText = 'Write A Story';
     } else {
-      className = "nav-tools--login";
-      buttonText = "Sign in / Sign up";
+      className = 'nav-tools--login';
+      buttonText = 'Sign in / Sign up';
     }
-
     return (
-
-      <button
-        className={className}
-        onClick={this.openModal}>
+      <button className={className} onClick={this.openModal}>
         {buttonText}
-
         <Modal
           closeTimeoutMS={150}
           isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal}
-          style={ModalStyle}>
-
-        <button
-          className="modal--exit"
-          onClick={this.closeModal}>✖</button>
+          style={ModalStyle}
+        >
+          <button
+            className="modal--exit"
+            onClick={this.closeModal}
+          >✖</button>
           {content}
-
         </Modal>
-
       </button>
     );
-  },
-
-
-});
+  }
+}
 
 module.exports = Login;

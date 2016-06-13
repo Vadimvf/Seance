@@ -1,22 +1,18 @@
-var React = require('react');
-var Link = require("react-router").Link;
+import React from 'react';
+import { Link } from 'react-router';
 
-var Logo = React.createClass({
+function Logo() {
+  return (
+    <b className="nav-logo">
+      <Link to="" className="nav-logo-text">
+        <strong>Seance</strong>
+      </Link>
 
-  render: function() {
-    return (
-      <b className="nav-logo">
-        <Link to="" className="nav-logo-text">
-          <strong>Seance</strong>
-        </Link>
-
-        <Link to="" >
-          <img alt="" className="nav-logo-icon" />
-        </Link>
-      </b>
-    );
-  }
-
-});
+      <Link to="" >
+        <img alt="" className="nav-logo-icon" />
+      </Link>
+    </b>
+  );
+}
 
 module.exports = Logo;

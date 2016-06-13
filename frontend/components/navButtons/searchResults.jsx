@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 import SearchStore from '../../stores/search';
 
 class SearchResults extends React.Component {
-  propTypes: {
-    isVisible: PropTypes.isVisible.isRequired,
+  static propTypes = {
+    isVisible: PropTypes.bool.isRequired,
   }
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class SearchResults extends React.Component {
   onResults = () => {
     this.setState({
       results: SearchStore.all(),
-    }, this.createResultEl);
+    });
   }
   createLinks(result, idx) {
     const resultPath = () => {
@@ -81,6 +81,7 @@ class SearchResults extends React.Component {
   }
   render() {
     const klass = (this.props.isVisible) ? '' : 'hidden';
+    this.createResultEl();
     return (
       <div
         className={`nav-tools-search--results ${klass}`}
