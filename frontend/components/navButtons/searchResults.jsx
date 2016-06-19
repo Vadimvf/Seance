@@ -80,11 +80,13 @@ class SearchResults extends React.Component {
     this.authorList = this.createResultSubList(authors, 'AUTHORS');
   }
   render() {
-    const klass = (this.props.isVisible) ? '' : 'hidden';
+    const { isVisible, ...mouseFuncs } = this.props;
+    const klass = (isVisible) ? '' : 'hidden';
     this.createResultEl();
     return (
       <div
         className={`nav-tools-search--results ${klass}`}
+        { ...mouseFuncs }
       >
        {this.articleList}
        {this.authorList}
