@@ -45,4 +45,4 @@ class LogInOptions extends React.Component {
   }
 }
 
-module.exports = LogInOptions;
+export default LogInOptions;

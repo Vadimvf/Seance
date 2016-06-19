@@ -1,133 +1,137 @@
-var React = require('react');
-var ReactRouter = require("react-router");
-var Editor = require('react-medium-editor');
+import React, { PropTypes } from 'react';
+import { Link, hashHistory } from 'react-router';
 
-var Link = ReactRouter.Link;
-var PropTypes = React.PropTypes;
+import Editor from 'react-medium-editor';
 
-var SessionStore = require('../stores/session');
-var ArticleStore = require('../stores/article');
-var ErrorStore = require('../stores/error');
-var NavToolMessagesStore = require('../stores/navToolMessages');
+import SessionStore from '../stores/session';
+import ArticleStore from '../stores/article';
 
-var NavAction = require('../actions/navAction');
-var ArticleAction = require('../actions/articleAction');
-var ArticleUtil = require('../util/articleUtil');
-var NavConstants = require('../constants/navConstants');
-var SaveArticle = require('./navButtons/saveArticle');
+import NavToolMessagesStore from '../stores/navToolMessages';
 
-var ArticleNew = React.createClass({
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
+import NavAction from '../actions/navAction';
+import ArticleAction from '../actions/articleAction';
+import ArticleUtil from '../util/articleUtil';
+import NavConstants from '../constants/navConstants';
+import SaveArticle from './navButtons/saveArticle';
 
-  getInitialState: function () {
-    return {
+class ArticleNew extends React.Component {
+  static propTypes = {
+    params: PropTypes.object.isRequired,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
       author: SessionStore.currentAuthor(),
-      title: "",
-      body: "",
-      published: false
+      title: '',
+      body: '',
+      published: false,
     };
-  },
-
-  componentDidMount: function () {
-    this.authorListener =
-    SessionStore.addListener(this._onChange);
-
-    this.articleListener =
-    ArticleStore.addListener(this._onInitialFetch);
-
-    this.navToolMessagesListener =
-    NavToolMessagesStore.addListener(this._onToolUse);
-
+  }
+  componentDidMount() {
+    this.authListener = SessionStore.addListener(this.onChange);
+    this.artListener = ArticleStore.addListener(this.onInitialFetch);
+    this.navListener = NavToolMessagesStore.addListener(this.onToolUse);
     NavAction.renderWriteTools();
-
-    //Check to see if we're editing
-    if (this.props.params.id){
-      var self = this;
-      this.placeholder = "";
-      ArticleUtil.fetchArticle(this.props.params.id, function (article){
-        _ensureAuthor(article);
-        self.setState({
+    // Make sure the article fetched belongs to the user
+    const ensureAuthor = (article) => {
+      if (this.state.author.id !== article.author.id) {
+        hashHistory.push('');
+      }
+    };
+    // Check to see if we're editing v. new article
+    if (this.props.params.id) {
+      this.placeholder = '';
+      ArticleUtil.fetchArticle(this.props.params.id, article => {
+        ensureAuthor(article);
+        this.setState({
           title: article.title,
-          body: article.body
+          body: article.body,
         });
       });
     }
-
-    //Make sure the article fetched belongs to the user
-    function _ensureAuthor (article){
-        if (self.state.author.id !== article.author.id) {
-          self.context.router.push("");
-          article = {};
-        }
+  }
+  componentWillUnmount = () => {
+    this.authListener.remove();
+    this.artListener.remove();
+    this.navListener.remove();
+    if (this.autoSaveInterval) clearInterval(this.autoSaveInterval);
+  }
+  onChange = () => {
+    this.setState({
+      author: SessionStore.currentAuthor(),
+    });
+  }
+  onInitialFetch = () => {
+    this.articleId = ArticleStore.one().id;
+  }
+  onToolUse = () => {
+    const message = NavToolMessagesStore.message();
+    switch (message) {
+      case NavConstants.DELETE_ARTICLE:
+        if (!this.articleId) return;
+        ArticleUtil.deleteArticle(this.articleId, () => {
+          hashHistory.push('/authors/profile');
+        });
+        break;
+      case NavConstants.PUBLISH_ARTICLE:
+        this.state.published = true;
+        ArticleUtil.editArticle(this.state, this.articleId, () => {
+          hashHistory.push(`/articles/${this.articleId}`);
+        });
+        break;
+      case NavConstants.SAVE_ARTICLE:
+        ArticleUtil.editArticle(this.state, this.articleId);
+        break;
+        // no default
     }
-  },
-
-  componentWillUnmount: function () {
-    this.authorListener.remove();
-    this.articleListener.remove();
-    this.navToolMessagesListener.remove();
-
-    this.autoSaveInterval && clearInterval(this.autoSaveInterval);
-  },
-
-
-  autoSave: function (resetMouseDown) {
-    var prevSaveLength = 0;
-    var articleSaved = false;
-    var articleSaving = false;
-
-    function _saveOnlyOnce(articleProps){
+  }
+  handleTitle = (e) => {
+    this.setState({
+      title: e.target.value,
+    });
+  }
+  handleChange = (text) => {
+    this.setState({
+      body: text,
+    });
+    if (!this.autoSaveInterval) this.autoSave();
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+  }
+  autoSave = () => {
+    let prevSaveLength = 0;
+    let articleSaving = false;
+    function _saveOnlyOnce(articleProps) {
       articleSaving = true;
-      ArticleAction.updateSaveStatus("Saving...");
-
-      ArticleUtil.saveArticle(articleProps, function (){
-        articleSaved = true;
+      ArticleAction.updateSaveStatus('Saving...');
+      ArticleUtil.saveArticle(articleProps, () => {
         articleSaving = false;
-      }.bind(this));
+      });
     }
-
-    function _checkLengthSave(){
-      var currentBodyLength = this.state.body.length;
-      if (articleSaving) return ;
-      if (Math.abs(currentBodyLength - prevSaveLength) > 10){
+    function _checkLengthSave() {
+      const currentBodyLength = this.state.body.length;
+      if (articleSaving) return;
+      if (Math.abs(currentBodyLength - prevSaveLength) > 10) {
         prevSaveLength = currentBodyLength;
-        ArticleAction.updateSaveStatus("Saving...");
-        if (this.articleId){
+        ArticleAction.updateSaveStatus('Saving...');
+        if (this.articleId) {
           ArticleUtil.editArticle(this.state, this.articleId);
-        }else {
+        } else {
           _saveOnlyOnce(this.state);
         }
       }
     }
-
     this.autoSaveInterval = setInterval(
       _checkLengthSave.bind(this), 2000
     );
-  },
-
-  handleSubmit: function (e) {
-    e.preventDefault();
-  },
-
-  handleTitle: function (e) {
-   this.setState({title: e.target.value});
- },
-
-  handleChange: function (text, medium) {
-   this.setState({body: text});
-   this.autoSaveInterval || this.autoSave();
- },
-
-  render: function () {
-    var author = this.state.author;
-    if (this.placeholder) this.placeholder = "Tell your story...";
-
+  }
+  render() {
+    const author = this.state.author;
+    if (this.placeholder) this.placeholder = 'Tell your story...';
     return (
       <div className="article-create-container">
         <div className="article-create-content">
-
           <div className="article-header group">
             <SaveArticle />
             <ul className="article--info">
@@ -141,7 +145,6 @@ var ArticleNew = React.createClass({
               </li>
             </ul>
           </div>
-
           <form className="article-create-form">
             <input
               className="title"
@@ -157,46 +160,11 @@ var ArticleNew = React.createClass({
               onChange={this.handleChange}
             />
           </form>
-
         </div>
       </div>
-    );
-  },
-
-  _onChange: function () {
-    this.setState({
-      author: SessionStore.currentAuthor()
-    });
-  },
-
-  _onInitialFetch: function () {
-    this.articleId = ArticleStore.one().id;
-  },
-
-  _onToolUse: function () {
-    var router = this.context.router;
-    var message = NavToolMessagesStore.message();
-    var self = this;
-    switch (message) {
-      case NavConstants.DELETE_ARTICLE:
-        if (!this.articleId) {return ;}
-        ArticleUtil.deleteArticle(this.articleId, function(){
-          router.push('/authors/profile');
-        });
-      break;
-      case NavConstants.PUBLISH_ARTICLE:
-        self.state.published = true;
-        ArticleUtil.editArticle(self.state, this.articleId,
-          function(){ router.push('/articles/' + self.articleId);
-        });
-      break;
-      case NavConstants.SAVE_ARTICLE:
-        ArticleUtil.editArticle(self.state, self.articleId);
-      break;
-    }
+     );
   }
+}
 
-});
 
-
-module.exports = ArticleNew;
+export default ArticleNew;

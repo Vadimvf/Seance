@@ -1,77 +1,64 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react';
 
-var ArticleUtil = require('../util/articleUtil');
-var ArticleStore = require('../stores/article');
-var ArticleListItem = require('./articleListItem');
-var NavAction = require('../actions/navAction');
-var SessionStore = require('../stores/session');
+import ArticleUtil from '../util/articleUtil';
+import ArticleStore from '../stores/article';
+import SessionStore from '../stores/session';
+import NavAction from '../actions/navAction';
+import ArticleListItem from './articleListItem';
 
-var ArticleIndex = React.createClass({
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
-
-  getInitialState: function() {
-    return {
+class ArticleIndex extends React.Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
       author: SessionStore.currentAuthor(),
-      articles: []
+      articles: [],
     };
-  },
-
-  _onChange: function() {
-    this.setState({
-      articles: ArticleStore.all()
-    });
-  },
-
-  _onAuthor: function() {
-    this.setState({
-      author: SessionStore.currentAuthor()
-    });
-  },
-
-  componentDidMount: function() {
-    this.indexListener = ArticleStore.addListener(this._onChange);
-    var impressionable = !!this.props.location.query.impressionable;
-    ArticleUtil.fetchArticles({query: {
-      published: true,
-      impressionable: impressionable
-    }});
-
-    this.authorListener =
-    SessionStore.addListener(this._onAuthor);
-
+  }
+  componentDidMount() {
+    this.indexListener = ArticleStore.addListener(this.onChange);
+    this.authorListener = SessionStore.addListener(this.onAuthor);
+    this.fetchIndexArticles(this.props);
     NavAction.renderDefaultNav();
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    var impressionable = !!nextProps.location.query.impressionable;
-    ArticleUtil.fetchArticles({query: {
-      published: true,
-      impressionable: impressionable
-    }});
-  },
-
-  componentWillUnmount: function() {
+  }
+  componentWillReceiveProps(nextProps) {
+    this.fetchIndexArticles(nextProps);
+  }
+  componentWillUnmount = () => {
     this.indexListener.remove();
     this.authorListener.remove();
-  },
-
-  render: function() {
-    var articles = this.state.articles.map(function (article, idx){
-      return (
-        <ArticleListItem article={article} key={idx} />
-        );
+  }
+  onChange = () => {
+    this.setState({
+      articles: ArticleStore.all(),
     });
-
+  }
+  onAuthor = () => {
+    this.setState({
+      author: SessionStore.currentAuthor(),
+    });
+  }
+  fetchIndexArticles(props) {
+    const isImpressionable = !!props.location.query.impressionable;
+    ArticleUtil.fetchArticles({
+      query: {
+        published: true,
+        impressionable: isImpressionable,
+      },
+    });
+  }
+  render() {
+    const articles = this.state.articles.map((article, idx) => (
+      <ArticleListItem article={article} key={idx} />
+    ));
     return (
-        <section className="articles">
-          {articles}
-        </section>
+      <section className="articles" >
+        {articles}
+      </section>
     );
   }
+}
 
-});
-
-module.exports = ArticleIndex;
+export default ArticleIndex;

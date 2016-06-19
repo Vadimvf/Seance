@@ -1,83 +1,83 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var ReactRouter = require("react-router");
-var Modal = require('react-modal');
+import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var hashHistory = ReactRouter.hashHistory;
-var Link = ReactRouter.Link;
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-var Nav = require('./components/nav');
-var ArticleIndex = require('./components/articleIndex');
-var ArticleShow = require('./components/articleShow');
-var ArticleNew = require('./components/articleNew');
-var AuthorProfile = require('./components/authorProfile');
-var AuthorShow = require('./components/authorShow');
-var SessionStore = require('./stores/session');
-var SessionUtil = require('./util/sessionUtil');
+import Nav from './components/nav';
+import ArticleIndex from './components/articleIndex';
+import ArticleShow from './components/articleShow';
+import ArticleNew from './components/articleNew';
+import AuthorProfile from './components/authorProfile';
+import AuthorShow from './components/authorShow';
+import SessionStore from './stores/session';
+import SessionUtil from './util/sessionUtil';
 
-var App = React.createClass({
-
-  render: function() {
-    var router = this.context.router;
-    return (
-      <div className="seance-container">
-        <Nav />
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-$(function(){
-  Modal.setAppElement(document.body);
-  ReactDOM.render((
-    <Router history={hashHistory}>
-      <Route path="/" component={App}
-                      onEnter={_checkLogin}>
-        <IndexRoute component={ArticleIndex} />
-        <Route path="articles/top"
-               component={ArticleIndex}
-               />
-        <Route path="articles/new"
-               component={ArticleNew}
-               onEnter={_requireLogIn}/>
-        <Route path="articles/edit/:id"
-               component={ArticleNew}
-               onEnter={_requireLogIn}/>
-        <Route path="articles/:id"
-               component={ArticleShow} />
-        <Route path="authors/profile"
-               component={AuthorProfile}
-               onEnter={_requireLogIn}/>
-        <Route path="authors/:id"
-               component={AuthorShow}/>
-      </Route>
-    </Router>
-    ), document.getElementById("seance")
+function App(props) {
+  return (
+    <div className="seance-container">
+      <Nav />
+      {props.children}
+    </div>
   );
-});
+}
+App.propTypes = {
+  children: PropTypes.object,
+};
 
-function _checkLogin(){
+function _checkLogin() {
   if (!SessionStore.currentAuthorHasBeenFetched()) {
     SessionUtil.fetchCurrentAuthor();
   }
 }
 
 function _requireLogIn(nextState, replace, asyncCompletionCallback) {
+  function _redirectIfNotLoggedIn() {
+    if (!SessionStore.currentAuthor().hasOwnProperty('id')) {
+      replace({ pathname: '/' });
+    }
+    asyncCompletionCallback();
+  }
   if (!SessionStore.currentAuthorHasBeenFetched()) {
     SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
   } else {
     _redirectIfNotLoggedIn();
   }
-
-  function _redirectIfNotLoggedIn() {
-    if ($.isEmptyObject(SessionStore.currentAuthor())){
-      replace({pathname: "/"});
-    }
-
-    asyncCompletionCallback();
-  }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  Modal.setAppElement(document.body);
+  ReactDOM.render((
+    <Router history={hashHistory}>
+      <Route
+        path="/"
+        component={App}
+        onEnter={_checkLogin}
+      >
+        <IndexRoute component={ArticleIndex} />
+        <Route path="articles/top" component={ArticleIndex} />
+        <Route
+          path="articles/new"
+          component={ArticleNew}
+          onEnter={_requireLogIn}
+        />
+        <Route
+          path="articles/edit/:id"
+          component={ArticleNew}
+          onEnter={_requireLogIn}
+        />
+        <Route path="articles/:id" component={ArticleShow} />
+        <Route
+          path="authors/profile"
+          component={AuthorProfile}
+          onEnter={_requireLogIn}
+        />
+        <Route
+          path="authors/:id"
+          component={AuthorShow}
+        />
+      </Route>
+    </Router>
+    ), document.getElementById('seance')
+  );
+});

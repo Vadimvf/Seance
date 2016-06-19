@@ -15,4 +15,4 @@ function Logo() {
   );
 }
 
-module.exports = Logo;
+export default Logo;

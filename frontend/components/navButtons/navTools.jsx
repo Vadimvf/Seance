@@ -47,4 +47,4 @@ class NavTools extends React.Component {
   }
 }
 
-module.exports = NavTools;
+export default NavTools;

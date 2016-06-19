@@ -1,76 +1,65 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react';
 
-// var ArticleUtil = require('../util/articleUtil');
-var AuthorUtil = require('../util/authorUtil');
-// var ArticleStore = require('../stores/article');
-var AuthorStore = require('../stores/author');
-var NavAction = require('../actions/navAction');
-var ArticleListItem = require('./articleListItem');
+import AuthorUtil from '../util/authorUtil';
+import AuthorStore from '../stores/author';
+import NavAction from '../actions/navAction';
+import ArticleListItem from './articleListItem';
 
-var AuthorShow = React.createClass({
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
-
-  getInitialState: function () {
-    return {
-      author: null
+class AuthorShow extends React.Component {
+  static propTypes = {
+    params: PropTypes.object.isRequired,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      author: null,
     };
-  },
-
-  componentDidMount: function () {
+  }
+  componentDidMount() {
     NavAction.renderArticleShow();
-    this.authorListener = AuthorStore.addListener(this._onChange);
+    this.authorListener = AuthorStore.addListener(this.onChange);
     AuthorUtil.fetchAuthor(this.props.params.id);
-  },
-
-  _onChange: function () {
-    this.setState({
-      author: AuthorStore.author()
-    });
-  },
-
-  componentWillUnmount: function () {
+  }
+  componentWillUnmount = () => {
     this.authorListener.remove();
-  },
-
-  _ensureAuthorRender: function (){
-
-  },
-
-  render: function () {
-    if (!this.state.author) {return <div/>;}
-    var author = this.state.author;
-    var authorArticles = this.state.author.articles || [];
-    var self = this;
-
-    var articles = authorArticles.map(function (article, idx){
-      article.author = {};
-      article.author.username = self.state.author.username;
-      return (
-        <ArticleListItem article={article} key={idx} />
-        );
+  }
+  onChange = () => {
+    this.setState({
+      author: AuthorStore.author(),
     });
-
+  }
+  createArticles = () => {
+    const authorArticles = this.state.author.articles || [];
+    const articles = authorArticles.map((article, idx) => {
+      const articleCopy = article;
+      articleCopy.author = this.state.author;
+      return (
+        <ArticleListItem article={articleCopy} key={idx} />
+      );
+    });
+    return articles;
+  }
+  render() {
+    if (!this.state.author) return <div />;
+    const { fullname, username, email, bio } = this.state.author;
+    const articles = this.createArticles();
     return (
       <div className="author-container">
         <div className="author-content-background" >
           <section className="author-content">
-            <h2>{author.fullname}</h2>
-            <h3>{author.username}</h3>
-            <h4>{author.email}</h4>
-            <p>{author.bio}</p>
+            <h2>{fullname}</h2>
+            <h3>{username}</h3>
+            <h4>{email}</h4>
+            <p>{bio}</p>
           </section>
         </div>
         <section className="articles">
           <h3 className="latest-articles--header">Recent Stories</h3>
           {articles}
-        </section >
+        </section>
       </div>
     );
   }
+}
 
-});
-
-module.exports = AuthorShow;
+export default AuthorShow;

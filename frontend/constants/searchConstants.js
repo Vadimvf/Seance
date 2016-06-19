@@ -1,5 +1,5 @@
-var SearchConstants = {
-  SEARCH_RECEIVED: "SEARCH_RECEIVED"
+const SearchConstants = {
+  SEARCH_RECEIVED: 'SEARCH_RECEIVED',
 };
 
 module.exports = SearchConstants;

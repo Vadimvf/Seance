@@ -1,38 +1,34 @@
-var React = require('react');
-var ReactRouter = require("react-router");
+import React from 'react';
 
-var Logo = require('./navButtons/logo');
-var NavLinks = require('./navButtons/navLinks');
-var NavTools = require('./navButtons/navTools');
-var SearchBar = require("./navButtons/search");
-var NavConstants = require('../constants/navConstants');
-var NavStore = require('../stores/navStore');
-var NavWriteTools = require('./navButtons/navWriteTools');
+import Logo from './navButtons/logo';
+import NavLinks from './navButtons/navLinks';
+import NavTools from './navButtons/navTools';
+import SearchBar from './navButtons/search';
+import NavConstants from '../constants/navConstants';
+import NavStore from '../stores/navStore';
+import NavWriteTools from './navButtons/navWriteTools';
+import Profile from './navButtons/profile';
 
-var NavBar = React.createClass({
-  getInitialState: function() {
-    return {
-      navType: NavConstants.DEFAULT
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navType: NavConstants.DEFAULT,
     };
-  },
-
-  _onChange: function () {
-    this.setState({
-      navType: NavStore.currentNavType()
-    });
-  },
-
-  componentDidMount: function () {
-    this.listener = NavStore.addListener(this._onChange);
-  },
-
-  componentWillUnmount: function () {
+  }
+  componentDidMount() {
+    this.listener = NavStore.addListener(this.onChange);
+  }
+  componentWillUnmount = () => {
     this.listener.remove();
-  },
-
-  setNavRenderOnType: function () {
-    var navContent;
-
+  }
+  onChange = () => {
+    this.setState({
+      navType: NavStore.currentNavType(),
+    });
+  }
+  setNavRenderOnType = () => {
+    let navContent;
     switch (this.state.navType) {
       case NavConstants.DEFAULT:
         navContent = (
@@ -59,19 +55,21 @@ var NavBar = React.createClass({
               <li className="nav-tools-search">
                 <SearchBar />
               </li>
+              <li>
+                <Profile />
+              </li>
             </ul>
           </header>
         );
-      break;
+        break;
+        // no default
     }
-
     return navContent;
-  },
-
-  render: function() {
+  }
+  render() {
     return this.setNavRenderOnType();
   }
 
-});
+}
 
-module.exports = NavBar;
+export default NavBar;

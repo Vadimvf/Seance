@@ -4,6 +4,7 @@ import { hashHistory } from 'react-router';
 import validateForm from '../../formValidation';
 import sessionUtil from '../../util/sessionUtil';
 import ErrorStore from '../../stores/error';
+import NewUserFormOpts from './newUserFormOpts';
 
 class LoginForm extends React.Component {
   static propTypes = {
@@ -20,10 +21,15 @@ class LoginForm extends React.Component {
     };
   }
   componentDidMount() {
-    this.errorListener = ErrorStore.addListener(this._onError);
+    this.errorListener = ErrorStore.addListener(this.onError);
   }
   componentWillUnmount = () => {
     this.errorListener.remove();
+  }
+  onError = () => {
+    this.setState({
+      errors: ErrorStore.all(),
+    });
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +41,6 @@ class LoginForm extends React.Component {
       sessionUtil.loginAuthor(this.state, () => hashHistory.push(''));
     }
   }
-  _onError = () => {
-    this.setState({
-      errors: ErrorStore.all(),
-    });
-  }
   returnErrors = () => {
     const allMessages = validateForm(this.state, this.props.formType);
     this.setState({
@@ -47,24 +48,9 @@ class LoginForm extends React.Component {
     });
     return (allMessages.length !== 0) ? allMessages : null;
   }
-  updateUsername = (e) => {
+  updateField = (type, e) => {
     this.setState({
-      username: e.currentTarget.value,
-    });
-  }
-  updateFullname = (e) => {
-    this.setState({
-      fullname: e.currentTarget.value,
-    });
-  }
-  updatePassword = (e) => {
-    this.setState({
-      password: e.currentTarget.value,
-    });
-  }
-  updateEmail = (e) => {
-    this.setState({
-      email: e.currentTarget.value,
+      [type]: e.currentTarget.value,
     });
   }
   errorMessages = () => {
@@ -74,40 +60,23 @@ class LoginForm extends React.Component {
     return (<ul className="form-errors">{errorElements}</ul>);
   }
   render() {
-    let newUserFormOpts = null;
     let submitVal = 'Sign in';
-    if (this.props.formType === 'Create') {
-      submitVal = 'Sign up';
-      newUserFormOpts = (
-        <div>
-          <label htmlFor="fullname"></label>
-          <input
-            onChange={this.updateFullname}
-            type="text"
-            placeholder="Full name"
-          />
-          <label htmlFor="email" />
-          <input
-            onChange={this.updateEmail}
-            type="email"
-            placeholder="Email"
-          />
-        </div>
-     );
-    }
+    if (this.props.formType === 'Create') submitVal = 'Sign up';
+    const errorMessages = this.errorMessages();
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
-        {this.errorMessages()}
-        {newUserFormOpts}
-        <label htmlFor="username" />
+        {errorMessages}
+        <NewUserFormOpts
+          isVisible={!!(this.props.formType === 'Create')}
+          updateField={this.updateField}
+        />
         <input
-          onChange={this.updateUsername}
+          onChange={e => this.updateField('username', e)}
           type="text"
           placeholder="Username"
         />
-        <label htmlFor="password" />
         <input
-          onChange={this.updatePassword}
+          onChange={e => this.updateField('password', e)}
           type="password"
           placeholder="Password"
         />
@@ -121,4 +90,4 @@ class LoginForm extends React.Component {
   }
 }
 
-module.exports = LoginForm;
+export default LoginForm;

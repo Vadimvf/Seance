@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import ArticleStore from '../../stores/article';
 import SessionStore from '../../stores/session';
 import ArticleUtil from '../../util/articleUtil';
+import ProfileArticles from './profileArticles';
 
 class QueryArticles extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class QueryArticles extends React.Component {
     };
   }
   componentDidMount() {
-    this.articleListener = ArticleStore.addListener(this._onChange);
+    this.articleListener = ArticleStore.addListener(this.onChange);
     ArticleUtil.fetchArticles({
       query: {
         published: false,
@@ -25,7 +26,7 @@ class QueryArticles extends React.Component {
   componentWillUnmount = () => {
     this.articleListener.remove();
   }
-  _onChange = () => {
+  onChange = () => {
     this.setState({
       articles: ArticleStore.all(),
     });
@@ -52,7 +53,6 @@ class QueryArticles extends React.Component {
   render() {
     const draftKlass = !this.state.published ? 'active' : '';
     const publicKlass = this.state.published ? 'active' : '';
-
     return (
       <div className="author-articles-container">
         <h1>Your stories</h1>
@@ -71,53 +71,13 @@ class QueryArticles extends React.Component {
             </li>
           </ul>
         </section>
-
-        <section className="articles-list">
-          {this._renderArticles()}
-        </section>
+        <ProfileArticles
+          articles={this.state.articles}
+          deleteArticle={this.deleteArticle}
+        />
       </div>
     );
   }
-  _renderArticles() {
-    var articles;
-    var self = this;
-    function _createHTML(content){
-      return {__html: content};
-    }
-    if (this.state.articles.length > 0){
-      articles = this.state.articles.map(function (article, idx){
-        return (
-          <article key={idx} className="author-show-article">
-            <h3>{article.title}</h3>
-            <div className="author-show-article--content"
-              dangerouslySetInnerHTML={_createHTML(article.body_short)}>
-            </div>
-            <ul className="article-options group">
-              <li className="article--info-content">
-                {article.created_ago + " ⋅ " + article.read_time}
-              </li>
-              <li className="article--edit">
-                <Link to={"/articles/edit/" + article.id}>Edit</Link>
-              </li>
-              <li className="article--delete">
-                <button onClick={self.deleteArticle.bind(null, article.id)}>
-                  Delete
-                </button>
-              </li>
-            </ul>
-          </article>
-        );
-      });
-    } else {
-      articles = (
-        <Link to="articles/new" >
-          Write a new story?
-        </Link>
-      );
-    }
-
-    return articles;
-  }
 }
 
-module.exports = QueryArticles;
+export default QueryArticles;

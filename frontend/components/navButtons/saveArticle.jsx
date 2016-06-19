@@ -28,4 +28,4 @@ class SaveArticle extends React.Component {
   }
 }
 
-module.exports = SaveArticle;
+export default SaveArticle;

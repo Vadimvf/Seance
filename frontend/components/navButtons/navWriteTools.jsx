@@ -28,4 +28,4 @@ function navWriteTools() {
   );
 }
 
-module.exports = navWriteTools;
+export default navWriteTools;

@@ -23,4 +23,4 @@ function NavLinks() {
   );
 }
 
-module.exports = NavLinks;
+export default NavLinks;
