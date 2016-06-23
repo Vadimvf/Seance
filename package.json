@@ -1,7 +1,7 @@
 {
   "name": "Seance",
   "version": "1.0.0",
-  "description": "[Heroku link][heroku] **NB:** Coming Tue., March 29th",
+  "description": "Web Blogger",
   "main": "index.js",
   "directories": {
     "doc": "docs",

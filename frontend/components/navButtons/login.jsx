@@ -52,7 +52,6 @@ class Login extends React.Component {
     const isLoginAttempt = this.state.isLoginAttempt;
     const isCreateAttempt = this.state.isCreateAttempt;
     let content;
-
     if (isLoginAttempt) {
       content = <LoginForm formType="Session" />;
     } else if (isCreateAttempt) {
