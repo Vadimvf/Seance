@@ -38,11 +38,12 @@ function _requireLogIn(nextState, replace, asyncCompletionCallback) {
     }
     asyncCompletionCallback();
   }
-  if (!SessionStore.currentAuthorHasBeenFetched()) {
-    SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
-  } else {
-    _redirectIfNotLoggedIn();
-  }
+  SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
+  // if (!SessionStore.currentAuthorHasBeenFetched()) {
+  //   SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
+  // } else {
+  //   _redirectIfNotLoggedIn();
+  // }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
