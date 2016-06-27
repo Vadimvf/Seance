@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 import SessionUtil from '../../util/sessionUtil';
+import SessionStore from '../../stores/session';
 
 class Profile extends React.Component {
   static contextTypes: {
@@ -16,9 +17,15 @@ class Profile extends React.Component {
     hashHistory.push('authors/profile');
   }
   logout = () => {
-    SessionUtil.logout(() => {
-      hashHistory.push('');
-    });
+    function _redirectIfNotLoggedIn() {
+      if (!SessionStore.currentAuthor().hasOwnProperty('id')) {
+        hashHistory.push('');
+      }
+      SessionUtil.logout(() => {
+        hashHistory.push('');
+      });
+    }
+    SessionUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
   }
   toggleActive = () => {
     this.setState({
