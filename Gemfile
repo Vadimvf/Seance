@@ -28,6 +28,9 @@ gem 'impressionist'
 #Search
 gem 'pg_search'
 
+#Paperclip for image conversion/storage
+gem "paperclip", "~> 5.0.0.beta1"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
